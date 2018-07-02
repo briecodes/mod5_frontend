@@ -3,25 +3,30 @@ import { connect } from 'react-redux';
 
 class Event extends React.Component {
 
-  componentDidUpdate() {
-    // this.getUserEvents();
-    // if (this.props.activeEvent){
-    //   this.eventAttendanceCheck(this.getEventUsers());
-    // };
+  state = {
+    attending: false
+  };
+
+  componentDidMount() {
+    this.getEventUsers();
   };
 
   eventAttendanceCheck = (arr) => {
-    arr.find(userEvent => {
+    let theResult = arr.find(userEvent => {
       return userEvent.user_id === this.props.activeUser.id;
+    });
+    theResult = theResult ? true : false;
+    this.setState({
+      attending: theResult
     });
   };
 
   getEventUsers = () => {
+    console.log('getevent...');
     fetch('http://localhost:3000/api/v1/events/' + this.props.activeEvent.id).then(response => response.json() )
     .then(array => {
       const tim = array.user_events;
-      console.log('tim', tim);
-      return tim
+      this.eventAttendanceCheck(tim);
     });
   };
 
@@ -36,7 +41,6 @@ class Event extends React.Component {
   };
 
   render() {
-    // console.log('activeEvent', this.props.activeEvent);
     return (
       <div>
         {this.props.activeEvent ? <React.Fragment>
