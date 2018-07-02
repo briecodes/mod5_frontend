@@ -19,7 +19,15 @@ class SignUp extends React.Component {
         headers: {'Content-Type': 'application/json'}
       })
       .then( res => res.json() )
-      .then( response => console.log('success:', response ));
+      .then( response => {
+        // console.log('response:', response );
+        if (response.errors){
+          alert(response.errors[0]);
+        }else{
+          alert(`You're signed in!`);
+          // e.target.reset(); //TAKE ANOTHER LOOK AT RESETTING FORM.
+        }
+      });
     }else {
       console.log('error: password does not match');
     };
@@ -38,7 +46,7 @@ class SignUp extends React.Component {
     if (e.target.value === this.state.password){
       this.props.handleOnSubmit();
     }else{
-        console.log('Warning! password does not match.');
+      console.log(`Warning! Password does not match.`);
     };
   };
 

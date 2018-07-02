@@ -1,5 +1,6 @@
 import React from 'react';
 
+import SignIn from './SignIn';
 import SignUp from './SignUp';
 
 class UserEntry extends React.Component {
@@ -10,7 +11,10 @@ class UserEntry extends React.Component {
 
   render() {
     return (
-      <SignUp handleOnSubmit={this.createUser} />
+      <React.Fragment>
+        <SignUp handleOnSubmit={this.createUser} />
+        <SignIn/>
+      </React.Fragment>
     );
   };
 };
