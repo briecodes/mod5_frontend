@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setUser } from '../actions/index';
-
 class CreateEvent extends React.Component {
 
   state = {

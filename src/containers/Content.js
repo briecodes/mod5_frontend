@@ -14,8 +14,8 @@ class Content extends React.Component {
       <div id='content'>
         <Navigation/>
         <Route exact path='/' component={HomePage} />
-        <Route exact path='/create-event' component={CreateEvent} />
-        <Route path='/event' component={Event}/>
+        <Route exact path='/' component={CreateEvent} />
+        <Route path='/' component={Event}/>
         <Footer/>
       </div>
     );
