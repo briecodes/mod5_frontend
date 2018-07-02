@@ -16,7 +16,6 @@ class Navigation extends React.Component {
         <div id='nav-logo'>logo</div>
         <NavLink to="/" exact >Home</NavLink>
         <NavLink to="/create-event" exact >Create Event</NavLink>
-        <NavLink to="/my-profile" exact >Edit Profile</NavLink>
         <NavLink to="/" exact >Log Out</NavLink>
         <form>
           <input type='text' name='search_events' placeholder='Search Events' />

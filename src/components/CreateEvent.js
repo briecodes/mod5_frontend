@@ -68,7 +68,7 @@ class CreateEvent extends React.Component {
 const mapStateToProps = (state) => {
   return {
     userId: state.userId
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(CreateEvent);
