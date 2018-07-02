@@ -17,6 +17,13 @@ export function setUserFake() {
   };
 };
 
+export function logOutUser() {
+  return {
+    type: 'LOGOUT',
+    payload: {user: null}
+  };
+};
+
 export function setActiveEvent(event) {
   return {
     type: 'ACTIVE_EVENT',

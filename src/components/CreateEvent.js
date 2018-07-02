@@ -18,7 +18,7 @@ class CreateEvent extends React.Component {
     if (this.state.password === this.state.password_retype){
       fetch('http://localhost:3000/api/v1/events', {
         method: 'POST',
-        body: JSON.stringify({user_id: this.props.userId, title: this.state.title, location: this.state.location, description: this.state.description, key_code: this.state.key_code, active: true}),
+        body: JSON.stringify({user_id: this.props.activeUser.id, title: this.state.title, location: this.state.location, description: this.state.description, key_code: this.state.key_code, active: true}),
         headers: {'Content-Type': 'application/json'}
       })
       .then( res => res.json() )
@@ -67,7 +67,7 @@ class CreateEvent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userId
+    activeUser: state.activeUser
   };
 };
 

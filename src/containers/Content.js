@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import HomePage from '../components/HomePage';
 import CreateEvent from '../components/CreateEvent';
+import Event from '../components/Event';
 import Footer from '../components/Footer';
 
 class Content extends React.Component {
@@ -13,7 +14,8 @@ class Content extends React.Component {
       <div id='content'>
         <Navigation/>
         <Route exact path='/' component={HomePage} />
-        <Route exact path='/' component={CreateEvent} />
+        <Route exact path='/create-event' component={CreateEvent} />
+        <Route path='/event' component={Event}/>
         <Footer/>
       </div>
     );

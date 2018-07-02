@@ -21,6 +21,8 @@ const reducer = (state = initialState, action) => {
     return {...state, activeUser: action.payload.user}
   }else if (action.type === 'ACTIVE_EVENT'){
     return {...state, activeEvent: action.payload.event}
+  }else if (action.type === 'LOGOUT'){
+    return {...state, activeUser: action.payload.user}
   }
   return state;
 };
