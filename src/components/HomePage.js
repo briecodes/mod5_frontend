@@ -18,10 +18,12 @@ class HomePage extends React.Component {
       array.forEach(event => {
         if (event.user_id === this.props.userId){
           if (event.active){
+            console.log('active event', event);
             this.setState({
               myCurrentEvents: [...this.state.myCurrentEvents, event]
             });
           }else{
+            console.log('else event', event);
             this.setState({
               myPastEvents: [...this.state.myPastEvents, event]
             });
