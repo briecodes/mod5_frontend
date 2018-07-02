@@ -1,3 +1,11 @@
 export const myAction = {
-  type: 'ADD_NOTE'
+  type: 'LOG_IN',
+  payload: {userId: 5}
+};
+
+export function setUser(userId) {
+  return {
+    type: 'USER_ID',
+    payload: {userId}
+  };
 };

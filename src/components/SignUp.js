@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { setUser } from '../actions/index';
 
 class SignUp extends React.Component {
 
@@ -11,6 +14,7 @@ class SignUp extends React.Component {
 
   createUser = (e) => {
     e.preventDefault();
+    e.persist();
     if (this.state.password === this.state.password_retype){
       console.log('new user accepted');
       fetch('http://localhost:3000/api/v1/users', {
@@ -20,12 +24,13 @@ class SignUp extends React.Component {
       })
       .then( res => res.json() )
       .then( response => {
-        // console.log('response:', response );
+        console.log('response:', response );
         if (response.errors){
           alert(response.errors[0]);
         }else{
-          alert(`You're signed in!`);
-          // e.target.reset(); //TAKE ANOTHER LOOK AT RESETTING FORM.
+          this.props.dispatch(setUser(response.user.id));
+          e.target.reset();
+          alert(`${response.user.name}, you're signed in!`);
         }
       });
     }else {
@@ -64,4 +69,4 @@ class SignUp extends React.Component {
   };
 };
 
-export default SignUp;
+export default connect()(SignUp);
