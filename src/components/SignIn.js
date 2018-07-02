@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setUser } from '../actions/index';
+import { setUserFake } from '../actions/index';
 
 class SignIn extends React.Component {
   state = {
@@ -18,7 +18,11 @@ class SignIn extends React.Component {
   logIn = (e) => {
     e.preventDefault();
     if (this.state.username && this.state.password){
-      this.props.dispatch(setUser(1));
+      this.props.dispatch(setUserFake());
+      this.setState({
+        username: '',
+        password: ''
+      });
       e.currentTarget.reset();
     }else{
       alert('Username/Password needed.');
@@ -39,8 +43,9 @@ class SignIn extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userId
-  }
-}
+    userId: state.userId,
+    activeUser: state.activeUser
+  };
+};
 
 export default connect(mapStateToProps)(SignIn);

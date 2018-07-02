@@ -9,3 +9,17 @@ export function setUser(userId) {
     payload: {userId}
   };
 };
+
+export function setUserFake() {
+  return {
+    type: 'FAKED_USER',
+    payload: {user: {id: 1, name: 'THE Shun', username: 'theshun'}}
+  };
+};
+
+export function setActiveEvent(event) {
+  return {
+    type: 'ACTIVE_EVENT',
+    payload: {event}
+  };
+};

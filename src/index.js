@@ -9,13 +9,18 @@ import { Provider } from 'react-redux';
 
 const initialState = {
   userId: null,
-  songList: ['song1', 'song2']
+  activeUser: null,
+  activeEvent: null
 }
 
 const reducer = (state = initialState, action) => {
   if (action.type === 'USER_ID'){
     console.log('logging in..', action.payload.userId);
     return {...state, userId: action.payload.userId}
+  }else if (action.type === 'FAKED_USER'){
+    return {...state, activeUser: action.payload.user}
+  }else if (action.type === 'ACTIVE_EVENT'){
+    return {...state, activeEvent: action.payload.event}
   }
   return state;
 };
