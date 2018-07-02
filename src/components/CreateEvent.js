@@ -12,11 +12,10 @@ class CreateEvent extends React.Component {
     key_code: ''
   }
 
-  createUser = (e) => {
+  createEvent = (e) => {
     e.preventDefault();
     e.persist();
     if (this.state.password === this.state.password_retype){
-      console.log('new user accepted');
       fetch('http://localhost:3000/api/v1/events', {
         method: 'POST',
         body: JSON.stringify({user_id: this.props.userId, title: this.state.title, location: this.state.location, description: this.state.description, key_code: this.state.key_code, active: true}),
@@ -33,7 +32,7 @@ class CreateEvent extends React.Component {
         }
       });
     }else {
-      console.log('error: password does not match');
+      console.log('Error! Something is amiss...');
     };
   };
 
@@ -52,20 +51,9 @@ class CreateEvent extends React.Component {
     });
   };
 
-  checkPassword = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-    if (e.target.value === this.state.password){
-      this.props.handleOnSubmit();
-    }else{
-      console.log(`Warning! Password does not match.`);
-    };
-  };
-
   render() {
     return (
-      <form onSubmit={this.createUser}>
+      <form onSubmit={this.createEvent}>
         <h1>Create a Karaoke Event!</h1>
         <input type='text' name='title' placeholder='Title' value={this.state.title} onChange={this.inputControl} />
         <input type='text' name='location' placeholder='Location' value={this.state.location} onChange={this.inputControl} />
