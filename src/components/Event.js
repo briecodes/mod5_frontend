@@ -8,7 +8,7 @@ class Event extends React.Component {
   };
 
   componentDidMount() {
-    this.getEventUsers();
+    // this.getEventUsers();
   };
 
   eventAttendanceCheck = (arr) => {
