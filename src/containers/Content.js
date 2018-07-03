@@ -14,12 +14,13 @@ class Content extends React.Component {
     return (
       <div id='content'>
         <Navigation/>
+        {this.props.currentLocation === '/' ? <HomePage/> : null}
+        {this.props.currentLocation === '/create-event' ? <CreateEvent/> : null}
+        {this.props.currentLocation.includes('/events/') ? <Event/> : null}
         <Switch>
           {/* <Route exact path='/' component={HomePage}/> */}
-          {this.props.currentLocation === '/' ? <HomePage/> : null}
-          {this.props.currentLocation === '/create-event' ? <CreateEvent/> : null}
           {/* <Route exact path='/create-event' component={CreateEvent}/> */}
-          <Route path='/events' component={Event}/>
+          {/* <Route path='/events' component={Event}/> */}
         </Switch>
         <Footer/>
       </div>

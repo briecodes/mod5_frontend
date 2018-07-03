@@ -25,7 +25,7 @@ const reducer = (state = initialState, action) => {
   }else if (action.type === 'LOGOUT'){
     return {...state, activeUser: action.payload.user}
   }else if (action.type === 'SET_LOCATION'){
-    console.log('setting location...', action.payload.currentLocation)
+    // console.log('setting location...', action.payload.currentLocation)
     return {...state, currentLocation: action.payload.currentLocation}
   }
   return state;

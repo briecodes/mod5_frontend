@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setActiveEvent } from '../actions/index';
+import { setActiveEvent, setCurrentLocation } from '../actions/index';
 
 class HomePage extends React.Component {
 
@@ -49,6 +49,7 @@ class HomePage extends React.Component {
   };
 
   exploreEvent = (event) => {
+    this.props.dispatch(setCurrentLocation('/events/'+event.id));
     this.props.dispatch(setActiveEvent(event));
   };
 
@@ -66,7 +67,7 @@ class HomePage extends React.Component {
         </ul>
         <ul>
           <h3>Visited Events:</h3>
-          {this.state.visitedEvents.map(event => <li key={event.id} >{event.title} > {event.song_entries.map(song => <p key={song.id}>{song.song_title}</p>)}</li>)}
+          {this.state.visitedEvents.map(event => <li key={event.id} ><Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} >{event.title} > </Link>{event.song_entries.map(song => <p key={song.id}>{song.song_title}</p>)}</li>)}
         </ul>
       </div>
     );
