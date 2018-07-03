@@ -2,9 +2,44 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  font-size: .75em;
 }
 
 #App {
   margin: 0;
   padding: 0;
+}
+
+#content {
+  margin: 0;
+  padding: 0;
+}
+
+#entryFormContainer {
+  display: table;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+#formInnerContainer {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.formContainer {
+  text-align: center;
+  max-height: 25%;
+  max-width: 30%;
+  padding: 2%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+}
+
+.formContainer input {
+  border-radius: 5px;
+  width: 75%;
+  margin-bottom: 5%;
 }

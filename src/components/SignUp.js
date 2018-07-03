@@ -57,14 +57,16 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.createUser}>
-        <h1>Sign Up Below:</h1>
-        <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={this.inputControl} />
-        <input type='text' name='name' placeholder='Name' value={this.state.name} onChange={this.inputControl} />
-        <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.inputControl} />
-        <input type='password' name='password_retype' placeholder='Password Confirmation' value={this.state.password_retype} onChange={this.checkPassword} />
-        <input type='submit'/>
-      </form>
+      <div className='formContainer'>
+        <form onSubmit={this.createUser}>
+          <h1>Sign Up Below:</h1>
+          <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={this.inputControl} />
+          <input type='text' name='name' placeholder='Name' value={this.state.name} onChange={this.inputControl} />
+          <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.inputControl} />
+          <input type='password' name='password_retype' placeholder='Password Confirmation' value={this.state.password_retype} onChange={this.checkPassword} />
+          <input type='submit'/>
+        </form>
+      </div>
     );
   };
 };

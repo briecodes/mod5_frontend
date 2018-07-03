@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { setUserFake } from '../actions/index';
 
@@ -23,6 +24,7 @@ class SignIn extends React.Component {
         username: '',
         password: ''
       });
+      window.history.pushState({}, "new state", "/");
       e.currentTarget.reset();
     }else{
       alert('Username/Password needed.');
@@ -31,12 +33,15 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.logIn}>
-      <h1>{this.props.userId} Sign In Below:</h1>
-        <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={this.inputControl} />
-        <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.inputControl} />
-        <input type='submit'/>
-      </form>
+      <div className='formContainer'>
+        <form onSubmit={this.logIn}>
+        <h1>{this.props.userId} Sign In Below:</h1>
+          <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={this.inputControl} />
+          <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.inputControl} />
+          <input type='submit'/>
+        </form>
+        <Link exact='true' to='/sign-up'>Don't have an account? Sign up ></Link>
+      </div>
     );
   };
 };

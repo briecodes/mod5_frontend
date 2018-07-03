@@ -11,10 +11,12 @@ class UserEntry extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <SignUp handleOnSubmit={this.createUser} />
-        <SignIn/>
-      </React.Fragment>
+      <div id='entryFormContainer'>
+        <div id='formInnerContainer'>
+          <SignUp handleOnSubmit={this.createUser} />
+          <SignIn/>
+        </div>
+      </div>
     );
   };
 };
