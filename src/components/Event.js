@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import SongForm from '../components/SongForm';
-import { setActiveEvent } from '../actions/index';
+import { setActiveEvent, addPerformerToList } from '../actions/index';
 
 
 
@@ -41,9 +41,10 @@ class Event extends React.Component {
     .then(performerList => {
       performerList.forEach(entry => {
         if (entry.event_id === this.props.activeEvent.id){
-          this.setState({
-            performerList: [...this.state.performerList, entry]
-          });
+          this.props.dispatch(addPerformerToList(entry));
+          // this.setState({
+          //   performerList: [...this.state.performerList, entry]
+          // });
         };
       });
     });
@@ -67,7 +68,7 @@ class Event extends React.Component {
             <p>{this.props.activeEvent.description}</p>
           </React.Fragment> : null}
           <ul>
-            {this.state.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
+            {this.props.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
           </ul>
           <SongForm/>
       </div>
@@ -78,7 +79,8 @@ class Event extends React.Component {
 const mapStateToProps = (state) => {
   return {
     activeUser: state.activeUser,
-    activeEvent: state.activeEvent
+    activeEvent: state.activeEvent,
+    performerList: state.performerList
   };
 };
 

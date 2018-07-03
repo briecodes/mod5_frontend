@@ -43,3 +43,22 @@ body {
   width: 75%;
   margin-bottom: 5%;
 }
+
+#video-results {
+  height: 250px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: 45%;
+  white-space: nowrap;
+}
+
+.video-result {
+  height: 250px;
+  width: 300px;
+  display: inline;
+  margin-right: 1%;
+}
+
+.video-result img, .video-result iframe {
+  height: 199px;
+}

@@ -1,15 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { addPerformerToList } from '../actions/index';
 import YouTubeSearch from '../components/YouTubeSearch';
 
 class SongForm extends React.Component {
 
   state = {
-    song_title: '',
-    song_artist: '',
-    video_url: '',
-    video_id: '',
+    song_title: undefined,
+    song_artist: undefined,
     user_id: this.props.activeUser.id,
     event_id: this.props.activeEvent.id
   };
@@ -20,9 +19,35 @@ class SongForm extends React.Component {
     });
   };
 
+  submitEntry = (e) => {
+    e.preventDefault();
+    if (this.validateData()){
+      fetch('http://localhost:3000/api/v1/song_entries', {
+        method: 'POST',
+        body: JSON.stringify({...this.state, video_id: this.props.video_id, video_url: this.props.video_url}),
+        headers: {'Content-Type': 'application/json'}
+    })
+      .then( res => res.json() )
+      .then( response => {
+        console.log('success:', response);
+        this.props.dispatch(addPerformerToList(response));
+      });
+    }else{
+      alert('Form incomplete!');
+    }
+  };
+
+  validateData = () => {
+    if (this.state.song_title !== undefined & this.state.song_artist !== undefined & this.props.video_id !== undefined & this.props.video_url !== undefined){
+      return true;
+    }else{
+      return false;
+    }
+  };
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.submitEntry}>
         <input type='text' name='song_title' placeholder='Song Title' value={this.state.song_title} onChange={this.inputControl} />
         <input type='text' name='song_artist' placeholder='Song Artist' value={this.state.song_artist} onChange={this.inputControl} />
         <YouTubeSearch/>
@@ -35,7 +60,9 @@ class SongForm extends React.Component {
 const mapStateToProps = (state) => {
   return {
     activeUser: state.activeUser,
-    activeEvent: state.activeEvent
+    activeEvent: state.activeEvent,
+    video_id: state.video_id,
+    video_url: state.video_url
   };
 };
 

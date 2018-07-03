@@ -44,3 +44,17 @@ export function setPerformerList(entry) {
     payload: {performerList: entry}
   }
 };
+
+export function selectVideoInForm(video_id, video_url) {
+  return {
+    type: 'VIDEO_FORM_SELECTION',
+    payload: {video_id, video_url}
+  };
+};
+
+export function addPerformerToList(performer) {
+  return {
+    type: 'ADD_PERFORMER_TO_LIST',
+    payload: {performer}
+  }
+};

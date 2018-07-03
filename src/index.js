@@ -12,7 +12,9 @@ const initialState = {
   activeUser: null,
   activeEvent: null,
   performerList: [],
-  currentLocation: '/'
+  currentLocation: '/',
+  video_url: undefined,
+  video_id: undefined
 }
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +30,10 @@ const reducer = (state = initialState, action) => {
   }else if (action.type === 'SET_LOCATION'){
     // console.log('setting location...', action.payload.currentLocation)
     return {...state, currentLocation: action.payload.currentLocation}
+  }else if (action.type === 'VIDEO_FORM_SELECTION'){
+    return {...state, video_id: action.payload.video_id, video_url: action.payload.video_url}
+  }else if (action.type === 'ADD_PERFORMER_TO_LIST'){
+    return {...state, performerList: [ ...state.performerList , action.payload.performerList]}
   }
   return state;
 };
