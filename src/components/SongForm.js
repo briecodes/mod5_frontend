@@ -7,8 +7,8 @@ import YouTubeSearch from '../components/YouTubeSearch';
 class SongForm extends React.Component {
 
   state = {
-    song_title: undefined,
-    song_artist: undefined,
+    song_title: '',
+    song_artist: '',
     user_id: this.props.activeUser.id,
     event_id: this.props.activeEvent.id
   };
@@ -22,8 +22,8 @@ class SongForm extends React.Component {
   resetForm = () => {
     console.log('resetting form');
     this.setState({
-      song_title: undefined,
-      song_artist: undefined
+      song_title: '',
+      song_artist: ''
     });
     console.log('state:', this.state);
   };
@@ -50,7 +50,7 @@ class SongForm extends React.Component {
   };
 
   validateData = () => {
-    if (this.state.song_title !== undefined & this.state.song_artist !== undefined & this.props.video_id !== undefined & this.props.video_url !== undefined){
+    if (this.state.song_title !== '' & this.state.song_artist !== '' & this.props.video_id !== undefined & this.props.video_url !== undefined){
       return true;
     }else{
       return false;
