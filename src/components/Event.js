@@ -62,14 +62,17 @@ class Event extends React.Component {
     return (
       <div>
         {this.props.activeEvent ? <React.Fragment>
-            <h1>{this.props.activeEvent.title}</h1>
+            <h1>{this.props.activeEvent.title} {this.props.activeEvent.user_id}</h1>
             <p>Location: {this.props.activeEvent.location}</p>
             <p>{this.props.activeEvent.description}</p>
           </React.Fragment> : null}
-          <ul>
-            {this.props.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
-          </ul>
-          <SongForm/>
+
+          {this.state.attending ? <React.Fragment>
+            <ul>
+              {this.props.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
+            </ul>
+            <SongForm/>
+            </React.Fragment> : null}
       </div>
     );
   };

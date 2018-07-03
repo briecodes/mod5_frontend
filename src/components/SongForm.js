@@ -19,8 +19,18 @@ class SongForm extends React.Component {
     });
   };
 
+  resetForm = () => {
+    console.log('resetting form');
+    this.setState({
+      song_title: undefined,
+      song_artist: undefined
+    });
+    console.log('state:', this.state);
+  };
+
   submitEntry = (e) => {
     e.preventDefault();
+    e.persist();
     if (this.validateData()){
       fetch('http://localhost:3000/api/v1/song_entries', {
         method: 'POST',
@@ -29,7 +39,9 @@ class SongForm extends React.Component {
     })
       .then( res => res.json() )
       .then( response => {
-        console.log('success:', response);
+        // console.log('success:', response);
+        this.resetForm();
+        e.target.reset();
         this.props.dispatch(addPerformerToList(response));
       });
     }else{
