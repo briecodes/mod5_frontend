@@ -35,6 +35,10 @@ const reducer = (state = initialState, action) => {
     return {...state, performerList: [ ...state.performerList, action.payload.performer]}
   }else if (action.type === 'RESET_STORE'){
     return {...state, performerList: initialState.performerList, video_url: initialState.video_url, video_id: initialState.video_id}
+  }else if (action.type === 'RESET_APP'){
+    console.log('state:', state);
+    console.log('action:', action);
+    return { initialState }
   }
   return state;
 };

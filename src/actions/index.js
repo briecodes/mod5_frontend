@@ -64,3 +64,10 @@ export function resetStore() {
     type: 'RESET_STORE'
   };
 };
+
+export function resetApp() {
+  return {
+    type: 'RESET_APP',
+    payload: {}
+  };
+};
