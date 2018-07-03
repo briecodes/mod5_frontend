@@ -65,10 +65,10 @@ class HomePage extends React.Component {
           <h3>Past Events:</h3>
           {this.state.myPastEvents.map(event => <li key={event.id} >{event.title} ></li>)}
         </ul>
-        <ul>
+        {/* <ul>
           <h3>Visited Events:</h3>
           {this.state.visitedEvents.map(event => <li key={event.id} ><Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} >{event.title} > </Link>{event.song_entries.map(song => <p key={song.id}>{song.song_title}</p>)}</li>)}
-        </ul>
+        </ul> */}
       </div>
     );
   };
