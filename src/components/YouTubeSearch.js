@@ -44,6 +44,14 @@ class YouTubeSearch extends React.Component {
     });
   };
 
+  resetForm = (e) => {
+    // console.log(e.target);
+    this.setState({
+      search_term: '',
+      video_results: []
+    });
+  };
+
   render() {
     return (
       <React.Fragment>
