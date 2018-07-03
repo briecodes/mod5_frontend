@@ -70,7 +70,7 @@ class Event extends React.Component {
             <p>{this.props.activeEvent.description}</p>
           </React.Fragment> : null}
           <ul>
-            {/* {this.props.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)} */}
+            {this.props.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
           </ul>
           <SongForm/>
       </div>
