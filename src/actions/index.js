@@ -30,3 +30,10 @@ export function setActiveEvent(event) {
     payload: {event}
   };
 };
+
+export function setCurrentLocation(loc) {
+  return {
+    type: 'SET_LOCATION',
+    payload: {currentLocation: loc}
+  }
+};

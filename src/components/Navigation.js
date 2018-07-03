@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { logOutUser } from '../actions/index';
+import { logOutUser, setCurrentLocation } from '../actions/index';
 
 class Navigation extends React.Component {
 
@@ -14,9 +14,9 @@ class Navigation extends React.Component {
     return (
       <div id='navigation'>
         <div id='nav-logo'>logo</div>
-        <NavLink to="/" exact >Home</NavLink>
-        <NavLink to="/create-event" exact >Create Event</NavLink>
-        <NavLink to="/" exact onClick={this.logOut} >Log Out</NavLink>
+        <Link to='/' onClick={() => this.props.dispatch(setCurrentLocation('/'))} >Home</Link>
+        <Link to='/create-event' onClick={() => this.props.dispatch(setCurrentLocation('/create-event'))} >Create Event</Link>
+        <Link to='/' onClick={this.logOut} >Log Out</Link>
         <form>
           <input type='text' name='search_events' placeholder='Search Events' />
         </form>
@@ -27,7 +27,8 @@ class Navigation extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    activeUser: state.activeUser
+    activeUser: state.activeUser,
+    currentLocation: state.currentLocation
   };
 };
 

@@ -10,7 +10,8 @@ import { Provider } from 'react-redux';
 const initialState = {
   userId: null,
   activeUser: null,
-  activeEvent: null
+  activeEvent: null,
+  currentLocation: '/'
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +24,9 @@ const reducer = (state = initialState, action) => {
     return {...state, activeEvent: action.payload.event}
   }else if (action.type === 'LOGOUT'){
     return {...state, activeUser: action.payload.user}
+  }else if (action.type === 'SET_LOCATION'){
+    console.log('setting location...', action.payload.currentLocation)
+    return {...state, currentLocation: action.payload.currentLocation}
   }
   return state;
 };

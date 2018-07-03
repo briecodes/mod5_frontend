@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 
 import Navigation from '../components/Navigation';
@@ -14,8 +15,10 @@ class Content extends React.Component {
       <div id='content'>
         <Navigation/>
         <Switch>
-          <Route exact path='/' component={HomePage}/>
-          <Route exact path='/create-event' component={CreateEvent}/>
+          {/* <Route exact path='/' component={HomePage}/> */}
+          {this.props.currentLocation === '/' ? <HomePage/> : null}
+          {this.props.currentLocation === '/create-event' ? <CreateEvent/> : null}
+          {/* <Route exact path='/create-event' component={CreateEvent}/> */}
           <Route path='/events' component={Event}/>
         </Switch>
         <Footer/>
@@ -24,4 +27,10 @@ class Content extends React.Component {
   };
 };
 
-export default Content;
+const mapStateToProps = (state) => {
+  return {
+    currentLocation: state.currentLocation
+  };
+};
+
+export default connect(mapStateToProps)(Content);
