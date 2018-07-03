@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Navigation from '../components/Navigation';
 import HomePage from '../components/HomePage';
@@ -13,9 +13,11 @@ class Content extends React.Component {
     return (
       <div id='content'>
         <Navigation/>
-        <Route exact path='/' component={HomePage} />
-        <Route exact path='/create-event' component={CreateEvent} />
-        <Route path='/events' component={Event}/>
+        <Switch>
+          <Route exact path='/' component={HomePage}/>
+          <Route exact path='/create-event' component={CreateEvent}/>
+          <Route path='/events' component={Event}/>
+        </Switch>
         <Footer/>
       </div>
     );

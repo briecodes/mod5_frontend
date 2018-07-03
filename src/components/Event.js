@@ -33,10 +33,9 @@ class Event extends React.Component {
   getUserEvents = () => {
     fetch('http://localhost:3000/api/v1/user_events').then( response => response.json() )
     .then(array => {
-      const tim = array.find(userEvent => {
+      array.find(userEvent => {
         return userEvent.event_id === this.props.activeEvent
       });
-      // console.log('tim', tim);
     });
   };
 
