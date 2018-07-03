@@ -1,14 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { setActiveEvent } from '../actions/index';
+
+
+
 class Event extends React.Component {
 
   state = {
-    attending: false
+    attending: false,
+    performerList: []
   };
 
   componentDidMount() {
-    // this.getEventUsers();
+    this.getEventDetails();
+    this.getEventPerformerList();
   };
 
   eventAttendanceCheck = (arr) => {
@@ -21,12 +27,24 @@ class Event extends React.Component {
     });
   };
 
-  getEventUsers = () => {
-    console.log('getevent...');
+  getEventDetails = () => {
     fetch('http://localhost:3000/api/v1/events/' + this.props.activeEvent.id).then(response => response.json() )
-    .then(array => {
-      const tim = array.user_events;
-      this.eventAttendanceCheck(tim);
+    .then(activeEvent => {
+      this.props.dispatch(setActiveEvent(activeEvent));
+      this.eventAttendanceCheck(activeEvent.user_events);
+    });
+  };
+
+  getEventPerformerList = () => {
+    fetch('http://localhost:3000/api/v1/song_entries/').then(response => response.json() )
+    .then(performerList => {
+      performerList.forEach(entry => {
+        if (entry.event_id === this.props.activeEvent.id){
+          this.setState({
+            performerList: [...this.state.performerList, entry]
+          });
+        };
+      });
     });
   };
 
@@ -47,6 +65,9 @@ class Event extends React.Component {
             <p>Location: {this.props.activeEvent.location}</p>
             <p>{this.props.activeEvent.description}</p>
           </React.Fragment> : null}
+          <ul>
+            {this.state.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
+          </ul>
       </div>
     );
   };

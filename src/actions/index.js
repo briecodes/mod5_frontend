@@ -37,3 +37,10 @@ export function setCurrentLocation(loc) {
     payload: {currentLocation: loc}
   }
 };
+
+export function setPerformerList(entry) {
+  return {
+    type: 'LOAD_PERFORMERS',
+    payload: {performerList: entry}
+  }
+};

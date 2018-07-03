@@ -11,6 +11,7 @@ const initialState = {
   userId: null,
   activeUser: null,
   activeEvent: null,
+  performerList: [],
   currentLocation: '/'
 }
 
