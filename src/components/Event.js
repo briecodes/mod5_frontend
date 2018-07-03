@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import SongForm from '../components/SongForm';
 import { setActiveEvent } from '../actions/index';
 
 
@@ -68,6 +69,7 @@ class Event extends React.Component {
           <ul>
             {this.state.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
           </ul>
+          <SongForm/>
       </div>
     );
   };
