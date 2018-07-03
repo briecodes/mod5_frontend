@@ -58,3 +58,9 @@ export function addPerformerToList(performer) {
     payload: {performer}
   }
 };
+
+export function resetStore() {
+  return {
+    type: 'RESET_STORE'
+  };
+};

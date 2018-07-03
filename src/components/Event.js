@@ -9,8 +9,7 @@ import { setActiveEvent, addPerformerToList } from '../actions/index';
 class Event extends React.Component {
 
   state = {
-    attending: false,
-    performerList: []
+    attending: false
   };
 
   componentDidMount() {
@@ -41,7 +40,6 @@ class Event extends React.Component {
     .then(performerList => {
       performerList.forEach(entry => {
         if (entry.event_id === this.props.activeEvent.id){
-          console.log('fetch entry', entry);
           this.props.dispatch(addPerformerToList(entry));
           // this.setState({
           //   performerList: [...this.state.performerList, entry]
@@ -61,7 +59,6 @@ class Event extends React.Component {
   };
 
   render() {
-    console.log('list', this.props.performerList);
     return (
       <div>
         {this.props.activeEvent ? <React.Fragment>

@@ -33,6 +33,8 @@ const reducer = (state = initialState, action) => {
     return {...state, video_id: action.payload.video_id, video_url: action.payload.video_url}
   }else if (action.type === 'ADD_PERFORMER_TO_LIST'){
     return {...state, performerList: [ ...state.performerList, action.payload.performer]}
+  }else if (action.type === 'RESET_STORE'){
+    return {...state, performerList: initialState.performerList, video_url: initialState.video_url, video_id: initialState.video_id}
   }
   return state;
 };
