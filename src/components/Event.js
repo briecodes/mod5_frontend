@@ -62,7 +62,7 @@ class Event extends React.Component {
     return (
       <div>
         {this.props.activeEvent ? <React.Fragment>
-            <h1>{this.props.activeEvent.title} {this.props.activeEvent.user_id}</h1>
+            <h1>{this.props.activeEvent.title} {this.props.activeEvent.user_id} {this.state.attending ? <button type='button'>Join</button> : <button type='button'>Leave</button>}</h1>
             <p>Location: {this.props.activeEvent.location}</p>
             <p>{this.props.activeEvent.description}</p>
           </React.Fragment> : null}
