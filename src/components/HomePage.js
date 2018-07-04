@@ -52,7 +52,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div>
-        <h1 onClick={this.checkEvents}>HomePage</h1>
+        <h1>HomePage</h1>
         <ul>
           <h3>My Events:</h3>
           {this.state.myCurrentEvents.map(event => <li key={event.id} ><Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} >{event.title} ></Link></li>)}

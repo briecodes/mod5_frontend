@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import EventSearch from '../components/EventSearch';
 import { logOutUser, setCurrentLocation, resetStore } from '../actions/index';
 
 class Navigation extends React.Component {
@@ -27,9 +28,7 @@ class Navigation extends React.Component {
         <Link to='/' onClick={() => this.routingMethod('/')} >Home</Link>
         <Link to='/create-event' onClick={() => this.routingMethod('/create-event')} >Create Event</Link>
         <Link to='/' onClick={this.logOut} >Log Out</Link>
-        <form>
-          <input type='text' name='search_events' placeholder='Search Events' />
-        </form>
+        <EventSearch/>
       </div>
     );
   };
