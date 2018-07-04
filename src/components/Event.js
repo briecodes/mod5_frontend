@@ -40,7 +40,7 @@ class Event extends React.Component {
     fetch('http://localhost:3000/api/v1/song_entries/').then(response => response.json() )
     .then(performerList => {
       performerList.forEach(entry => {
-        if (entry.event_id === this.props.activeEvent.id){
+        if (entry.event_id === this.props.activeEvent.id && entry.played === false && entry.passed === false){
           this.props.dispatch(addPerformerToList(entry));
         };
       });
@@ -86,6 +86,10 @@ class Event extends React.Component {
     }
   };
 
+  markAsPerformed = (id) => {
+    console.log('performed:', id);
+  };
+
   render() {
     return (
       <div>
@@ -94,6 +98,7 @@ class Event extends React.Component {
           {this.props.performerList.length > 0 ? <iframe id='player' title='Admin Player' type='text/html'
                   src={`http://www.youtube.com/embed/${this.props.performerList[0].video_id}`} frameBorder='0'></iframe> : null}
           <div className='admin-list'>
+          {this.props.performerList.map(perf => <div key={perf.id} className='admin-performer current'><span className='admin-performer-name'>{perf.user.name} <button className='admin-next-button' onClick={() => this.markAsPerformed(perf.id)} >></button></span> {perf.song_title} by {perf.song_artist}</div>)[0]}
             {this.props.performerList.map(perf => <div key={perf.id} className='admin-performer'><span className='admin-performer-name'>{perf.user.name}</span> {perf.song_title} by {perf.song_artist}</div>)}
           </div>
         </React.Fragment> : null}

@@ -171,13 +171,15 @@ ul {
 /* EVENT PAGE */
 
 .admin-list {
+  font-size: .8em;
   float: right;
   width: 25%;
   overflow-y: auto;
 }
 
 .admin-performer {
-  margin-bottom: 5%;
+  padding-top: 4%;
+  padding-bottom: 4%;
 }
 
 .admin-performer:hover {
@@ -185,7 +187,7 @@ ul {
 }
 
 #player {
-  width: 73%;
+  width: 73.5%;
   float: left;
 }
 
@@ -199,4 +201,25 @@ ul {
   display: block;
   margin: 0;
   padding: 0;
+}
+
+.current {
+  background: #d2e6f4;
+  font-size: 1.5em;
+}
+
+.current:hover {
+  background: #d2e6f4;
+}
+
+.admin-next-button {
+  border: 0;
+  margin-left: 5%;
+  border-radius: 5px;
+}
+
+.admin-next-button:hover {
+  cursor: pointer;
+  background: #f15a25;
+  color: #fff;
 }
