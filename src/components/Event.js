@@ -9,7 +9,8 @@ import { setActiveEvent, addPerformerToList } from '../actions/index';
 class Event extends React.Component {
 
   state = {
-    attending: false
+    attending: false,
+    attending_id: null
   };
 
   componentDidMount() {
@@ -55,11 +56,29 @@ class Event extends React.Component {
     });
   };
 
+  deleteUserEvent = (id) => {
+    fetch('http://localhost:3000/api/v1/user_events/' + id, {
+        method: 'DELETE'
+    })
+    .then( res => res.json() )
+    .then( response => console.log('response:', response ))
+    .then( () => this.getEventDetails() );
+  };
+
+  attendButton = (e) => {
+    if (e.target.name === 'join'){
+
+    }else{
+      const uev = this.props.activeEvent.user_events.find(userevent => userevent.user_id === this.props.activeUser.id);
+      this.deleteUserEvent(uev.id);
+    }
+  };
+
   render() {
     return (
       <div>
         {this.props.activeEvent ? <React.Fragment>
-            <h1>{this.props.activeEvent.title} {this.props.activeEvent.user_id} {this.state.attending ? <button type='button'>Leave</button> : this.props.activeEvent.user_id !== this.props.activeUser.id ? <button type='button'>Join</button> : null}</h1>
+            <h1>{this.props.activeEvent.title} {this.props.activeEvent.user_id} {this.state.attending ? <button type='button' name='leave' onClick={this.attendButton}>Leave</button> : this.props.activeEvent.user_id !== this.props.activeUser.id ? <button type='button' name='join' onClick={this.attendButton}>Join</button> : null}</h1>
             <p>Location: {this.props.activeEvent.location}</p>
             <p>{this.props.activeEvent.description}</p>
           </React.Fragment> : null}

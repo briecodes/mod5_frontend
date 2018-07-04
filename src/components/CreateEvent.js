@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { setActiveEvent, setCurrentLocation } from '../actions/index';
+
 class CreateEvent extends React.Component {
 
   state = {
@@ -21,17 +23,25 @@ class CreateEvent extends React.Component {
       })
       .then( res => res.json() )
       .then( response => {
-        console.log('response:', response );
+        // console.log('response:', response );
         if (response.errors){
           alert(response.errors[0]);
         }else{
           this.stateReset();
           e.target.reset();
+          this.exploreEvent(response);
+          return response;
         }
+      }).then(response => {
+        this.props.dispatch(setCurrentLocation('/events/'+response.id))
       });
     }else {
       console.log('Error! Something is amiss...');
     };
+  };
+
+  exploreEvent = (event) => {
+    this.props.dispatch(setActiveEvent(event));
   };
 
   stateReset = () => {
