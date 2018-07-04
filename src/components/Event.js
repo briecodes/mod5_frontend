@@ -89,17 +89,19 @@ class Event extends React.Component {
   render() {
     return (
       <div>
+
+        {this.props.activeUser.id === this.props.activeEvent.user_id ? <React.Fragment>
+          {this.props.performerList.length > 0 ? <iframe id='player' title='Admin Player' type='text/html'
+                  src={`http://www.youtube.com/embed/${this.props.performerList[0].video_id}`} frameBorder='0'></iframe> : null}
+          <div className='admin-list'>
+            {this.props.performerList.map(perf => <div key={perf.id} className='admin-performer'><span className='admin-performer-name'>{perf.user.name}</span> {perf.song_title} by {perf.song_artist}</div>)}
+          </div>
+        </React.Fragment> : null}
+
         {this.props.activeEvent ? <React.Fragment>
             <h1>{this.props.activeEvent.title} {this.props.activeEvent.user_id} {this.state.attending ? <button type='button' name='leave' onClick={this.attendButton}>Leave</button> : this.props.activeEvent.user_id !== this.props.activeUser.id ? <button type='button' name='join' onClick={this.attendButton}>Join</button> : null}</h1>
             <p>Location: {this.props.activeEvent.location}</p>
             <p>{this.props.activeEvent.description}</p>
-          </React.Fragment> : null}
-
-          {this.props.activeUser.id === this.props.activeEvent.user_id ? <React.Fragment>
-            <ul>
-              <h5>Event list</h5>
-              {this.props.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
-            </ul>
           </React.Fragment> : null}
 
           {this.state.attending ? <React.Fragment>

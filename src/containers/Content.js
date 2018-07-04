@@ -22,6 +22,7 @@ class Content extends React.Component {
           {/* <Route exact path='/create-event' component={CreateEvent}/> */}
           {/* <Route path='/events' component={Event}/> */}
         </Switch>
+        <div className='divider'></div>
         <Footer/>
       </div>
     );
