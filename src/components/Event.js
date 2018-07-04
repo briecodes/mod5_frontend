@@ -39,11 +39,19 @@ class Event extends React.Component {
   getEventPerformerList = () => {
     fetch('http://localhost:3000/api/v1/song_entries/').then(response => response.json() )
     .then(performerList => {
+      // performerList.forEach(entry => {
+      //   if (entry.event_id === this.props.activeEvent.id && entry.played === false && entry.passed === false){
+      //     this.props.dispatch(addPerformerToList(entry));
+      //   };
+      // });
+      const list = []
       performerList.forEach(entry => {
         if (entry.event_id === this.props.activeEvent.id && entry.played === false && entry.passed === false){
-          this.props.dispatch(addPerformerToList(entry));
+          // this.props.dispatch(addPerformerToList(entry));
+          list.push(entry);
         };
       });
+      this.props.dispatch(addPerformerToList(list));
     });
   };
 
@@ -88,6 +96,16 @@ class Event extends React.Component {
 
   markAsPerformed = (id) => {
     console.log('performed:', id);
+    fetch('http://localhost:3000/api/v1/song_entries/' + id, {
+      method: 'PATCH',
+      body: JSON.stringify({played: true}),
+      headers: {'Content-Type': 'application/json'}
+      })
+      .then( res => res.json() )
+      .then( response => {
+        console.log('success:', response);
+        this.getEventPerformerList();
+      });
   };
 
   render() {
