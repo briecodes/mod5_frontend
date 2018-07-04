@@ -96,6 +96,27 @@ input {
   margin-top: 5px;
 }
 
+#footer {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+  padding-top: 15px;
+  text-align: center;
+  color: #d3d2d2;
+  border-top: 1px;
+  border-top-color: #d3d2d2;
+  border-top-style: solid;
+}
+
+#footer a, #footer a:visited {
+  color: #d3d2d2;
+}
+
+#footer a:hover {
+  color: #f15a25;
+}
+
 #entryFormContainer {
   display: table;
   vertical-align: middle;

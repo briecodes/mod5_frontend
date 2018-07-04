@@ -95,6 +95,13 @@ class Event extends React.Component {
             <p>{this.props.activeEvent.description}</p>
           </React.Fragment> : null}
 
+          {this.props.activeUser.id === this.props.activeEvent.user_id ? <React.Fragment>
+            <ul>
+              <h5>Event list</h5>
+              {this.props.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
+            </ul>
+          </React.Fragment> : null}
+
           {this.state.attending ? <React.Fragment>
             <ul>
               {this.props.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
