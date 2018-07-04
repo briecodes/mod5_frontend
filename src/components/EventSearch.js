@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { setActiveEvent, setCurrentLocation } from '../actions/index';
 
 class EventSearch extends React.Component {
     state = {
@@ -11,26 +13,37 @@ class EventSearch extends React.Component {
         this.setState({
             [e.target.name]: e.target.value
         });
-        this.searchEvents();
+        this.searchEvents(e);
     };
 
-    fetchEvents = () => {
+    clearState = () => {
+        this.setState({
+            searchTerm: '',
+            foundEvents: []
+        });
+    };
+
+    fetchEvents = (searchTerm) => {
         fetch('http://localhost:3000/api/v1/events').then( response => response.json() ).then(array => {
-            const foundEvents = array.filter(event => event.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()) && event.user_id !== this.props.activeUser.id);
+            const foundEvents = array.filter(event => event.title.toLowerCase().includes(searchTerm.toLowerCase()) && event.user_id !== this.props.activeUser.id);
             this.setState({
                 foundEvents
             });
         });
     };
 
-    searchEvents = () => {
-        if (this.state.searchTerm === ''){
-            this.setState({
-                foundEvents: []
-            });
+    searchEvents = (e) => {
+        if (e.target.value === '' || e.target.value === ' '){
+            this.clearState(e);
         }else{
-            this.fetchEvents();
+            this.fetchEvents(e.target.value);
         };
+    };
+
+    exploreEvent = (event) => {
+        this.clearState();
+        this.props.dispatch(setCurrentLocation('/events/'+event.id));
+        this.props.dispatch(setActiveEvent(event));
     };
 
     render() {
@@ -38,7 +51,7 @@ class EventSearch extends React.Component {
             <div>
                 <input type='text' name='searchTerm' placeholder='Search Events' value={this.state.searchTerm} onChange={this.inputControl} />
                 <ul>
-                    {this.state.foundEvents.map(event => <li key={event.id}>{event.title}</li>)}
+                    {this.state.foundEvents.map(event => <li key={event.id}><Link to={'/events/'+event.id} onClick={() => this.exploreEvent(event)}>{event.title}</Link></li>)}
                 </ul>
             </div>
         );
