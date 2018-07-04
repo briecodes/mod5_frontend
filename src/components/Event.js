@@ -56,6 +56,18 @@ class Event extends React.Component {
     });
   };
 
+  createUserEvent = () => {
+    fetch('http://localhost:3000/api/v1/user_events', {
+        method: 'POST',
+        body: JSON.stringify({user_id: this.props.activeUser.id, event_id: this.props.activeEvent.id}),
+        headers: {'Content-Type': 'application/json'}
+      })
+      .then( res => res.json() )
+      .then( response => {
+        console.log('response:', response );
+      }).then(() => this.getEventDetails() );
+  };
+
   deleteUserEvent = (id) => {
     fetch('http://localhost:3000/api/v1/user_events/' + id, {
         method: 'DELETE'
@@ -67,7 +79,7 @@ class Event extends React.Component {
 
   attendButton = (e) => {
     if (e.target.name === 'join'){
-
+      this.createUserEvent();
     }else{
       const uev = this.props.activeEvent.user_events.find(userevent => userevent.user_id === this.props.activeUser.id);
       this.deleteUserEvent(uev.id);
