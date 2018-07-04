@@ -1,8 +1,39 @@
+/* COLORS */
+/* DARK BLUE #263a5f */
+/* GREY #f4f2f2 */
+/* MEDIUM BLUE #85b7d0 */
+/* LIGHT BLUE #d2e6f4 */
+/* ORANGE #f15a25 */
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: .75em;
+  color: #263a5f;
+  background: #f4f2f2;
+}
+
+.divider {
+  width: 100%;
+  clear: both;
+}
+
+a, a:visited {
+  color: #f15a25;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+input {
+  border-radius: 5px;
+  border: 1px;
+  border-color: #d2e6f4;
+  border-style: solid;
+  padding: 5px;
 }
 
 #App {
@@ -13,6 +44,56 @@ body {
 #content {
   margin: 0;
   padding: 0;
+}
+
+#entry-logo {
+  width: 150px;
+  height: 30px;
+  background-image: url('octothoke_logo.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: fixed;
+  left: 2%;
+  top: 2%;
+}
+
+#nav-logo {
+  width: 150px;
+  height: 30px;
+  margin-right: 25px;
+  background-image: url('octothoke_logo.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  float: left;
+}
+
+#navigation {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+#navigation a {
+  display: block;
+  position: relative;
+  float: left;
+  padding: 10px;
+}
+
+#navigation a:hover {
+  background: #fff;
+  text-decoration: none;
+}
+
+#navigation input {
+  position: relative;
+  float: right;
+  margin-top: 5px;
 }
 
 #entryFormContainer {
@@ -36,10 +117,10 @@ body {
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;
+  background: #fff;
 }
 
 .formContainer input {
-  border-radius: 5px;
   width: 75%;
   margin-bottom: 5%;
 }

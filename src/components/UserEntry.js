@@ -12,6 +12,7 @@ class UserEntry extends React.Component {
   render() {
     return (
       <div id='entryFormContainer'>
+      <div id='entry-logo'></div>
         <div id='formInnerContainer'>
           <SignUp handleOnSubmit={this.createUser} />
           <SignIn/>
