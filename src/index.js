@@ -40,6 +40,8 @@ const reducer = (state = initialState, action) => {
     console.log('state:', state);
     console.log('action:', action);
     return { initialState }
+  }else if (action.type === 'RESET_ACTIVE_EVENT'){
+    return {...state, activeEvent: null}
   }
   return state;
 };

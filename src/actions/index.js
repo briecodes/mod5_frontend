@@ -71,3 +71,10 @@ export function resetApp() {
     payload: {}
   };
 };
+
+export function resetActiveEvent() {
+  return {
+    type: 'RESET_ACTIVE_EVENT',
+    payload: {}
+  };
+};
