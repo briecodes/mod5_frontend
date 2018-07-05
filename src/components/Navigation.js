@@ -8,6 +8,7 @@ import { logOutUser, setCurrentLocation, resetStore } from '../actions/index';
 class Navigation extends React.Component {
 
   logOut = () => {
+    this.props.dispatch(setCurrentLocation('/'));
     this.props.dispatch(logOutUser());
     this.props.dispatch(resetStore());
   };
