@@ -13,13 +13,15 @@ class Navigation extends React.Component {
     this.props.dispatch(resetStore());
   };
 
-  routingMethod = (arg) => {
+  routingMethod = (urlRoute) => {
     this.props.dispatch(resetStore());
-    if (arg === '/'){
-      window.history.pushState({}, "new state", "/");
-      this.props.dispatch(setCurrentLocation('/'));
-    }else if (arg === '/create-event'){
-      this.props.dispatch(setCurrentLocation('/create-event'));
+    if (urlRoute === '/'){
+      window.history.pushState({}, "new state", urlRoute);
+      this.props.dispatch(setCurrentLocation(urlRoute));
+    }else if (urlRoute === '/create-event'){
+      this.props.dispatch(setCurrentLocation(urlRoute));
+    }else if (urlRoute === '/edit-profile'){
+      this.props.dispatch(setCurrentLocation(urlRoute))
     }
   };
 
@@ -29,6 +31,7 @@ class Navigation extends React.Component {
         <div id='nav-logo' onClick={() => this.routingMethod('/')}></div>
         <Link to='/' onClick={() => this.routingMethod('/')} >Home</Link>
         <Link to='/create-event' onClick={() => this.routingMethod('/create-event')} >Create Event</Link>
+        <Link to='/edit-profile' onClick={() => this.routingMethod('/edit-profile')} >Edit Profile</Link>
         <Link to='/' onClick={this.logOut} >Log Out</Link>
         <EventSearch/>
         <div className='divider'></div>
