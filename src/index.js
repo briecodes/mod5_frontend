@@ -19,10 +19,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   if (action.type === 'SET_USER'){
-    console.log('action.type SET_USER', action.payload);
     return {...state, activeUser: action.payload.user}
   }else if (action.type === 'FAKED_USER'){
-    console.log('action.type FAKED_USER', action.payload);
     return {...state, activeUser: action.payload.user}
   }else if (action.type === 'ACTIVE_EVENT'){
     return {...state, activeEvent: action.payload.event}

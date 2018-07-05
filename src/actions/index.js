@@ -4,7 +4,6 @@ export const myAction = {
 };
 
 export function setUser(user) {
-  console.log('reducer:', user);
   return {
     type: 'SET_USER',
     payload: {user}
