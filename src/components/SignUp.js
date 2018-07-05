@@ -29,9 +29,10 @@ class SignUp extends React.Component {
         if (response.errors){
           alert(response.errors[0]);
         }else{
-          this.props.dispatch(setUser(response.user.id));
+          this.props.dispatch(setUser(response.user));
           e.target.reset();
-          alert(`${response.user.name}, you're signed in!`);
+          this.props.dispatch(setCurrentLocation('/'));
+          // alert(`${response.user.name}, you're signed in!`);
         }
       });
     }else {

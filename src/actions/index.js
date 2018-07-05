@@ -3,10 +3,11 @@ export const myAction = {
   payload: {userId: 5}
 };
 
-export function setUser(userId) {
+export function setUser(user) {
+  console.log('reducer:', user);
   return {
-    type: 'USER_ID',
-    payload: {userId}
+    type: 'SET_USER',
+    payload: {user}
   };
 };
 
