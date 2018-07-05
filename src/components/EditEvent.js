@@ -38,7 +38,14 @@ class EditEvent extends React.Component {
     console.log('delete event..');
   };
 
+  check = () => {
+    this.setState({
+      active: !this.state.active
+    });
+  };
+
   render() {
+    console.log('state', this.state);
     return (
       <React.Fragment>
         <form onSubmit={this.submitEvent}>
@@ -47,6 +54,7 @@ class EditEvent extends React.Component {
           <input type='text' name='location' placeholder='Location' value={this.state.location} onChange={this.inputControl} />
           <input type='text' name='description' placeholder='Description' value={this.state.description} onChange={this.inputControl} />
           <input type='text' name='key_code' placeholder='Key Code' value={this.state.key_code} onChange={this.inputControl} />
+          {this.state.active ? <React.Fragment><input type='checkbox' name='active' onChange={this.check} defaultChecked /> Active</React.Fragment> : <React.Fragment><input type='checkbox' name='active' onChange={this.check} /> Active</React.Fragment>}
           <input type='submit'/>
         </form>
         <form onSubmit={this.deleteEvent}>
