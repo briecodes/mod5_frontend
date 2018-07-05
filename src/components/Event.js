@@ -67,7 +67,7 @@ class Event extends React.Component {
       })
       .then( res => res.json() )
       .then( response => {
-        console.log('response:', response );
+        // console.log('response:', response );
       }).then(() => this.getEventDetails() );
   };
 
@@ -76,7 +76,7 @@ class Event extends React.Component {
         method: 'DELETE'
     })
     .then( res => res.json() )
-    .then( response => console.log('response:', response ))
+    // .then( response => console.log('response:', response ))
     .then( () => this.getEventDetails() );
   };
 
@@ -122,11 +122,10 @@ class Event extends React.Component {
           </React.Fragment> : null}
 
           {this.state.attending ? <React.Fragment>
-            {this.props.performerList.length > 0 ? <React.Fragment>
             <ul>
               {this.props.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
             </ul>
-            <SongForm/> </React.Fragment> : null }
+            <SongForm/>
             </React.Fragment> : null}
       </div>
     );

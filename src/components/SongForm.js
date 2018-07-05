@@ -20,12 +20,12 @@ class SongForm extends React.Component {
   };
 
   resetForm = () => {
-    console.log('resetting form');
+    // console.log('resetting form');
     this.setState({
       song_title: '',
       song_artist: ''
     });
-    console.log('state:', this.state);
+    // console.log('state:', this.state);
   };
 
   submitEntry = (e) => {
