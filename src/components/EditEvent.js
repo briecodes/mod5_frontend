@@ -43,10 +43,10 @@ class EditEvent extends React.Component {
       <React.Fragment>
         <form onSubmit={this.submitEvent}>
           <h1>Editing {this.props.activeEvent.title}</h1>
-          <input type='text' name='title' value={this.state.title} onChange={this.inputControl} />
-          <input type='text' name='location' value={this.state.location} onChange={this.inputControl} />
-          <input type='text' name='description' value={this.state.description} onChange={this.inputControl} />
-          <input type='text' name='key_code' value={this.state.key_code} onChange={this.inputControl} />
+          <input type='text' name='title' placeholder='Title' value={this.state.title} onChange={this.inputControl} />
+          <input type='text' name='location' placeholder='Location' value={this.state.location} onChange={this.inputControl} />
+          <input type='text' name='description' placeholder='Description' value={this.state.description} onChange={this.inputControl} />
+          <input type='text' name='key_code' placeholder='Key Code' value={this.state.key_code} onChange={this.inputControl} />
           <input type='submit'/>
         </form>
         <form onSubmit={this.deleteEvent}>
