@@ -39,7 +39,6 @@ class SongForm extends React.Component {
     })
       .then( res => res.json() )
       .then( response => {
-        console.log('submitEntry response:', response);
         this.resetForm();
         e.target.reset();
         this.props.dispatch(addPerformerToList(response));
