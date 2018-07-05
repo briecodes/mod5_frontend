@@ -15,6 +15,7 @@ class Navigation extends React.Component {
   routingMethod = (arg) => {
     this.props.dispatch(resetStore());
     if (arg === '/'){
+      window.history.pushState({}, "new state", "/");
       this.props.dispatch(setCurrentLocation('/'));
     }else if (arg === '/create-event'){
       this.props.dispatch(setCurrentLocation('/create-event'));
