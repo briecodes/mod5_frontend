@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -22,4 +23,4 @@ class UserEntry extends React.Component {
   };
 };
 
-export default UserEntry;
+export default connect()(UserEntry);
