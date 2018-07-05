@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setUserFake } from '../actions/index';
+import { setUserFake, setCurrentLocation } from '../actions/index';
 
 class SignIn extends React.Component {
   state = {
@@ -40,7 +40,7 @@ class SignIn extends React.Component {
           <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.inputControl} />
           <input type='submit'/>
         </form>
-        <Link exact='true' to='/sign-up'>Don't have an account? Sign up ></Link>
+        <Link exact='true' to='/sign-up' onClick={() => this.props.dispatch(setCurrentLocation('/sign-up'))} >Don't have an account? Sign up ></Link>
       </div>
     );
   };

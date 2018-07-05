@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { setUser } from '../actions/index';
+import { setUser, setCurrentLocation } from '../actions/index';
 
 class SignUp extends React.Component {
 
@@ -66,6 +67,7 @@ class SignUp extends React.Component {
           <input type='password' name='password_retype' placeholder='Password Confirmation' value={this.state.password_retype} onChange={this.checkPassword} />
           <input type='submit'/>
         </form>
+        <Link exact='true' to='/' onClick={() => this.props.dispatch(setCurrentLocation('/'))} >Already have an account? Sign in ></Link>
       </div>
     );
   };
