@@ -54,19 +54,16 @@ class EditEvent extends React.Component {
   };
 
   cancelDeletion = () => {
-    console.log('cancelling deletion');
     this.setState({
       confirmDelete: false
     });
   };
 
   confirmDeletion = () => {
-    console.log('deletion confirmed.');
     this.deleteSongEntries();
   };
 
   deleteSongEntries = () => {
-    console.log('deleteSongEntries..');
     const entryURL = 'http://localhost:3000/api/v1/song_entries';
     fetch(entryURL)
     .then( response => response.json() )
@@ -81,7 +78,6 @@ class EditEvent extends React.Component {
   };
 
   deleteUserEvents = () => {
-    console.log('deleteUserEvents..');
     const userEventsURL = 'http://localhost:3000/api/v1/user_events';
     fetch(userEventsURL)
     .then( response => response.json())
@@ -96,7 +92,6 @@ class EditEvent extends React.Component {
   };
 
   deleteTheEvent = () => {
-    console.log('about to delete the actual event.');
     fetch('http://localhost:3000/api/v1/events/'+ this.props.activeEvent.id, {
       method: 'DELETE'
     })
@@ -106,10 +101,6 @@ class EditEvent extends React.Component {
       window.history.pushState({}, "new state", "/");
       this.props.dispatch(resetActiveEvent());
     } );
-    // this.deleteHelper('http://localhost:3000/api/v1/events', this.props.activeEvent.id);
-    // this.props.dispatch(setCurrentLocation('/'));
-    // window.history.pushState({}, "new state", "/");
-    // this.props.dispatch(resetActiveEvent());
   };
 
   deleteHelper = (url, id) => {
