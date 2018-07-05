@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import SongForm from '../components/SongForm';
-import { setActiveEvent, addPerformerToList } from '../actions/index';
+import { setActiveEvent, addPerformerToList, setPerformerList } from '../actions/index';
 
 
 
@@ -45,7 +45,8 @@ class Event extends React.Component {
           list.push(entry);
         };
       });
-      this.props.dispatch(addPerformerToList(list));
+      // this.props.dispatch(addPerformerToList(list));
+      this.props.dispatch(setPerformerList(list));
     });
   };
 
@@ -121,10 +122,11 @@ class Event extends React.Component {
           </React.Fragment> : null}
 
           {this.state.attending ? <React.Fragment>
+            {this.props.performerList.length > 0 ? <React.Fragment>
             <ul>
               {this.props.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
             </ul>
-            <SongForm/>
+            <SongForm/> </React.Fragment> : null }
             </React.Fragment> : null}
       </div>
     );
