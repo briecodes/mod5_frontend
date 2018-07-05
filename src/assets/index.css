@@ -167,8 +167,8 @@ ul {
 }
 
 .video-result {
-  height: 250px;
-  width: 300px;
+  /* height: 250px;
+  width: 300px; */
   display: inline;
   margin-right: 1%;
 }
