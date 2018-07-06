@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div id="App">
-        {this.props.activeUser || parseInt(localStorage.getItem('user_id'), 10) ? <Content/> : <UserEntry/>}
+        {parseInt(localStorage.getItem('user_id'), 10) ? <Content/> : <UserEntry/>}
       </div>
     );
   };
