@@ -16,6 +16,7 @@ class HomePage extends React.Component {
   }
   
   getMyEvents = () => {
+    const localUserId = parseInt(localStorage.getItem('user_id'), 10);
     fetch('http://localhost:3000/api/v1/events', {
       headers: {
         'Content-Type': 'application/json',
@@ -23,7 +24,7 @@ class HomePage extends React.Component {
       }
     }).then( response => response.json() ).then(array => {
       array.forEach(event => {
-        if (event.user_id === localStorage.getItem('user_id')){
+        if (event.user_id === localUserId){
           if (event.active){
             this.setState({
               myCurrentEvents: [...this.state.myCurrentEvents, event]
@@ -35,7 +36,7 @@ class HomePage extends React.Component {
           };
         };
         event.user_events.forEach(usrEvt => {
-          if (usrEvt.user_id === this.props.activeUser.id){
+          if (usrEvt.user_id === localUserId){
             this.setState({
               visitedEvents: [...this.state.visitedEvents, event]
             });

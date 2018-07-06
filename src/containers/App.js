@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div id="App">
-        {this.props.activeUser ? <Content/> : <UserEntry/>}
+        {this.props.activeUser || parseInt(localStorage.getItem('user_id')) ? <Content/> : <UserEntry/>}
       </div>
     );
   };

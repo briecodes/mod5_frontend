@@ -20,7 +20,7 @@ class Event extends React.Component {
 
   eventAttendanceCheck = (arr) => {
     let theResult = arr.find(userEvent => {
-      return userEvent.user_id === this.props.activeUser.id;
+      return userEvent.user_id === parseInt(localStorage.getItem('user_id'), 10);
     });
     theResult = theResult ? true : false;
     this.setState({
@@ -42,7 +42,12 @@ class Event extends React.Component {
   };
 
   getEventPerformerList = () => {
-    fetch('http://localhost:3000/api/v1/song_entries/').then(response => response.json() )
+    fetch('http://localhost:3000/api/v1/song_entries/', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
+    }).then(response => response.json() )
     .then(performerList => {
       const list = []
       performerList.forEach(entry => {
@@ -56,7 +61,12 @@ class Event extends React.Component {
   };
 
   getUserEvents = () => {
-    fetch('http://localhost:3000/api/v1/user_events').then( response => response.json() )
+    fetch('http://localhost:3000/api/v1/user_events', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
+    }).then( response => response.json() )
     .then(array => {
       array.find(userEvent => {
         return userEvent.event_id === this.props.activeEvent
@@ -67,8 +77,11 @@ class Event extends React.Component {
   createUserEvent = () => {
     fetch('http://localhost:3000/api/v1/user_events', {
         method: 'POST',
-        body: JSON.stringify({user_id: this.props.activeUser.id, event_id: this.props.activeEvent.id}),
-        headers: {'Content-Type': 'application/json'}
+        body: JSON.stringify({user_id: parseInt(localStorage.getItem('user_id'), 10), event_id: this.props.activeEvent.id}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
       })
       .then( res => res.json() )
       .then( response => {
@@ -78,7 +91,11 @@ class Event extends React.Component {
 
   deleteUserEvent = (id) => {
     fetch('http://localhost:3000/api/v1/user_events/' + id, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
     })
     .then( res => res.json() )
     // .then( response => console.log('response:', response ))
@@ -89,7 +106,7 @@ class Event extends React.Component {
     if (e.target.name === 'join'){
       this.createUserEvent();
     }else{
-      const uev = this.props.activeEvent.user_events.find(userevent => userevent.user_id === this.props.activeUser.id);
+      const uev = this.props.activeEvent.user_events.find(userevent => userevent.user_id === parseInt(localStorage.getItem('user_id'), 10));
       this.deleteUserEvent(uev.id);
     }
   };
@@ -98,8 +115,11 @@ class Event extends React.Component {
     fetch('http://localhost:3000/api/v1/song_entries/' + id, {
       method: 'PATCH',
       body: JSON.stringify({played: true}),
-      headers: {'Content-Type': 'application/json'}
-      })
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
+    })
       .then( res => res.json() )
       .then( response => {
         // console.log('success:', response);
@@ -111,7 +131,7 @@ class Event extends React.Component {
     return (
       <div>
 
-        {this.props.activeUser.id === this.props.activeEvent.user_id ? <React.Fragment>
+        {parseInt(localStorage.getItem('user_id'), 10) === this.props.activeEvent.user_id ? <React.Fragment>
           {this.props.performerList.length > 0 ? <iframe id='player' title='Admin Player' type='text/html'
                   src={`http://www.youtube.com/embed/${this.props.performerList[0].video_id}`} frameBorder='0'></iframe> : null}
           <div className='admin-list'>
@@ -121,7 +141,7 @@ class Event extends React.Component {
         </React.Fragment> : null}
 
         {this.props.activeEvent ? <React.Fragment>
-            <h1>{this.props.activeEvent.title} {this.props.activeEvent.user_id} {this.state.attending ? <button type='button' name='leave' onClick={this.attendButton}>Leave</button> : this.props.activeEvent.user_id !== this.props.activeUser.id ? <button type='button' name='join' onClick={this.attendButton}>Join</button> : null}</h1>
+            <h1>{this.props.activeEvent.title} {this.props.activeEvent.user_id} {this.state.attending ? <button type='button' name='leave' onClick={this.attendButton}>Leave</button> : this.props.activeEvent.user_id !== parseInt(localStorage.getItem('user_id'), 10) ? <button type='button' name='join' onClick={this.attendButton}>Join</button> : null}</h1>
             <p>Location: {this.props.activeEvent.location}</p>
             <p>{this.props.activeEvent.description}</p>
           </React.Fragment> : null}

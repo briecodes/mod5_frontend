@@ -24,8 +24,13 @@ class EventSearch extends React.Component {
     };
 
     fetchEvents = (searchTerm) => {
-        fetch('http://localhost:3000/api/v1/events').then( response => response.json() ).then(array => {
-            const foundEvents = array.filter(event => event.title.toLowerCase().includes(searchTerm.toLowerCase()) && event.user_id !== this.props.activeUser.id);
+        fetch('http://localhost:3000/api/v1/events', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+          }
+        }).then( response => response.json() ).then(array => {
+            const foundEvents = array.filter(event => event.title.toLowerCase().includes(searchTerm.toLowerCase()) && event.user_id !== parseInt(localStorage.getItem('user_id')));
             this.setState({
                 foundEvents
             });

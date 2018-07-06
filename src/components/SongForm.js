@@ -9,7 +9,7 @@ class SongForm extends React.Component {
   state = {
     song_title: '',
     song_artist: '',
-    user_id: this.props.activeUser.id,
+    user_id: parseInt(localStorage.getItem('user_id')),
     event_id: this.props.activeEvent.id
   };
 
@@ -35,7 +35,10 @@ class SongForm extends React.Component {
       fetch('http://localhost:3000/api/v1/song_entries', {
         method: 'POST',
         body: JSON.stringify({...this.state, video_id: this.props.video_id, video_url: this.props.video_url}),
-        headers: {'Content-Type': 'application/json'}
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
     })
       .then( res => res.json() )
       .then( response => {

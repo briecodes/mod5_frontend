@@ -27,13 +27,13 @@ class SignIn extends React.Component {
         }
       }).then( res => res.json() )
       .then( response => {
-        if (response.errors){
-          console.log('errors!', response.errors);
+        if (response.errors || response.error){
+          console.log('errors!', response);
         }else{
-          console.log('login info', response);
-          this.props.dispatch(setUser(response.user));
+          // console.log('login info', response);
           localStorage.setItem('user_id', response.user.id);
           localStorage.setItem('token', response.token);
+          this.props.dispatch(setUser(response.user));
           this.props.dispatch(setUserId(response.user.id));
           window.history.pushState({}, "new state", "/");
         }

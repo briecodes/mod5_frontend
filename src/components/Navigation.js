@@ -11,6 +11,7 @@ class Navigation extends React.Component {
     this.props.dispatch(setCurrentLocation('/'));
     this.props.dispatch(logOutUser());
     this.props.dispatch(resetStore());
+    localStorage.clear();
   };
 
   routingMethod = (urlRoute) => {
