@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import EventSearch from '../components/EventSearch';
-import { logOutUser, setCurrentLocation, resetStore } from '../actions/index';
+import { logOutUser, setCurrentLocation, resetStore } from '../reducers/index';
 
 class Navigation extends React.Component {
 

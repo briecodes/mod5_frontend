@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import SongForm from '../components/SongForm';
-import { setActiveEvent, setPerformerList } from '../actions/index';
+import { setActiveEvent, setPerformerList } from '../reducers/index';
 
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setActiveEvent, setCurrentLocation, resetActiveEvent } from '../actions/index';
+import { setActiveEvent, setCurrentLocation, resetActiveEvent } from '../reducers/index';
 
 class EditEvent extends React.Component {
   state = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setUser } from '../actions/index';
+import { setUser } from '../reducers/index';
 
 class EditProfile extends React.Component {
   state = {

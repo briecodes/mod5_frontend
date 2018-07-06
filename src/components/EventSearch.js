@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setActiveEvent, setCurrentLocation } from '../actions/index';
+import { setActiveEvent, setCurrentLocation } from '../reducers/index';
 
 class EventSearch extends React.Component {
     state = {
