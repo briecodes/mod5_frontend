@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setUserFake, setCurrentLocation } from '../actions/index';
+import { setUserFake, setCurrentLocation, setUserId, setUser } from '../actions/index';
 
 class SignIn extends React.Component {
   state = {
@@ -19,13 +19,32 @@ class SignIn extends React.Component {
   logIn = (e) => {
     e.preventDefault();
     if (this.state.username && this.state.password){
-      this.props.dispatch(setUserFake());
-      this.setState({
-        username: '',
-        password: ''
+      fetch('http://localhost:3000/sessions', {
+        method: 'POST',
+        body: JSON.stringify({username: this.state.username, password: this.state.password}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then( res => res.json() )
+      .then( response => {
+        if (response.errors){
+          console.log('errors!', response.errors);
+        }else{
+          console.log('login info', response);
+          this.props.dispatch(setUser(response.user));
+          localStorage.setItem('user_id', response.user.id);
+          localStorage.setItem('token', response.token);
+          this.props.dispatch(setUserId(response.user.id));
+          window.history.pushState({}, "new state", "/");
+        }
       });
-      window.history.pushState({}, "new state", "/");
-      e.currentTarget.reset();
+      // this.props.dispatch(setUserFake());
+      // this.setState({
+      //   username: '',
+      //   password: ''
+      // });
+      // window.history.pushState({}, "new state", "/");
+      // e.currentTarget.reset();
     }else{
       alert('Username/Password needed.');
     }

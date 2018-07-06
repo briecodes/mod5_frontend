@@ -23,7 +23,7 @@ class HomePage extends React.Component {
       }
     }).then( response => response.json() ).then(array => {
       array.forEach(event => {
-        if (event.user_id === this.props.activeUser.id){
+        if (event.user_id === localStorage.getItem('user_id')){
           if (event.active){
             this.setState({
               myCurrentEvents: [...this.state.myCurrentEvents, event]
