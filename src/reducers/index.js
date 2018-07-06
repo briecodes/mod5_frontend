@@ -3,12 +3,12 @@ export const myAction = {
   payload: {userId: 5}
 };
 
-export function setUser(user) {
-  return {
-    type: 'SET_USER',
-    payload: {user}
-  };
-};
+// export function setUser(user) {
+//   return {
+//     type: 'SET_USER',
+//     payload: {user}
+//   };
+// };
 
 export function setUserId(user_id) {
   return {
@@ -34,7 +34,7 @@ export function setUserFake() {
 export function logOutUser() {
   return {
     type: 'LOGOUT',
-    payload: {user: null}
+    payload: {user_id: null}
   };
 };
 

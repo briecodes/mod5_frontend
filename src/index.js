@@ -8,8 +8,8 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 const initialState = {
-  user_id: null,
-  activeUser: null,
+  user_id: parseInt(localStorage.getItem('user_id'), 10) || null,
+  // activeUser: null,
   activeEvent: null,
   performerList: [],
   currentLocation: '/',
@@ -20,14 +20,14 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_USER':
-      return {...state, activeUser: action.payload.user};
+    // case 'SET_USER':
+    //   return {...state, activeUser: action.payload.user};
     case 'SET_USER_ID':
       return {...state, user_id: action.payload.user_id};
     case 'ACTIVE_EVENT':
       return {...state, activeEvent: action.payload.event};
     case 'LOGOUT':
-      return {...state, activeUser: action.payload.user};
+      return {...state, user_id: action.payload.user_id};
     case 'SET_LOCATION':
       return {...state, currentLocation: action.payload.currentLocation};
     case 'VIDEO_FORM_SELECTION':

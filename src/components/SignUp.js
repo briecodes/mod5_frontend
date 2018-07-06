@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setUser, setCurrentLocation, setToken } from '../reducers/index';
+import { setUserId, setCurrentLocation, setToken } from '../reducers/index';
 
 class SignUp extends React.Component {
 
@@ -12,6 +12,10 @@ class SignUp extends React.Component {
     password: '',
     password_retype: ''
   }
+
+  componentDidMount() {
+    this.props.dispatch(setCurrentLocation(window.location.pathname));
+  };
 
   createUser = (e) => {
     e.preventDefault();
@@ -25,18 +29,15 @@ class SignUp extends React.Component {
       })
       .then( res => res.json() )
       .then( response => {
-        console.log('response:', response );
-        if (response.errors){
+        if (response.errors || response.error){
           alert(response.errors[0]);
         }else{
-          this.props.dispatch(setUser(response.user));
+          this.props.dispatch(setUserId(response.user.id));
           this.props.dispatch(setToken(response.token));
           localStorage.setItem('token', response.token);
-          localStorage.setItem('user', response.user);
           localStorage.setItem('user_id', response.user.id);
           e.target.reset();
           this.props.dispatch(setCurrentLocation('/'));
-          // alert(`${response.user.name}, you're signed in!`);
         }
       });
     }else {
@@ -55,7 +56,6 @@ class SignUp extends React.Component {
       [e.target.name]: e.target.value
     });
     if (e.target.value === this.state.password){
-      this.props.handleOnSubmit();
     }else{
       console.log(`Warning! Password does not match.`);
     };

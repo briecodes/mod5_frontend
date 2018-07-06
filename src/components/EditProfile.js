@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setUser } from '../reducers/index';
+import { setUserId } from '../reducers/index';
 
 class EditProfile extends React.Component {
   state = {
@@ -59,7 +59,7 @@ class EditProfile extends React.Component {
         console.log(response.errors);
         console.log(response.error);
       }else{
-        this.props.dispatch(setUser(response));
+        this.props.dispatch(setUserId(response.id));
         localStorage.setItem('user_id', response.id);
         this.setState({
           success: true

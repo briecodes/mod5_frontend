@@ -6,9 +6,10 @@ import Content from './Content';
 
 class App extends Component {
   render() {
+    console.log('user:', this.props.user_id);
     return (
       <div id="App">
-        {parseInt(localStorage.getItem('user_id'), 10) ? <Content/> : <UserEntry/>}
+        {parseInt(localStorage.getItem('user_id'), 10) && this.props.user_id ? <Content/> : <UserEntry/>}
       </div>
     );
   };
@@ -16,7 +17,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userId
+    user_id: state.user_id
   };
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setCurrentLocation, setUserId, setUser } from '../reducers/index';
+import { setCurrentLocation, setUserId } from '../reducers/index';
 
 class SignIn extends React.Component {
   state = {
@@ -32,9 +32,9 @@ class SignIn extends React.Component {
         }else{
           localStorage.setItem('user_id', response.user.id);
           localStorage.setItem('token', response.token);
-          this.props.dispatch(setUser(response.user));
           this.props.dispatch(setUserId(response.user.id));
           window.history.pushState({}, "new state", "/");
+          this.props.dispatch(setCurrentLocation('/'))
         }
       });
     }else{
@@ -59,8 +59,7 @@ class SignIn extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userId,
-    activeUser: state.activeUser
+    userId: state.userId
   };
 };
 

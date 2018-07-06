@@ -6,16 +6,12 @@ import SignUp from './SignUp';
 
 class UserEntry extends React.Component {
 
-  createUser = (e) => {
-    console.log('create user');
-  };
-
   render() {
     return (
       <div id='entryFormContainer'>
       <div id='entry-logo'></div>
         <div id='formInnerContainer'>
-          {this.props.currentLocation === '/' ? <SignIn/> : <SignUp handleOnSubmit={this.createUser} /> }
+          {window.location.pathname === '/' ? <SignIn/> : <SignUp /> }
         </div>
       </div>
     );
