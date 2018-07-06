@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { selectVideoInForm } from '../actions/index';
+import { selectVideoInForm } from '../reducers/index';
 
 class YouTubeSearchResults extends React.Component {
 
