@@ -9,7 +9,7 @@ class SongForm extends React.Component {
   state = {
     song_title: '',
     song_artist: '',
-    user_id: parseInt(localStorage.getItem('user_id')),
+    user_id: parseInt(localStorage.getItem('user_id'), 10),
     event_id: this.props.activeEvent.id
   };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setUserFake, setCurrentLocation, setUserId, setUser } from '../actions/index';
+import { setCurrentLocation, setUserId, setUser } from '../actions/index';
 
 class SignIn extends React.Component {
   state = {

@@ -30,7 +30,7 @@ class EventSearch extends React.Component {
             'Authorization': localStorage.getItem('token')
           }
         }).then( response => response.json() ).then(array => {
-            const foundEvents = array.filter(event => event.title.toLowerCase().includes(searchTerm.toLowerCase()) && event.user_id !== parseInt(localStorage.getItem('user_id')));
+            const foundEvents = array.filter(event => event.title.toLowerCase().includes(searchTerm.toLowerCase()) && event.user_id !== parseInt(localStorage.getItem('user_id'), 10));
             this.setState({
                 foundEvents
             });
