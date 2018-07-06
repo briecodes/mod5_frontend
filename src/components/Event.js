@@ -29,7 +29,12 @@ class Event extends React.Component {
   };
 
   getEventDetails = () => {
-    fetch('http://localhost:3000/api/v1/events/' + this.props.activeEvent.id).then(response => response.json() )
+    fetch('http://localhost:3000/api/v1/events/' + this.props.activeEvent.id, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
+    }).then(response => response.json() )
     .then(activeEvent => {
       this.props.dispatch(setActiveEvent(activeEvent));
       this.eventAttendanceCheck(activeEvent.user_events);

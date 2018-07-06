@@ -30,7 +30,10 @@ class EditEvent extends React.Component {
     fetch('http://localhost:3000/api/v1/events/' + this.props.activeEvent.id, {
       method: 'PATCH',
       body: JSON.stringify(this.state.eventData),
-      headers: {'Content-Type': 'application/json'}
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
       })
       .then( res => res.json() )
       .then( response => {
@@ -93,7 +96,11 @@ class EditEvent extends React.Component {
 
   deleteTheEvent = () => {
     fetch('http://localhost:3000/api/v1/events/'+ this.props.activeEvent.id, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
     })
     .then(response => response.json() )
     .then(() => {

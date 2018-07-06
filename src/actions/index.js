@@ -10,6 +10,20 @@ export function setUser(user) {
   };
 };
 
+export function setUserId(user_id) {
+  return {
+    type: 'SET_USER_ID',
+    payload: {user_id}
+  };
+};
+
+export function setToken(token) {
+  return {
+    type: 'SET_TOKEN',
+    payload: {token}
+  };
+};
+
 export function setUserFake() {
   return {
     type: 'FAKED_USER',

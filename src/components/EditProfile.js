@@ -7,6 +7,7 @@ class EditProfile extends React.Component {
   state = {
     name: this.props.activeUser.name,
     username: this.props.activeUser.username,
+    password: '',
     success: false
   };
 
@@ -20,16 +21,21 @@ class EditProfile extends React.Component {
     e.preventDefault();
     fetch('http://localhost:3000/api/v1/users/' + this.props.activeUser.id, {
       method: 'PATCH',
-      body: JSON.stringify({username: this.state.username, name: this.state.name}),
+      body: JSON.stringify({username: this.state.username, name: this.state.name, password: this.state.password}),
       headers: {'Content-Type': 'application/json'}
     })
     .then( res => res.json() )
     .then( response => {
       // console.log('response:', response);
-      this.props.dispatch(setUser(response));
-      this.setState({
-        success: true
-      });
+      if (response.errors){
+        console.log(response.errors)
+      }else{
+        this.props.dispatch(setUser(response));
+        localStorage.setItem('user_id', response.id);
+        this.setState({
+          success: true
+        });
+      }
     });
   };
 
@@ -40,6 +46,7 @@ class EditProfile extends React.Component {
         {this.state.success ? <h3>Changes Saved!</h3> : null }
         <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={this.inputControl} />
         <input type='text' name='name' placeholder='Name' value={this.state.name} onChange={this.inputControl} />
+        <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.inputControl} />
         <input type='submit'/>
       </form>
     );

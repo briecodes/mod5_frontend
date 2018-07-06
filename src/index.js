@@ -8,18 +8,21 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 const initialState = {
-  userId: null,
+  user_id: null,
   activeUser: null,
   activeEvent: null,
   performerList: [],
   currentLocation: '/',
   video_url: undefined,
-  video_id: undefined
+  video_id: undefined,
+  token: null
 }
 
 const reducer = (state = initialState, action) => {
   if (action.type === 'SET_USER'){
     return {...state, activeUser: action.payload.user}
+  }else if (action.type === 'SET_USER_ID'){
+    return {...state, user_id: action.payload.user_id}
   }else if (action.type === 'FAKED_USER'){
     return {...state, activeUser: action.payload.user}
   }else if (action.type === 'ACTIVE_EVENT'){
@@ -42,6 +45,8 @@ const reducer = (state = initialState, action) => {
     return { initialState }
   }else if (action.type === 'RESET_ACTIVE_EVENT'){
     return {...state, activeEvent: null}
+  }else if (action.type === 'SET_TOKEN'){
+    return {...state, token: action.payload.token}
   }
   return state;
 };

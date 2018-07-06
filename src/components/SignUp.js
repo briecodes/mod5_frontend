@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setUser, setCurrentLocation } from '../actions/index';
+import { setUser, setCurrentLocation, setToken } from '../actions/index';
 
 class SignUp extends React.Component {
 
@@ -30,6 +30,10 @@ class SignUp extends React.Component {
           alert(response.errors[0]);
         }else{
           this.props.dispatch(setUser(response.user));
+          this.props.dispatch(setToken(response.token));
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('user', response.user);
+          localStorage.setItem('user_id', response.user.id);
           e.target.reset();
           this.props.dispatch(setCurrentLocation('/'));
           // alert(`${response.user.name}, you're signed in!`);

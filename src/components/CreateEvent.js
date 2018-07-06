@@ -19,7 +19,10 @@ class CreateEvent extends React.Component {
       fetch('http://localhost:3000/api/v1/events', {
         method: 'POST',
         body: JSON.stringify({user_id: this.props.activeUser.id, title: this.state.title, location: this.state.location, description: this.state.description, key_code: this.state.key_code, active: true}),
-        headers: {'Content-Type': 'application/json'}
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
       })
       .then( res => res.json() )
       .then( response => {

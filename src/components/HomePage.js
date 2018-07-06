@@ -16,7 +16,12 @@ class HomePage extends React.Component {
   }
   
   getMyEvents = () => {
-    fetch('http://localhost:3000/api/v1/events').then( response => response.json() ).then(array => {
+    fetch('http://localhost:3000/api/v1/events', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
+    }).then( response => response.json() ).then(array => {
       array.forEach(event => {
         if (event.user_id === this.props.activeUser.id){
           if (event.active){
