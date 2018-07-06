@@ -36,7 +36,8 @@ class CreateEvent extends React.Component {
           return response;
         }
       }).then(response => {
-        this.props.dispatch(setCurrentLocation('/events/'+response.id))
+        window.history.pushState({}, "new state", '/events/' + response.id);
+        this.props.dispatch(setCurrentLocation('/events/' + response.id))
       });
     }else {
       console.log('Error! Something is amiss...');

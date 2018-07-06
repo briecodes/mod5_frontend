@@ -84,7 +84,7 @@ class EditProfile extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    activeUser: state.activeUser
+    user_id: state.user_id
   };
 };
 

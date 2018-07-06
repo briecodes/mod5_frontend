@@ -1,15 +1,3 @@
-export const myAction = {
-  type: 'LOG_IN',
-  payload: {userId: 5}
-};
-
-// export function setUser(user) {
-//   return {
-//     type: 'SET_USER',
-//     payload: {user}
-//   };
-// };
-
 export function setUserId(user_id) {
   return {
     type: 'SET_USER_ID',
@@ -21,13 +9,6 @@ export function setToken(token) {
   return {
     type: 'SET_TOKEN',
     payload: {token}
-  };
-};
-
-export function setUserFake() {
-  return {
-    type: 'FAKED_USER',
-    payload: {user: {id: 1, name: 'THE Shun', username: 'theshun'}}
   };
 };
 
@@ -59,18 +40,18 @@ export function setPerformerList(entry) {
   }
 };
 
-export function selectVideoInForm(video_id, video_url) {
-  return {
-    type: 'VIDEO_FORM_SELECTION',
-    payload: {video_id, video_url}
-  };
-};
-
 export function addPerformerToList(performer) {
   return {
     type: 'ADD_PERFORMER_TO_LIST',
     payload: {performer}
   }
+};
+
+export function selectVideoInForm(video_id, video_url) {
+  return {
+    type: 'VIDEO_FORM_SELECTION',
+    payload: {video_id, video_url}
+  };
 };
 
 export function resetStore() {

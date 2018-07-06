@@ -51,12 +51,12 @@ class HomePage extends React.Component {
   };
 
   exploreEvent = (event) => {
-    this.props.dispatch(setCurrentLocation('/events/'+event.id));
     this.props.dispatch(setActiveEvent(event));
+    this.props.dispatch(setCurrentLocation('/events/'+event.id));
   };
 
   editEvent = (event) => {
-    this.props.dispatch(setCurrentLocation('/edit-event/'+event.id));
+    this.props.dispatch(setCurrentLocation('/edit-event/' + event.id));
     this.props.dispatch(setActiveEvent(event));
   };
 

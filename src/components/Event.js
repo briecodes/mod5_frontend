@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 
 import SongForm from '../components/SongForm';
 import { setActiveEvent, setPerformerList } from '../reducers/index';
-
-
+import { parseUrl } from '../actions/index';
 
 class Event extends React.Component {
 
@@ -13,14 +12,19 @@ class Event extends React.Component {
     attending_id: null
   };
 
+  eventId = parseInt(parseUrl(window.location.pathname), 10);
+  localUserId = parseInt(localStorage.getItem('user_id'), 10);
+
   componentDidMount() {
+    console.log('eventId:', this.eventId);
     this.getEventDetails();
     this.getEventPerformerList();
   };
 
   eventAttendanceCheck = (arr) => {
+    console.log('attendance arr', arr);
     let theResult = arr.find(userEvent => {
-      return userEvent.user_id === parseInt(localStorage.getItem('user_id'), 10);
+      return userEvent.user_id === this.localUserId;
     });
     theResult = theResult ? true : false;
     this.setState({
@@ -29,15 +33,16 @@ class Event extends React.Component {
   };
 
   getEventDetails = () => {
-    fetch('http://localhost:3000/api/v1/events/' + this.props.activeEvent.id, {
+    fetch('http://localhost:3000/api/v1/events/' + this.eventId, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
       }
     }).then(response => response.json() )
-    .then(activeEvent => {
-      this.props.dispatch(setActiveEvent(activeEvent));
-      this.eventAttendanceCheck(activeEvent.user_events);
+    .then(eve => {
+      console.log('geteventdetails active', eve);
+      this.props.dispatch(setActiveEvent(eve));
+      this.eventAttendanceCheck(eve.user_events);
     });
   };
 
@@ -51,7 +56,7 @@ class Event extends React.Component {
     .then(performerList => {
       const list = []
       performerList.forEach(entry => {
-        if (entry.event_id === this.props.activeEvent.id && entry.played === false && entry.passed === false){
+        if (entry.event_id === this.eventId && entry.played === false && entry.passed === false){
           list.push(entry);
         };
       });
@@ -76,7 +81,7 @@ class Event extends React.Component {
   createUserEvent = () => {
     fetch('http://localhost:3000/api/v1/user_events', {
         method: 'POST',
-        body: JSON.stringify({user_id: parseInt(localStorage.getItem('user_id'), 10), event_id: this.props.activeEvent.id}),
+        body: JSON.stringify({user_id: this.localUserId, event_id: this.props.activeEvent.id}),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': localStorage.getItem('token')
@@ -105,7 +110,7 @@ class Event extends React.Component {
     if (e.target.name === 'join'){
       this.createUserEvent();
     }else{
-      const uev = this.props.activeEvent.user_events.find(userevent => userevent.user_id === parseInt(localStorage.getItem('user_id'), 10));
+      const uev = this.props.activeEvent.user_events.find(userevent => userevent.user_id === this.localUserId);
       this.deleteUserEvent(uev.id);
     }
   };
@@ -130,7 +135,7 @@ class Event extends React.Component {
     return (
       <div>
 
-        {parseInt(localStorage.getItem('user_id'), 10) === this.props.activeEvent.user_id ? <React.Fragment>
+        { this.localUserId === this.props.activeEvent.user_id ? <React.Fragment>
           {this.props.performerList.length > 0 ? <iframe id='player' title='Admin Player' type='text/html'
                   src={`http://www.youtube.com/embed/${this.props.performerList[0].video_id}`} frameBorder='0'></iframe> : null}
           <div className='admin-list'>
@@ -140,7 +145,7 @@ class Event extends React.Component {
         </React.Fragment> : null}
 
         {this.props.activeEvent ? <React.Fragment>
-            <h1>{this.props.activeEvent.title} {this.props.activeEvent.user_id} {this.state.attending ? <button type='button' name='leave' onClick={this.attendButton}>Leave</button> : this.props.activeEvent.user_id !== parseInt(localStorage.getItem('user_id'), 10) ? <button type='button' name='join' onClick={this.attendButton}>Join</button> : null}</h1>
+            <h1>{this.props.activeEvent.title} {this.state.attending ? <button type='button' name='leave' onClick={this.attendButton}>Leave</button> : this.props.activeEvent.user_id !== this.localUserId ? <button type='button' name='join' onClick={this.attendButton}>Join</button> : null}</h1>
             <p>Location: {this.props.activeEvent.location}</p>
             <p>{this.props.activeEvent.description}</p>
           </React.Fragment> : null}
@@ -160,7 +165,8 @@ const mapStateToProps = (state) => {
   return {
     activeUser: state.activeUser,
     activeEvent: state.activeEvent,
-    performerList: state.performerList
+    performerList: state.performerList,
+    currentLocation: state.currentLocation
   };
 };
 

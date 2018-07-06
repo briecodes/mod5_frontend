@@ -16,11 +16,11 @@ class Content extends React.Component {
     return (
       <div id='content'>
         <Navigation/>
-        {this.props.currentLocation === '/' ? <HomePage/> : null}
-        {this.props.currentLocation === '/create-event' ? <CreateEvent/> : null}
-        {this.props.currentLocation.includes('/events/') ? <Event/> : null}
-        {this.props.currentLocation.includes('/edit-event/') ? <EditEvent/> : null}
-        {this.props.currentLocation === '/edit-profile' ? <EditProfile /> : null}
+        {window.location.pathname === '/' ? <HomePage/> : null}
+        {window.location.pathname === '/create-event' ? <CreateEvent/> : null}
+        {window.location.pathname.includes('/events/') ? <Event/> : null}
+        {window.location.pathname.includes('/edit-event/') ? <EditEvent/> : null}
+        {window.location.pathname === '/edit-profile' ? <EditProfile /> : null}
         <Switch>
           {/* <Route exact path='/' component={HomePage}/> */}
           {/* <Route exact path='/create-event' component={CreateEvent}/> */}
