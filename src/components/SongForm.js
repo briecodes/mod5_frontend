@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addPerformerToList } from '../actions/index';
+import { addPerformerToList } from '../reducers/index';
 import YouTubeSearch from '../components/YouTubeSearch';
 
 class SongForm extends React.Component {
