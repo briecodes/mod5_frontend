@@ -66,7 +66,6 @@ class HomePage extends React.Component {
         <h1>HomePage</h1>
         <ul>
           <h3>My Events:</h3>
-          {/* {this.state.myCurrentEvents.map(event => <li key={event.id} ><Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} >{event.title} ></Link></li>)} */}
           {this.state.myCurrentEvents.map(event => <li key={event.id} >{event.title} | <Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} >view</Link> | <Link to={'/edit-event/' + event.id} onClick={() => this.editEvent(event)} >edit</Link></li>)}
         </ul>
         <ul>

@@ -30,7 +30,6 @@ class SignIn extends React.Component {
         if (response.errors || response.error){
           console.log('errors!', response);
         }else{
-          // console.log('login info', response);
           localStorage.setItem('user_id', response.user.id);
           localStorage.setItem('token', response.token);
           this.props.dispatch(setUser(response.user));
@@ -38,13 +37,6 @@ class SignIn extends React.Component {
           window.history.pushState({}, "new state", "/");
         }
       });
-      // this.props.dispatch(setUserFake());
-      // this.setState({
-      //   username: '',
-      //   password: ''
-      // });
-      // window.history.pushState({}, "new state", "/");
-      // e.currentTarget.reset();
     }else{
       alert('Username/Password needed.');
     }

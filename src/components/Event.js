@@ -55,7 +55,6 @@ class Event extends React.Component {
           list.push(entry);
         };
       });
-      // this.props.dispatch(addPerformerToList(list));
       this.props.dispatch(setPerformerList(list));
     });
   };
