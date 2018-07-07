@@ -11,7 +11,6 @@ import EditProfile from '../components/EditProfile';
 import Footer from '../components/Footer';
 
 class Content extends React.Component {
-  
   render() {
     return (
       <div id='content'>
