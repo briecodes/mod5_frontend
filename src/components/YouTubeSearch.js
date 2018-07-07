@@ -56,7 +56,8 @@ class YouTubeSearch extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <input type='text' name='search_term' value={this.state.search_term} placeholder='Search YouTube' onChange={this.inputControl}/>
+        <input type='text' className='songInput' name='search_term' value={this.state.search_term} placeholder='Search YouTube' onChange={this.inputControl}/>
+        <div className='divider'></div>
         {this.state.video_results.length > 0 ? <YouTubeSearchResults results={this.state.video_results} /> : null}
       </React.Fragment>
     );

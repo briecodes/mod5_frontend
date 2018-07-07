@@ -59,9 +59,10 @@ class SongForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.submitEntry}>
-        <input type='text' name='song_title' placeholder='Song Title' value={this.state.song_title} onChange={this.inputControl} />
-        <input type='text' name='song_artist' placeholder='Song Artist' value={this.state.song_artist} onChange={this.inputControl} />
+      <form onSubmit={this.submitEntry} className='boxed'>
+        <input type='text' className='songInput' name='song_title' placeholder='Song Title' value={this.state.song_title} onChange={this.inputControl} />
+        <input type='text' className='songInput' name='song_artist' placeholder='Song Artist' value={this.state.song_artist} onChange={this.inputControl} />
+        <div className='divider'></div>
         <YouTubeSearch/>
         <input type='submit'/>
       </form>

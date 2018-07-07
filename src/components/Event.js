@@ -158,16 +158,36 @@ class Event extends React.Component {
           </div>
         </React.Fragment> : null}
 
-          {this.state.attending ? <React.Fragment>
-            {this.props.activeEvent ? <React.Fragment>
-              <h1>{this.props.activeEvent.title} {this.state.attending ? <button type='button' name='leave' onClick={this.attendButton}>Leave</button> : this.props.activeEvent.user_id !== this.localUserId ? <button type='button' name='join' onClick={this.attendButton}>Join</button> : null}</h1>
-              <p>Location: {this.props.activeEvent.location}</p>
-              <p>{this.props.activeEvent.description}</p>
+          {this.props.activeEvent.title ? <React.Fragment>
+              <div className='col-half float-left'>
+                <h1 className='medium'>{this.props.activeEvent.title} {this.state.attending ? <button type='button' name='leave' onClick={this.attendButton}>Leave</button> : this.props.activeEvent.user_id !== this.localUserId ? <button type='button' name='join' onClick={this.attendButton}>Join</button> : null}</h1>
+                <p>
+                  <span className='heavy'>Location:</span> {this.props.activeEvent.location}<br />
+                  <span className='heavy'>Description:</span> {this.props.activeEvent.description}<br />
+                  <span className='heavy'>Hosted by:</span> {this.props.activeEvent.user.name}
+                </p>
+              </div>
+              <div className='divider'></div>
             </React.Fragment> : null}
-            <ul>
-              {this.props.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
-            </ul>
-            <SongForm/>
+
+          {this.state.attending ? <React.Fragment>
+            <div className='col-half float-left'>
+              <h3>Songlist:</h3>
+              <ul>
+                {this.props.performerList.map((perf, index) => {
+                  return (
+                    <li key={perf.id} className='user-performer'>
+                      <span className='heavy'>{perf.user.name}</span> up {index > 0 ? ('in ' + index * 3.5 + ' mins') : 'now' }<br />
+                      performing <em>{perf.song_title}</em> by {perf.song_artist}
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+            <div className='col-half float-right'>
+              <h3>Submit a song:</h3>
+              <SongForm/>
+            </div>
             </React.Fragment> : null}
       </React.Fragment>
     );
