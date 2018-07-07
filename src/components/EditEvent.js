@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import { setActiveEvent, setCurrentLocation, resetStore } from '../reducers/index';
 import { parseUrl } from '../actions/index';
 
-// const eventId = parseInt(parseUrl(window.location.pathname), 10);
-
 class EditEvent extends React.Component {
   state = {
     eventData: {
