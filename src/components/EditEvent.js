@@ -87,11 +87,8 @@ class EditEvent extends React.Component {
           this.setState({
             success: true
           });
-          // this.props.dispatch(setCurrentLocation('/events/' + response.id));
-          // window.history.pushState({}, "new state", "/events/" + response.id);
         };
       });
-      // .then(event => this.props.dispatch(setCurrentLocation('/events/'+event.id)) );
   };
 
   deleteEvent = (e) => {
