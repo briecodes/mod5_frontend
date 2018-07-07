@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setActiveEvent, setCurrentLocation, resetActiveEvent, resetStore } from '../reducers/index';
+import { setActiveEvent, setCurrentLocation, resetStore } from '../reducers/index';
 import { parseUrl } from '../actions/index';
 
 // const eventId = parseInt(parseUrl(window.location.pathname), 10);
