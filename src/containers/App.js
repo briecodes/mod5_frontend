@@ -6,7 +6,6 @@ import Content from './Content';
 
 class App extends Component {
   render() {
-    console.log('user:', this.props.user_id);
     return (
       <div id="App">
         {parseInt(localStorage.getItem('user_id'), 10) && this.props.user_id ? <Content/> : <UserEntry/>}
