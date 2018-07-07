@@ -149,10 +149,13 @@ class Event extends React.Component {
           {this.props.performerList.length > 0 ? <iframe id='mainPlayer' height={this.state.height} title='Admin Player' type='text/html'
                   src={`http://www.youtube.com/embed/${this.props.performerList[0].video_id}`} frameBorder='0'></iframe> : null}
           <div className='admin-list' style={{height: this.state.height}}>
-            {this.props.performerList.map(perf => <div key={perf.id} className='admin-performer current'><span className='admin-performer-name'>{perf.user.name} <button className='admin-next-button' onClick={() => this.markAsPerformed(perf.id)} >></button></span> {perf.song_title} by {perf.song_artist}</div>)[0]}
-            {this.props.performerList.slice(1).map(perf => <div key={perf.id} className='admin-performer'><span className='admin-performer-name'>{perf.user.name}</span> {perf.song_title} by {perf.song_artist}</div>)}
+            {this.props.performerList.map(perf => <div key={perf.id} className='admin-performer current'><span className='admin-performer-name heavy'>{perf.user.name} <button className='admin-next-button' onClick={() => this.markAsPerformed(perf.id)} >></button></span> {perf.song_title} by {perf.song_artist}</div>)[0]}
+            {this.props.performerList.slice(1).map(perf => <div key={perf.id} className='admin-performer'><span className='admin-performer-name medium'>{perf.user.name}</span> Performing <em>{perf.song_title}</em> by {perf.song_artist}</div>)}
           </div>
-          <h1>{this.props.activeEvent.title}</h1>
+          <div id='mainPlayerDetails'>
+            <h3 className='medium float-left'>{this.props.activeEvent.title}</h3>
+            <h3 className='light float-right'>Est. wait time: {this.props.performerList.length * 3.5}mins</h3>
+          </div>
         </React.Fragment> : null}
 
           {this.state.attending ? <React.Fragment>

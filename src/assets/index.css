@@ -5,6 +5,9 @@
 /* LIGHT BLUE #d2e6f4 */
 /* ORANGE #f15a25 */
 
+/* FONT WEIGHTS */
+/* 300, 300i, 400, 400i, 700, 700i */
+
 body {
   margin: 0;
   padding: 0;
@@ -15,6 +18,26 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.medium {
+  font-weight: 400;
+}
+
+.heavy {
+  font-weight: 700;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
 }
 
 .divider {
@@ -240,6 +263,8 @@ ul {
 .admin-performer {
   padding-top: 4%;
   padding-bottom: 4%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .admin-performer:hover {
@@ -251,13 +276,23 @@ ul {
   float: left;
 }
 
+#mainPlayerDetails h3, #mainPlayerDetails h4 {
+  padding: 0;
+  margin: 0;
+}
+
+#mainPlayerDetails {
+  width: 78.5%;
+  float: left;
+  margin-top: 1%;
+}
+
 .admin-list {
   height: 300px;
 }
 
 .admin-performer-name {
   font-size: 1.5em;
-  font-weight: 700;
   display: block;
   margin: 0;
   padding: 0;
@@ -265,7 +300,9 @@ ul {
 
 .current {
   background: #d2e6f4;
-  font-size: 1.5em;
+  font-size: 1.25em;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .current:hover {

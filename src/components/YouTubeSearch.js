@@ -34,6 +34,7 @@ class YouTubeSearch extends React.Component {
   };
 
   youTubeSearchCallback = (err, results) => {
+    console.log('youtube results', results);
     let arr = []
     if(err) return console.log(err);
     results.forEach(item =>{
