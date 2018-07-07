@@ -9,16 +9,27 @@ class Event extends React.Component {
 
   state = {
     attending: false,
-    attending_id: null
+    attending_id: null,
+    height: ''
   };
 
   eventId = parseInt(parseUrl(window.location.pathname), 10);
   localUserId = parseInt(localStorage.getItem('user_id'), 10);
 
   componentDidMount() {
-    // console.log('eventId:', this.eventId);
+    window.addEventListener("resize", function(){
+      this.calculateHeight();
+    }.bind(this), true);
+
+    this.calculateHeight();
     this.getEventDetails();
     this.getEventPerformerList();
+  };
+
+  calculateHeight = () => {
+    this.setState({
+      height: (window.innerWidth * .7) * 9/16
+    });
   };
 
   eventAttendanceCheck = (arr) => {
@@ -133,29 +144,29 @@ class Event extends React.Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         { this.localUserId === this.props.activeEvent.user_id ? <React.Fragment>
-          {this.props.performerList.length > 0 ? <iframe id='player' title='Admin Player' type='text/html'
+          {this.props.performerList.length > 0 ? <iframe id='mainPlayer' height={this.state.height} title='Admin Player' type='text/html'
                   src={`http://www.youtube.com/embed/${this.props.performerList[0].video_id}`} frameBorder='0'></iframe> : null}
-          <div className='admin-list'>
-          {this.props.performerList.map(perf => <div key={perf.id} className='admin-performer current'><span className='admin-performer-name'>{perf.user.name} <button className='admin-next-button' onClick={() => this.markAsPerformed(perf.id)} >></button></span> {perf.song_title} by {perf.song_artist}</div>)[0]}
+          <div className='admin-list' style={{height: this.state.height}}>
+            {this.props.performerList.map(perf => <div key={perf.id} className='admin-performer current'><span className='admin-performer-name'>{perf.user.name} <button className='admin-next-button' onClick={() => this.markAsPerformed(perf.id)} >></button></span> {perf.song_title} by {perf.song_artist}</div>)[0]}
             {this.props.performerList.map(perf => <div key={perf.id} className='admin-performer'><span className='admin-performer-name'>{perf.user.name}</span> {perf.song_title} by {perf.song_artist}</div>)}
           </div>
+          <h1>{this.props.activeEvent.title}</h1>
         </React.Fragment> : null}
 
-        {this.props.activeEvent ? <React.Fragment>
-            <h1>{this.props.activeEvent.title} {this.state.attending ? <button type='button' name='leave' onClick={this.attendButton}>Leave</button> : this.props.activeEvent.user_id !== this.localUserId ? <button type='button' name='join' onClick={this.attendButton}>Join</button> : null}</h1>
-            <p>Location: {this.props.activeEvent.location}</p>
-            <p>{this.props.activeEvent.description}</p>
-          </React.Fragment> : null}
-
           {this.state.attending ? <React.Fragment>
+            {this.props.activeEvent ? <React.Fragment>
+              <h1>{this.props.activeEvent.title} {this.state.attending ? <button type='button' name='leave' onClick={this.attendButton}>Leave</button> : this.props.activeEvent.user_id !== this.localUserId ? <button type='button' name='join' onClick={this.attendButton}>Join</button> : null}</h1>
+              <p>Location: {this.props.activeEvent.location}</p>
+              <p>{this.props.activeEvent.description}</p>
+            </React.Fragment> : null}
             <ul>
               {this.props.performerList.map(perf => <li key={perf.id}>{perf.user.name} Sings {perf.song_artist}'s {perf.song_title}</li>)}
             </ul>
             <SongForm/>
             </React.Fragment> : null}
-      </div>
+      </React.Fragment>
     );
   };
 };
