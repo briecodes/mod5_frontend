@@ -125,7 +125,7 @@ class EditEvent extends React.Component {
     })
     .then( response => response.json() )
     .then(array => {
-      console.log('delete songEntries');
+      // console.log('delete songEntries');
       array.forEach(se => {
         if (se.event_id === this.eventId){
           this.deleteHelper(entryURL, se.id);
@@ -145,7 +145,7 @@ class EditEvent extends React.Component {
     })
     .then( response => response.json())
     .then(array => {
-      console.log('delete userEvents');
+      // console.log('delete userEvents');
       array.forEach(uev => {
         if (uev.event_id === this.eventId){
           this.deleteHelper(userEventsURL, uev.id);
@@ -172,8 +172,7 @@ class EditEvent extends React.Component {
       };
     })
     .then( response => {
-      console.log('last delete');
-      // this.props.dispatch(setCurrentLocation('/'));
+      // console.log('last delete');
       this.setState({
         deleted: true
       });
