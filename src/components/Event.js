@@ -16,13 +16,13 @@ class Event extends React.Component {
   localUserId = parseInt(localStorage.getItem('user_id'), 10);
 
   componentDidMount() {
-    console.log('eventId:', this.eventId);
+    // console.log('eventId:', this.eventId);
     this.getEventDetails();
     this.getEventPerformerList();
   };
 
   eventAttendanceCheck = (arr) => {
-    console.log('attendance arr', arr);
+    // console.log('attendance arr', arr);
     let theResult = arr.find(userEvent => {
       return userEvent.user_id === this.localUserId;
     });
@@ -40,7 +40,7 @@ class Event extends React.Component {
       }
     }).then(response => response.json() )
     .then(eve => {
-      console.log('geteventdetails active', eve);
+      // console.log('geteventdetails active', eve);
       this.props.dispatch(setActiveEvent(eve));
       this.eventAttendanceCheck(eve.user_events);
     });
