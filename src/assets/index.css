@@ -265,6 +265,9 @@ ul {
   padding-bottom: 4%;
   padding-left: 5%;
   padding-right: 5%;
+  border-bottom: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #d2e6f4;
 }
 
 .admin-performer:hover {
