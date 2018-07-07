@@ -53,12 +53,13 @@ class EventSearch extends React.Component {
 
   render() {
     return (
-      <div>
+      <ul id='searchUl'>
         <input type='text' name='searchTerm' placeholder='Search Events' value={this.state.searchTerm} onChange={this.inputControl} />
-        <ul>
-          {this.state.foundEvents.map(event => <li key={event.id}><Link to={'/events/'+event.id} onClick={() => this.exploreEvent(event)}>{event.title}</Link></li>)}
-        </ul>
-      </div>
+        <div id='partySearchResults'>
+          {this.state.foundEvents.map(event => <li className='searchLi' key={event.id}><Link to={'/events/'+event.id} onClick={() => this.exploreEvent(event)}>{event.title}</Link><div className='spacer'></div></li>)}
+          <div className='divider'></div>
+        </div>
+      </ul>
     );
   };
 };

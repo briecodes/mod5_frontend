@@ -102,10 +102,35 @@ ul {
   text-decoration: none;
 }
 
-#navigation input {
+/* #navigation input {
   position: relative;
   float: right;
   margin-top: 5px;
+} */
+
+#searchUl {
+  margin-top: 5px;
+  position: relative;
+  float: right;
+  display: block;
+}
+
+#partySearchResults {
+  position: fixed;;
+};
+
+.searchLi {
+  /* position: fixed; */
+  display: block;
+  width: 75%;
+  background: fuchsia;
+}
+
+.searchLi a {
+  float: none;
+  display: block;
+  width: 100%;
+  /* color: #263a5f; */
 }
 
 #footer {
