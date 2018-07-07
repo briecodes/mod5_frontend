@@ -134,7 +134,6 @@ class Event extends React.Component {
   render() {
     return (
       <div>
-
         { this.localUserId === this.props.activeEvent.user_id ? <React.Fragment>
           {this.props.performerList.length > 0 ? <iframe id='player' title='Admin Player' type='text/html'
                   src={`http://www.youtube.com/embed/${this.props.performerList[0].video_id}`} frameBorder='0'></iframe> : null}

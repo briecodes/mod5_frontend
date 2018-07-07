@@ -17,7 +17,8 @@ class EditEvent extends React.Component {
       active: this.props.activeEvent.active
     },
     confirmDelete: false,
-    success: false
+    success: false,
+    deleted: false
   };
 
   eventId = parseInt(parseUrl(window.location.pathname), 10);
@@ -32,6 +33,20 @@ class EditEvent extends React.Component {
         ...this.state.eventData,
         [e.target.name]: e.target.value
       }
+    });
+  };
+
+  resetState = () => {
+    this.setState({
+      eventData: {
+        title: this.props.activeEvent.title,
+        location: this.props.activeEvent.location,
+        description: this.props.activeEvent.description,
+        key_code: this.props.activeEvent.key_code,
+        active: this.props.activeEvent.active
+      },
+      confirmDelete: false,
+      success: false
     });
   };
 
@@ -154,12 +169,23 @@ class EditEvent extends React.Component {
       }
     })
     .then(response => response.json() )
-    .then(() => {
+    .then( response => {
+      if(response.errors || response.error){
+        console.log('error!', response);
+      }else{
+        return response
+      };
+    })
+    .then( response => {
       console.log('last delete');
-      this.props.dispatch(setCurrentLocation('/'));
-      window.history.pushState({}, "new state", "/");
+      // this.props.dispatch(setCurrentLocation('/'));
+      this.setState({
+        deleted: true
+      });
       this.props.dispatch(resetStore());
-    } );
+      this.resetState();
+      window.history.pushState({}, "new state", window.location.pathname + '/deleted');
+    });
   };
 
   deleteHelper = (url, id) => {
@@ -189,6 +215,10 @@ class EditEvent extends React.Component {
   render() {
     return (
       <React.Fragment>
+        {this.state.deleted ? <React.Fragment>
+          <h1>Event Deleted!</h1>
+          <h3><Link to='/' onClick={() => this.props.dispatch(setCurrentLocation('/'))} >Go home ></Link></h3>
+        </React.Fragment> : null }
         {this.state.eventData.title ? <React.Fragment><form onSubmit={this.submitEvent}>
           <h1>Editing {this.state.eventData.title}</h1>
           {this.state.success ? <h3>Event updated! <Link to={'/events/' + this.eventId} onClick={() => this.props.dispatch(setCurrentLocation('/events/' + this.eventId))}>View ></Link></h3> : null }
