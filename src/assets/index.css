@@ -393,6 +393,10 @@ ul {
   padding: 0;
 }
 
+.col-third {
+  width: 33.33%;
+}
+
 .songInput {
   display: block;
   width: 46%;
