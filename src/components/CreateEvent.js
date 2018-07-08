@@ -65,14 +65,16 @@ class CreateEvent extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.createEvent}>
-        <h1>Create a Karaoke Event!</h1>
-        <input type='text' name='title' placeholder='Title' value={this.state.title} onChange={this.inputControl} />
-        <input type='text' name='location' placeholder='Location' value={this.state.location} onChange={this.inputControl} />
-        <input type='text' name='description' placeholder='Brief Description' value={this.state.description} onChange={this.inputControl} />
-        <input type='text' name='key_code' placeholder='key_code' value={this.state.key_code} onChange={this.inputControl} />
-        <input type='submit'/>
-      </form>
+      <div id='form-container'>
+        <form onSubmit={this.createEvent}>
+          <h1>Create a Karaoke Event!</h1>
+          <input type='text' name='title' className='form-input' placeholder='Title' value={this.state.title} onChange={this.inputControl} /><br />
+          <input type='text' name='location' className='form-input' placeholder='Location' value={this.state.location} onChange={this.inputControl} /><br />
+          <input type='text' name='description' className='form-input' placeholder='Brief Description' value={this.state.description} onChange={this.inputControl} /><br />
+          <input type='text' name='key_code' className='form-input' placeholder='key_code' value={this.state.key_code} onChange={this.inputControl} /><br />
+          <input type='submit' className='submit'/>
+        </form>
+      </div>
     );
   };
 };
