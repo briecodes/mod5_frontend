@@ -47,8 +47,8 @@ class EventSearch extends React.Component {
 
   exploreEvent = (event) => {
     this.clearState();
-    this.props.dispatch(setCurrentLocation('/events/'+event.id));
     this.props.dispatch(setActiveEvent(event));
+    this.props.dispatch(setCurrentLocation('/events/'+event.id));
   };
 
   render() {
