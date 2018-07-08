@@ -70,14 +70,23 @@ class EditProfile extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.save}>
-        <h1>Edit {this.state.name}'s Profile:</h1>
-        {this.state.success ? <h3>Changes Saved!</h3> : null }
-        <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={this.inputControl} />
-        <input type='text' name='name' placeholder='Name' value={this.state.name} onChange={this.inputControl} />
-        <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.inputControl} />
-        <input type='submit'/>
-      </form>
+      <div id='form-container'>
+        <form onSubmit={this.save}>
+          <h1>Edit Profile:</h1>
+          {this.state.success ? <h3>Changes Saved!</h3> : null }
+          <label htmlFor='username'>Username</label>
+          <input type='text' id='username' name='username' className='form-input' placeholder='Username' value={this.state.username} onChange={this.inputControl} />
+          <label htmlFor='name'>Name</label>
+          <input type='text' id='name' name='name' className='form-input' placeholder='Name' value={this.state.name} onChange={this.inputControl} />
+          <label htmlFor='password'>Confirm Password</label>
+          <input type='password' id='password' name='password' className='form-input' placeholder='Password' value={this.state.password} onChange={this.inputControl} />
+          <center>
+            <p>
+              <input type='submit' className='submit' />
+            </p>
+          </center>
+        </form>
+      </div>
     );
   };
 };
