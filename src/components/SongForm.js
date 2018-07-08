@@ -33,7 +33,7 @@ class SongForm extends React.Component {
     this.searchCheck();
   };
 
-  runSearch = _.debounce(() => this.searchYouTube(), 300);
+  runSearch = _.debounce(() => this.searchYouTube(), 100);
 
   searchCheck = () => {
     if (this.state.song_title && this.state.song_artist){
