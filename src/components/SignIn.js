@@ -46,7 +46,7 @@ class SignIn extends React.Component {
     return (
       <div className='formContainer'>
         <form onSubmit={this.logIn}>
-        <h1>{this.props.userId} Sign In Below:</h1>
+        <h1 className='light'>{this.props.userId} Sign In Below:</h1>
           <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={this.inputControl} />
           <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.inputControl} />
           <input type='submit'/>

@@ -66,8 +66,10 @@ class CreateEvent extends React.Component {
   render() {
     return (
       <div id='form-container'>
+        <center>
+          <span className='home-text light line-light'>Create Event:</span>
+        </center>
         <form onSubmit={this.createEvent}>
-          <h1>Create a Karaoke Event!</h1>
           <label htmlFor='title'>Title</label>
           <input type='text' id='title' name='title' className='form-input' placeholder='Title' value={this.state.title} onChange={this.inputControl} /><br />
           <label htmlFor='location'>Location</label>

@@ -72,8 +72,10 @@ class EditProfile extends React.Component {
     return (
       <div id='form-container'>
         <form onSubmit={this.save}>
-          <h1>Edit Profile:</h1>
-          {this.state.success ? <h3>Changes Saved!</h3> : null }
+          <center>
+            <span className='home-text light line-light'>Edit Profile:</span>
+            {this.state.success ? <h3>Changes Saved!</h3> : null }
+          </center>
           <label htmlFor='username'>Username</label>
           <input type='text' id='username' name='username' className='form-input' placeholder='Username' value={this.state.username} onChange={this.inputControl} />
           <label htmlFor='name'>Name</label>

@@ -214,8 +214,10 @@ class EditEvent extends React.Component {
           <h3><Link to='/' onClick={() => this.props.dispatch(setCurrentLocation('/'))} >Go home ></Link></h3>
         </React.Fragment> : null }
         {this.state.eventData.title ? <React.Fragment><form onSubmit={this.submitEvent}>
-          <h1>Editing {this.props.activeEvent.title}</h1>
-          {this.state.success ? <h3>Event updated! <Link to={'/events/' + this.eventId} onClick={() => this.props.dispatch(setCurrentLocation('/events/' + this.eventId))}>View ></Link></h3> : null }
+          <center>
+            <span className='home-text light'>Editing {this.props.activeEvent.title}</span>
+            {this.state.success ? <h3>Event updated! <Link to={'/events/' + this.eventId} onClick={() => this.props.dispatch(setCurrentLocation('/events/' + this.eventId))}>View ></Link></h3> : null }
+          </center>
           <label htmlFor='title'>Title</label>
           <input type='text' id='title' name='title' className='form-input' placeholder='Title' value={this.state.eventData.title} onChange={this.inputControl} />
           

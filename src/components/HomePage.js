@@ -65,19 +65,19 @@ class HomePage extends React.Component {
       <div>
         <div className='col-third float-left'>
           <ul>
-            <h3>My Hosted Events:</h3>
+            <span className='home-text light line-light'>Hosting Events:</span>
             {this.state.myCurrentEvents.map(event => <li key={event.id} >{event.title} | <Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} >view</Link> | <Link to={'/edit-event/' + event.id} onClick={() => this.editEvent(event)} >edit</Link></li>)}
           </ul>
         </div>
         <div className='col-third float-left'>
           <ul>
-            <h3>My Past Hosted Events:</h3>
+            <span className='home-text light line-light'>Closed Events:</span>
             {this.state.myPastEvents.map(event => <li key={event.id} >{event.title} | <Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} >view</Link> | <Link to={'/edit-event/' + event.id} onClick={() => this.editEvent(event)} >edit</Link></li>)}
           </ul>
         </div>
         <div className='col-third float-left'>
           <ul>
-            <h3>Attending Events:</h3>
+            <span className='home-text light line-light'>Attending Events:</span>
             {this.state.visitedEvents.map(event => <li key={event.id} ><Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} >{event.title} ></Link></li>)}
           </ul>
         </div>

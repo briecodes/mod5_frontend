@@ -11,9 +11,12 @@ class App extends Component {
   
   render() {
     return (
-      <div id="App">
-        {parseInt(localStorage.getItem('user_id'), 10) && this.props.user_id ? <Content/> : <UserEntry/>}
-      </div>
+      <React.Fragment>
+        <div id="App">
+          {parseInt(localStorage.getItem('user_id'), 10) && this.props.user_id ? <Content/> : <UserEntry/>}
+        </div>
+        {!localStorage.getItem('user_id') && !this.props.user_id ? <div id='welcome' style={{height: window.innerHeight}}></div> : null}
+      </React.Fragment>
     );
   };
 };

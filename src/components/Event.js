@@ -178,14 +178,17 @@ class Event extends React.Component {
 
           {this.props.activeEvent.title && this.localUserId !== this.props.activeEvent.user_id ? <React.Fragment>
               <div className='col-half float-left'>
-                <h1 className='medium'>{this.props.activeEvent.title}</h1>
-                <p>
+                <span className='home-text light'>{this.props.activeEvent.title}</span>
+              </div>
+              <div className='col-half float-right'>
+                <p className='match-headline'>
+                  <span className='heavy'>Hosted by:</span> {this.props.activeEvent.user.name}<br />
                   <span className='heavy'>Location:</span> {this.props.activeEvent.location}<br />
-                  <span className='heavy'>Description:</span> {this.props.activeEvent.description}<br />
-                  <span className='heavy'>Hosted by:</span> {this.props.activeEvent.user.name}
+                  <span className='heavy'>Description:</span> {this.props.activeEvent.description}
                 </p>
               </div>
-              <div className='divider'></div>
+              <div className='divider spacer line-light'></div>
+              <div className='divider spacer'></div>
             </React.Fragment> : null}
 
           {this.state.attending ? <React.Fragment>

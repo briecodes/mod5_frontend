@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 class Octothorps extends React.Component {
   render() {
     return (
-      <div>Octothot!!</div>
+      <div id='thots' style={{height: window.innerHeight * .75}}>
+        <div id='prez'></div>
+        <span className='with-love light'>
+          with love, for the #octothots.
+        </span>
+      </div>
     );
   };
 };
