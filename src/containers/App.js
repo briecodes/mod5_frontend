@@ -5,10 +5,14 @@ import UserEntry from '../components/UserEntry';
 import Content from './Content';
 
 class App extends Component {
+  componentDidMount() {
+      // document.getElementsByTagName('body')[0].style.backgroundImage='url(/assets/bg.jpg)';
+  };
+  
   render() {
     return (
       <div id="App">
-        {this.props.activeUser ? <Content/> : <UserEntry/>}
+        {parseInt(localStorage.getItem('user_id'), 10) && this.props.user_id ? <Content/> : <UserEntry/>}
       </div>
     );
   };
@@ -16,8 +20,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userId,
-    activeUser: state.activeUser
+    user_id: state.user_id
   };
 };
 

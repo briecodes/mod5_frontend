@@ -5,6 +5,9 @@
 /* LIGHT BLUE #d2e6f4 */
 /* ORANGE #f15a25 */
 
+/* FONT WEIGHTS */
+/* 300, 300i, 400, 400i, 700, 700i */
+
 body {
   margin: 0;
   padding: 0;
@@ -12,6 +15,29 @@ body {
   font-size: .75em;
   color: #263a5f;
   background: #f4f2f2;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.medium {
+  font-weight: 400;
+}
+
+.heavy {
+  font-weight: 700;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
 }
 
 .divider {
@@ -34,6 +60,29 @@ input {
   border-color: #d2e6f4;
   border-style: solid;
   padding: 5px;
+}
+
+.submit:hover {
+  cursor: pointer;
+  background: #85b7d0;
+  color: #fff;
+}
+
+.red {
+  color: #f15a25;
+}
+
+.cancel {
+  font-size: .75em;
+  border-color: #f15a25;
+  padding: 1%;
+  margin-left: 4%;
+}
+
+.cancel:hover {
+  cursor: pointer;
+  background: #f15a25;
+  color: #fff;
 }
 
 ul {
@@ -87,22 +136,69 @@ ul {
   padding-bottom: 15px;
 }
 
-#navigation a {
+.navLink {
   display: block;
   position: relative;
   float: left;
   padding: 10px;
 }
 
-#navigation a:hover {
+.navLink:hover {
   background: #fff;
   text-decoration: none;
 }
 
-#navigation input {
+#searchUl {
+  margin-top: 5px;
   position: relative;
   float: right;
-  margin-top: 5px;
+  display: block;
+  width: 20%;
+}
+
+#searchUl input {
+  width: 100%;
+  margin: 0;
+  display: block;
+}
+
+#partySearchResults {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 19.25%;
+  position: fixed;
+  background: #fff;
+  overflow: hidden;
+  border-left: 1px;
+  border-left-style: solid;
+  border-bottom: 1px;
+  border-bottom-style: solid;
+  border-right: 1px;
+  border-right-style: solid;
+  border-color: #d2e6f4;
+};
+
+.searchLi {
+  display: block;
+  max-width: 75%;
+  background: fuchsia;
+}
+
+.searchLink {
+  float: none;
+  display: block;
+  width: 100%;
+  padding: 5px;
+  border-bottom: 1px;
+  border-bottom-style: solid;
+  border-color: #d2e6f4;
+  background: transparent;
+}
+
+.searchLink:hover {
+  color: #263a5f;
+  background: #d2e6f4;
+  text-decoration: none;
 }
 
 #footer {
@@ -159,22 +255,34 @@ ul {
 }
 
 #video-results {
-  height: 250px;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  width: 45%;
+  height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
   white-space: nowrap;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 .video-result {
-  /* height: 250px;
-  width: 300px; */
-  display: inline;
-  margin-right: 1%;
+  max-width: 100%;
+  display: block;
+  margin-bottom: 8%;
+}
+
+.video-result input {
+  display: block;
+  float: left;
+  cursor: pointer;
+}
+
+.video-result input:hover {
+  background: #85b7d0;
+  color: #fff;
 }
 
 .video-result img, .video-result iframe {
-  height: 199px;
+  /* height: 199px; */
 }
 
 
@@ -183,31 +291,57 @@ ul {
 .admin-list {
   font-size: .8em;
   float: right;
-  width: 25%;
+  width: 20%;
   overflow-y: auto;
 }
 
 .admin-performer {
   padding-top: 4%;
   padding-bottom: 4%;
+  padding-left: 5%;
+  padding-right: 5%;
+  border-bottom: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #d2e6f4;
 }
 
 .admin-performer:hover {
   background: #fff;
 }
 
-#player {
-  width: 73.5%;
+.user-performer {
+  display: block;
+  margin-bottom: 5%;
+}
+
+.boxed {
+  border-radius: 10px;
+  background: #fff;
+  padding: 2%;
+}
+
+#mainPlayer {
+  width: 78.5%;
   float: left;
 }
 
-#player, .admin-list {
+#mainPlayerDetails h3, #mainPlayerDetails h4 {
+  padding: 0;
+  margin: 0;
+}
+
+#mainPlayerDetails {
+  width: 78.5%;
+  float: left;
+  margin-top: 1%;
+}
+
+.admin-list {
   height: 300px;
 }
 
 .admin-performer-name {
   font-size: 1.5em;
-  font-weight: 700;
   display: block;
   margin: 0;
   padding: 0;
@@ -215,7 +349,9 @@ ul {
 
 .current {
   background: #d2e6f4;
-  font-size: 1.5em;
+  font-size: 1.25em;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .current:hover {
@@ -230,6 +366,35 @@ ul {
 
 .admin-next-button:hover {
   cursor: pointer;
+  background: #f15a25;
+  color: #fff;
+}
+
+.col-half {
+  width: 45%;
+}
+
+.col-half h3 {
+  display: block;
+  margin: 0;
+  margin-bottom: 5%;
+  padding: 0;
+}
+
+.songInput {
+  display: block;
+  width: 46%;
+  margin-left: 1%;
+  padding: 1%;
+  float: left;
+}
+
+.video-detail {
+  width: 100%;
+  overflow: hidden;
+}
+
+.active {
   background: #f15a25;
   color: #fff;
 }

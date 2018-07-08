@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setActiveEvent, setCurrentLocation } from '../actions/index';
+import { setActiveEvent, setCurrentLocation } from '../reducers/index';
 
 class CreateEvent extends React.Component {
 
@@ -18,8 +18,11 @@ class CreateEvent extends React.Component {
     if (this.state.password === this.state.password_retype){
       fetch('http://localhost:3000/api/v1/events', {
         method: 'POST',
-        body: JSON.stringify({user_id: this.props.activeUser.id, title: this.state.title, location: this.state.location, description: this.state.description, key_code: this.state.key_code, active: true}),
-        headers: {'Content-Type': 'application/json'}
+        body: JSON.stringify({user_id: localStorage.getItem('user_id'), title: this.state.title, location: this.state.location, description: this.state.description, key_code: this.state.key_code, active: true}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
       })
       .then( res => res.json() )
       .then( response => {
@@ -33,7 +36,8 @@ class CreateEvent extends React.Component {
           return response;
         }
       }).then(response => {
-        this.props.dispatch(setCurrentLocation('/events/'+response.id))
+        window.history.pushState({}, "new state", '/events/' + response.id);
+        this.props.dispatch(setCurrentLocation('/events/' + response.id))
       });
     }else {
       console.log('Error! Something is amiss...');
@@ -62,7 +66,7 @@ class CreateEvent extends React.Component {
   render() {
     return (
       <form onSubmit={this.createEvent}>
-        <h1>Create a Karaoke Event! {this.props.activeUser.name}</h1>
+        <h1>Create a Karaoke Event!</h1>
         <input type='text' name='title' placeholder='Title' value={this.state.title} onChange={this.inputControl} />
         <input type='text' name='location' placeholder='Location' value={this.state.location} onChange={this.inputControl} />
         <input type='text' name='description' placeholder='Brief Description' value={this.state.description} onChange={this.inputControl} />

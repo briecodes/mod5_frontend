@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import EventSearch from '../components/EventSearch';
-import { logOutUser, setCurrentLocation, resetStore } from '../actions/index';
+import { logOutUser, setCurrentLocation, resetStore } from '../reducers/index';
 
 class Navigation extends React.Component {
 
   logOut = () => {
-    this.props.dispatch(setCurrentLocation('/'));
     this.props.dispatch(logOutUser());
     this.props.dispatch(resetStore());
+    localStorage.clear();
+    this.props.dispatch(setCurrentLocation('/'));
   };
 
   routingMethod = (urlRoute) => {
@@ -29,10 +30,10 @@ class Navigation extends React.Component {
     return (
       <div id='navigation'>
         <div id='nav-logo' onClick={() => this.routingMethod('/')}></div>
-        <Link to='/' onClick={() => this.routingMethod('/')} >Home</Link>
-        <Link to='/create-event' onClick={() => this.routingMethod('/create-event')} >Create Event</Link>
-        <Link to='/edit-profile' onClick={() => this.routingMethod('/edit-profile')} >Edit Profile</Link>
-        <Link to='/' onClick={this.logOut} >Log Out</Link>
+        <Link to='/' className='navLink' onClick={() => this.routingMethod('/')} >Home</Link>
+        <Link to='/create-event' className='navLink' onClick={() => this.routingMethod('/create-event')} >Create Event</Link>
+        <Link to='/edit-profile' className='navLink' onClick={() => this.routingMethod('/edit-profile')} >Edit Profile</Link>
+        <Link to='/' className='navLink' onClick={this.logOut} >Log Out</Link>
         <EventSearch/>
         <div className='divider'></div>
       </div>

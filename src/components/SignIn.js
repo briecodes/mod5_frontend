@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setUserFake, setCurrentLocation } from '../actions/index';
+import { setCurrentLocation, setUserId } from '../reducers/index';
 
 class SignIn extends React.Component {
   state = {
@@ -19,13 +19,24 @@ class SignIn extends React.Component {
   logIn = (e) => {
     e.preventDefault();
     if (this.state.username && this.state.password){
-      this.props.dispatch(setUserFake());
-      this.setState({
-        username: '',
-        password: ''
+      fetch('http://localhost:3000/sessions', {
+        method: 'POST',
+        body: JSON.stringify({username: this.state.username, password: this.state.password}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then( res => res.json() )
+      .then( response => {
+        if (response.errors || response.error){
+          console.log('errors!', response);
+        }else{
+          localStorage.setItem('user_id', response.user.id);
+          localStorage.setItem('token', response.token);
+          this.props.dispatch(setUserId(response.user.id));
+          window.history.pushState({}, "new state", "/");
+          this.props.dispatch(setCurrentLocation('/'))
+        }
       });
-      window.history.pushState({}, "new state", "/");
-      e.currentTarget.reset();
     }else{
       alert('Username/Password needed.');
     }
@@ -48,8 +59,7 @@ class SignIn extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userId,
-    activeUser: state.activeUser
+    userId: state.userId
   };
 };
 

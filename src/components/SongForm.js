@@ -1,31 +1,69 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
-import { addPerformerToList } from '../actions/index';
-import YouTubeSearch from '../components/YouTubeSearch';
+import { addPerformerToList, selectVideoInForm } from '../reducers/index';
+// import YouTubeSearch from '../components/YouTubeSearch';
+
+// YOUTUBE SEARCH API
+import API_KEY from '../api';
+import YouTubeSearchResults from '../components/YouTubeSearchResults';
+const search = require('youtube-search');
+const opts = {
+  maxResults: 10,
+  key: API_KEY,
+  type: 'video',
+  videoEmbeddable: true
+};
 
 class SongForm extends React.Component {
 
   state = {
     song_title: '',
     song_artist: '',
-    user_id: this.props.activeUser.id,
-    event_id: this.props.activeEvent.id
+    user_id: parseInt(localStorage.getItem('user_id'), 10),
+    event_id: this.props.activeEvent.id,
+    video_results: []
   };
 
   inputControl = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     });
+    this.searchCheck();
+  };
+
+  runSearch = _.debounce(() => this.searchYouTube(), 300);
+
+  searchCheck = () => {
+    if (this.state.song_title && this.state.song_artist){
+      this.runSearch();
+    }
   };
 
   resetForm = () => {
-    // console.log('resetting form');
     this.setState({
       song_title: '',
-      song_artist: ''
+      song_artist: '',
+      video_results: []
     });
-    // console.log('state:', this.state);
+    this.props.dispatch(selectVideoInForm('', ''))
+  };
+
+  searchYouTube = () => {
+    search('karaoke ' + this.state.song_title + this.state.song_artist, opts, this.youTubeSearchCallback)
+  };
+
+  youTubeSearchCallback = (err, results) => {
+    console.log('youtube results', results);
+    let arr = []
+    if(err) return console.log(err);
+    results.forEach(item =>{
+        arr.push(item);
+    });
+    this.setState({
+      video_results: arr
+    });
   };
 
   submitEntry = (e) => {
@@ -35,7 +73,10 @@ class SongForm extends React.Component {
       fetch('http://localhost:3000/api/v1/song_entries', {
         method: 'POST',
         body: JSON.stringify({...this.state, video_id: this.props.video_id, video_url: this.props.video_url}),
-        headers: {'Content-Type': 'application/json'}
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
     })
       .then( res => res.json() )
       .then( response => {
@@ -58,11 +99,13 @@ class SongForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.submitEntry}>
-        <input type='text' name='song_title' placeholder='Song Title' value={this.state.song_title} onChange={this.inputControl} />
-        <input type='text' name='song_artist' placeholder='Song Artist' value={this.state.song_artist} onChange={this.inputControl} />
-        <YouTubeSearch/>
-        <input type='submit'/>
+      <form onSubmit={this.submitEntry} className='boxed'>
+        <input type='text' className='songInput' name='song_artist' placeholder='Song Artist' value={this.state.song_artist} onChange={this.inputControl} />
+        <input type='text' className='songInput' name='song_title' placeholder='Song Title' value={this.state.song_title} onChange={this.inputControl} />
+        <div className='divider'></div>
+        {this.state.video_results.length > 0 ? <YouTubeSearchResults results={this.state.video_results} /> : null}
+        <div className='divider'></div>
+        {this.props.video_id ? <input type='submit' className='submit'/> : null }
       </form>
     );
   };
