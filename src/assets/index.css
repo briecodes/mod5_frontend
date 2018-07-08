@@ -62,10 +62,22 @@ input {
   padding: 5px;
 }
 
+textarea {
+  border-radius: 5px;
+  border: 1px;
+  border-color: #d2e6f4;
+  border-style: solid;
+  padding: 5px; 
+}
+
 .submit:hover {
   cursor: pointer;
   background: #85b7d0;
   color: #fff;
+}
+
+.submit:focus {
+  outline-width: 0;
 }
 
 .red {
@@ -410,10 +422,38 @@ ul {
   margin-left: 25%;
   margin-right: 25%;
   position: relative;
-  text-align: center;
+  /* text-align: center; */
+}
+
+#form-container h3 {
+  padding: 0;
+  margin-top: -3%;
+}
+
+#form-container label {
+  display: block;
+  width: 50%;
+  margin-bottom: 1%;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 .form-input {
   width: 50%;
-  margin-bottom: 2.5%;
+  margin-bottom: 3%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.delete-btn {
+  background: #f15a25;
+  color: #fff
+}
+
+.delete-btn:focus {
+  outline-width: 0;
+}
+
+.delete-btn:hover {
+  cursor: pointer;
 }

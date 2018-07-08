@@ -68,11 +68,19 @@ class CreateEvent extends React.Component {
       <div id='form-container'>
         <form onSubmit={this.createEvent}>
           <h1>Create a Karaoke Event!</h1>
-          <input type='text' name='title' className='form-input' placeholder='Title' value={this.state.title} onChange={this.inputControl} /><br />
-          <input type='text' name='location' className='form-input' placeholder='Location' value={this.state.location} onChange={this.inputControl} /><br />
-          <input type='text' name='description' className='form-input' placeholder='Brief Description' value={this.state.description} onChange={this.inputControl} /><br />
-          <input type='text' name='key_code' className='form-input' placeholder='key_code' value={this.state.key_code} onChange={this.inputControl} /><br />
-          <input type='submit' className='submit'/>
+          <label htmlFor='title'>Title</label>
+          <input type='text' id='title' name='title' className='form-input' placeholder='Title' value={this.state.title} onChange={this.inputControl} /><br />
+          <label htmlFor='location'>Location</label>
+          <input type='text' id='location' name='location' className='form-input' placeholder='Location' value={this.state.location} onChange={this.inputControl} /><br />
+          <label htmlFor='description'>Description</label>
+          <input type='text' id='description' name='description' className='form-input' placeholder='Brief Description' value={this.state.description} onChange={this.inputControl} /><br />
+          <label htmlFor='key-code'>Key Code</label>
+          <input type='text' id='key-code' name='key_code' className='form-input' placeholder='key_code' value={this.state.key_code} onChange={this.inputControl} /><br />
+          <center>
+            <p>
+              <input type='submit' className='submit'/>
+            </p>
+          </center>
         </form>
       </div>
     );

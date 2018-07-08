@@ -208,25 +208,42 @@ class EditEvent extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div id='form-container'>
         {this.state.deleted ? <React.Fragment>
           <h1>Event Deleted!</h1>
           <h3><Link to='/' onClick={() => this.props.dispatch(setCurrentLocation('/'))} >Go home ></Link></h3>
         </React.Fragment> : null }
         {this.state.eventData.title ? <React.Fragment><form onSubmit={this.submitEvent}>
-          <h1>Editing {this.state.eventData.title}</h1>
+          <h1>Editing {this.props.activeEvent.title}</h1>
           {this.state.success ? <h3>Event updated! <Link to={'/events/' + this.eventId} onClick={() => this.props.dispatch(setCurrentLocation('/events/' + this.eventId))}>View ></Link></h3> : null }
-          <input type='text' name='title' placeholder='Title' value={this.state.eventData.title} onChange={this.inputControl} />
-          <input type='text' name='location' placeholder='Location' value={this.state.eventData.location} onChange={this.inputControl} />
-          <input type='text' name='description' placeholder='Description' value={this.state.eventData.description} onChange={this.inputControl} />
-          <input type='text' name='key_code' placeholder='Key Code' value={this.state.eventData.key_code} onChange={this.inputControl} />
-          {this.state.eventData.active ? <React.Fragment><input type='checkbox' name='active' onChange={this.check} defaultChecked /> Active</React.Fragment> : <React.Fragment><input type='checkbox' name='active' onChange={this.check} /> Active</React.Fragment>}
-          <input type='submit'/>
+          <label htmlFor='title'>Title</label>
+          <input type='text' id='title' name='title' className='form-input' placeholder='Title' value={this.state.eventData.title} onChange={this.inputControl} />
+          
+          <label htmlFor='location'>Location</label>
+          <input type='text' id='location' name='location' className='form-input' placeholder='Location' value={this.state.eventData.location} onChange={this.inputControl} />
+          <label htmlFor='description'>Description</label>
+          <input type='text' id='description' name='description' className='form-input' placeholder='Description' value={this.state.eventData.description} onChange={this.inputControl} />
+          <label htmlFor='key-code'>Key Code</label>
+          <input type='text' id='key-code' name='key_code' className='form-input' placeholder='Key Code' value={this.state.eventData.key_code} onChange={this.inputControl} /><br />
+          <label htmlFor=''></label>
+          <center>
+            {this.state.eventData.active ? <React.Fragment><input type='checkbox' name='active' onChange={this.check} defaultChecked /> Active</React.Fragment> : <React.Fragment><input type='checkbox' name='active' onChange={this.check} /> Active</React.Fragment>}<br />
+          </center>
+          <center>
+            <p>
+              <input type='submit' className='submit' />
+            </p>
+          </center>
         </form>
         <form onSubmit={this.doNothing} >
-          {this.state.confirmDelete ? <React.Fragment><input type='submit' name='cancel-delete-event' value='cancel' onClick={this.deleteEvent} /> <input type='submit' name='confirm-delete-event' value='confirm delete' onClick={this.deleteEvent} /></React.Fragment> : <input type='submit' name='delete-event' value='delete event' onClick={this.deleteEvent} /> }
+        <p>&nbsp;</p>
+          <center>
+            <p>
+              {this.state.confirmDelete ? <React.Fragment><input type='submit' name='cancel-delete-event' className='submit' value='cancel' onClick={this.deleteEvent} /> &nbsp;&nbsp;&nbsp; <input type='submit' className='submit' name='confirm-delete-event' className='delete-btn' value='confirm delete' onClick={this.deleteEvent} /></React.Fragment> : <input type='submit' className='delete-btn' name='delete-event' value='delete event' onClick={this.deleteEvent} /> }
+            </p>
+          </center>
         </form></React.Fragment> : null }
-      </React.Fragment>
+      </div>
     );
   };
 };
