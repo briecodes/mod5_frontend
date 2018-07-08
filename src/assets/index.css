@@ -298,6 +298,9 @@ ul {
 }
 
 
+
+
+
 /* EVENT PAGE */
 
 .admin-list {
@@ -413,6 +416,21 @@ ul {
 .active {
   background: #f15a25;
   color: #fff;
+}
+
+.join-event, .leave-event {
+  margin-top: 5%;
+  font-size: 1.5em;
+  padding: 1%;
+}
+
+.leave-event {
+  background: #f15a25;
+  color: #fff;
+}
+
+.leave-event:hover {
+  background: #f15a25;
 }
 
 

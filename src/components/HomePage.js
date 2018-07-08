@@ -63,7 +63,6 @@ class HomePage extends React.Component {
   render() {
     return (
       <div>
-        <h1>HomePage</h1>
         <div className='col-third float-left'>
           <ul>
             <h3>My Hosted Events:</h3>

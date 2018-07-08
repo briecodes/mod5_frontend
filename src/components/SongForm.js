@@ -55,7 +55,6 @@ class SongForm extends React.Component {
   };
 
   youTubeSearchCallback = (err, results) => {
-    console.log('youtube results', results);
     let arr = []
     if(err) return console.log(err);
     results.forEach(item =>{
@@ -105,7 +104,9 @@ class SongForm extends React.Component {
         <div className='divider'></div>
         {this.state.video_results.length > 0 ? <YouTubeSearchResults results={this.state.video_results} /> : null}
         <div className='divider'></div>
-        {this.props.video_id ? <input type='submit' className='submit'/> : null }
+        <center>
+          {this.props.video_id ? <input type='submit' className='submit'/> : null }
+        </center>
       </form>
     );
   };

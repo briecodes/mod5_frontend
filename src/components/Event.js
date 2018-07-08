@@ -178,7 +178,7 @@ class Event extends React.Component {
 
           {this.props.activeEvent.title && this.localUserId !== this.props.activeEvent.user_id ? <React.Fragment>
               <div className='col-half float-left'>
-                <h1 className='medium'>{this.props.activeEvent.title} {this.state.attending ? <button type='button' name='leave' onClick={this.attendButton}>Leave</button> : this.props.activeEvent.user_id !== this.localUserId ? <button type='button' name='join' onClick={this.attendButton}>Join</button> : null}</h1>
+                <h1 className='medium'>{this.props.activeEvent.title}</h1>
                 <p>
                   <span className='heavy'>Location:</span> {this.props.activeEvent.location}<br />
                   <span className='heavy'>Description:</span> {this.props.activeEvent.description}<br />
@@ -207,6 +207,10 @@ class Event extends React.Component {
               <SongForm/>
             </div>
             </React.Fragment> : null}
+            <div className='divider'></div>
+            <center>
+              {this.state.attending ? <input type='submit' name='leave' value='Leave Event' className='submit leave-event light' onClick={this.attendButton} /> : this.props.activeEvent.user_id !== this.localUserId ? <input type='submit' name='join' value='Join Event' className='submit join-event light' onClick={this.attendButton} /> : null}
+            </center>
       </React.Fragment>
     );
   };

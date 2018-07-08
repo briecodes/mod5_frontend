@@ -55,9 +55,10 @@ class EventSearch extends React.Component {
     return (
       <ul id='searchUl'>
         <input type='text' name='searchTerm' placeholder='Search Events' value={this.state.searchTerm} onChange={this.inputControl} />
+        {this.state.searchTerm !== '' ? <React.Fragment>
         <div id='partySearchResults'>
           {this.state.foundEvents.map(event => <li className='searchLi' key={event.id}><Link to={'/events/'+event.id} className='searchLink' onClick={() => this.exploreEvent(event)}>{event.title}</Link><div className='spacer'></div></li>)}
-        </div>
+        </div></React.Fragment> : null }
       </ul>
     );
   };
