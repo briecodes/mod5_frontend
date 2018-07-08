@@ -20,7 +20,7 @@ class YouTubeSearchResults extends React.Component {
           <div key={video.id} className='video-result'>
             <iframe id='player' width={this.calculateWidth()} height={this.calculateHeight()} title={video.title} type='text/html' src={`http://www.youtube.com/embed/${video.id}`} frameBorder='0'></iframe>
             <div className='float-left'>
-              {video.title} <input type='button' value='Choose Video' onClick={()=> this.props.dispatch(selectVideoInForm(video.id, video.link)) } / >
+              {video.title} <input type='button' value='Select Video' onClick={()=> this.props.dispatch(selectVideoInForm(video.id, video.link)) } / >
             </div>
             <div className='divider'></div>
           </div>

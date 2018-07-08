@@ -142,6 +142,24 @@ class Event extends React.Component {
       });
   };
 
+  deletePerformer = (id) => {
+    fetch('http://localhost:3000/api/v1/song_entries/' + id, {
+      method: 'PATCH',
+      body: JSON.stringify({played: true}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
+    }).then (res => res.json() )
+    .then (response => {
+      if (response.error || response.errors){
+        console.log('error!', response);
+      }else{
+        this.getEventPerformerList();
+      }
+    })
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -177,7 +195,7 @@ class Event extends React.Component {
                 {this.props.performerList.map((perf, index) => {
                   return (
                     <li key={perf.id} className='user-performer'>
-                      <span className='heavy'>{perf.user.name}</span> up {index > 0 ? ('in ' + index * 3.5 + ' mins') : 'now' }<br />
+                      { perf.user.id === this.localUserId ? <span className='heavy red'>{perf.user.name}</span> : <span className='heavy'>{perf.user.name}</span>} up {index > 0 ? ('in ' + index * 3.5 + ' mins') : 'now' } {perf.user.id === this.localUserId ? <input type='button' value='Cancel' className='cancel' onClick={() => this.deletePerformer(perf.id)} /> : null}<br />
                       performing <em>{perf.song_title}</em> by {perf.song_artist}
                     </li>
                   )

@@ -64,7 +64,7 @@ class SongForm extends React.Component {
         <input type='text' className='songInput' name='song_artist' placeholder='Song Artist' value={this.state.song_artist} onChange={this.inputControl} />
         <div className='divider'></div>
         <YouTubeSearch/>
-        <input type='submit'/>
+        <input type='submit' className='submit'/>
       </form>
     );
   };
