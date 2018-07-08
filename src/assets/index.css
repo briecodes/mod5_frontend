@@ -388,3 +388,13 @@ ul {
   padding: 1%;
   float: left;
 }
+
+.video-detail {
+  width: 100%;
+  overflow: hidden;
+}
+
+.active {
+  background: #f15a25;
+  color: #fff;
+}

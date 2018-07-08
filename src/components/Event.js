@@ -189,7 +189,7 @@ class Event extends React.Component {
             </React.Fragment> : null}
 
           {this.state.attending ? <React.Fragment>
-            <div className='col-half float-left' style={{height: '350px', 'overflow-y': 'auto'}}>
+            <div className='col-half float-left' style={{height: '400px', overflowY: 'auto'}}>
               <h3>Songlist:</h3>
               <ul>
                 {this.props.performerList.map((perf, index) => {
