@@ -8,6 +8,7 @@ import CreateEvent from '../components/CreateEvent';
 import Event from '../components/Event';
 import EditEvent from '../components/EditEvent';
 import EditProfile from '../components/EditProfile';
+import Octothorps from '../components/Octothorps';
 import Footer from '../components/Footer';
 
 class Content extends React.Component {
@@ -20,6 +21,7 @@ class Content extends React.Component {
         {window.location.pathname.includes('/events/') ? <Event/> : null}
         {window.location.pathname.includes('/edit-event/') ? <EditEvent/> : null}
         {window.location.pathname === '/edit-profile' ? <EditProfile /> : null}
+        {window.location.pathname === '/octothots' ? <Octothorps /> : null}
         <Switch>
           {/* <Route exact path='/' component={HomePage}/> */}
           {/* <Route exact path='/create-event' component={CreateEvent}/> */}

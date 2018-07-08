@@ -1,5 +1,17 @@
 import React from 'react';
-const Footer = (props) => (
-  <div id='footer'>&#123; made with love <a href='https://www.apple.com/'>4 octothorpes</a> &#125;</div>
-);
-export default Footer;
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import { setCurrentLocation } from '../reducers/index';
+
+class Footer extends React.Component {
+  render() {
+    return (
+      <div id='footer'>
+        &#123; made with love <Link to={'/octothots'} onClick={() => this.props.dispatch(setCurrentLocation('/octothots'))} >4 octothorpes</Link> &#125;
+      </div>
+    );
+  };
+};
+
+export default connect()(Footer);
