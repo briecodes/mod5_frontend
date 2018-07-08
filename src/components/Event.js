@@ -171,12 +171,12 @@ class Event extends React.Component {
             {this.props.performerList.slice(1).map(perf => <div key={perf.id} className='admin-performer'><span className='admin-performer-name medium'>{perf.user.name}</span> Performing <em>{perf.song_title}</em> by {perf.song_artist}</div>)}
           </div>
           <div id='mainPlayerDetails'>
-            <h3 className='medium float-left'>{this.props.activeEvent.title}</h3>
+            <h3 className='medium float-left'>{this.props.activeEvent.title} {this.props.activeEvent.key_code ? <span className='light'> / Code: {this.props.activeEvent.key_code}</span> : null}</h3>
             <h3 className='light float-right'>Est. wait time: {this.props.performerList.length * 3.5}mins</h3>
           </div>
         </React.Fragment> : null}
 
-          {this.props.activeEvent.title ? <React.Fragment>
+          {this.props.activeEvent.title && this.localUserId !== this.props.activeEvent.user_id ? <React.Fragment>
               <div className='col-half float-left'>
                 <h1 className='medium'>{this.props.activeEvent.title} {this.state.attending ? <button type='button' name='leave' onClick={this.attendButton}>Leave</button> : this.props.activeEvent.user_id !== this.localUserId ? <button type='button' name='join' onClick={this.attendButton}>Join</button> : null}</h1>
                 <p>
@@ -189,7 +189,7 @@ class Event extends React.Component {
             </React.Fragment> : null}
 
           {this.state.attending ? <React.Fragment>
-            <div className='col-half float-left'>
+            <div className='col-half float-left' style={{height: '350px', 'overflow-y': 'auto'}}>
               <h3>Songlist:</h3>
               <ul>
                 {this.props.performerList.map((perf, index) => {
