@@ -24,12 +24,12 @@ class Event extends React.Component {
     this.calculateHeight();
     this.getEventDetails();
     this.getEventPerformerList();
-    // const fetchInterval = () => window.setInterval(this.compareList(), 1000);
+    this.fetchInterval = window.setInterval( () => this.compareList(), 2000);
   };
 
 
   componentWillUnmount() {
-    console.log('unmounting...');
+    // console.log('unmounting...');
     clearInterval(this.fetchInterval);
   }
 
@@ -85,7 +85,7 @@ class Event extends React.Component {
   i = 0;
 
   compareList = () => {
-    console.log('comparing...');
+    // console.log('comparing...');
     fetch('http://localhost:3000/api/v1/song_entries/', {
       headers: {
         'Content-Type': 'application/json',
@@ -100,10 +100,8 @@ class Event extends React.Component {
         };
       });
       if (list.length !== this.props.performerList.length){
-        console.log('difference detected!');
+        // console.log('difference detected!');
         this.getEventPerformerList();
-      }else {
-        console.log('no difference detected.');
       }
     });
   };
