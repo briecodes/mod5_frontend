@@ -24,7 +24,7 @@ class Event extends React.Component {
     this.calculateHeight();
     this.getEventDetails();
     this.getEventPerformerList();
-    const fetchInterval = () => window.setInterval(this.compareList(), 1000);
+    // const fetchInterval = () => window.setInterval(this.compareList(), 1000);
   };
 
 
@@ -82,6 +82,7 @@ class Event extends React.Component {
     });
   };
 
+  i = 0;
 
   compareList = () => {
     console.log('comparing...');
@@ -197,8 +198,8 @@ class Event extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {/* <div className='divider spacer'></div> */}
         { this.localUserId === this.props.activeEvent.user_id ? <React.Fragment>
+          <div className='divider spacer'></div>
           {this.props.performerList.length > 0 ? <iframe id='mainPlayer' height={this.state.height} title='Admin Player' type='text/html'
                   src={`http://www.youtube.com/embed/${this.props.performerList[0].video_id}`} frameBorder='0'></iframe> : null}
           <div className='admin-list' style={{height: this.state.height}}>

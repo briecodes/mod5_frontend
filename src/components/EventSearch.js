@@ -62,7 +62,7 @@ class EventSearch extends React.Component {
         {this.state.searchTerm !== '' ? <React.Fragment>
           <ul id='searchUl'>
             <div id='partySearchResults'>
-              {this.state.foundEvents.map(event => <React.Fragment><li key={event.id} onClick={() => this.linkHandler(`/events/${event.id}`, event)}>{event.title}</li></React.Fragment>)}
+              {this.state.foundEvents.map(event => <li key={event.id} onClick={() => this.linkHandler(`/events/${event.id}`, event)}>{event.title}</li>)}
             </div>
           </ul>
         </React.Fragment> : null }
