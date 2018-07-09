@@ -9,7 +9,7 @@ import { HURL } from '../actions/index';
 // YOUTUBE SEARCH API
 // import API_KEY from '../api';
 import YouTubeSearchResults from '../components/YouTubeSearchResults';
-const search = require('youtube-search');
+// const search = require('youtube-search');
 const opts = {
   maxResults: 10,
   key: process.env.API_KEY2,
@@ -52,7 +52,7 @@ class SongForm extends React.Component {
   };
 
   searchYouTube = () => {
-    search('karaoke ' + this.state.song_title + this.state.song_artist, opts, this.youTubeSearchCallback)
+    // search('karaoke ' + this.state.song_title + this.state.song_artist, opts, this.youTubeSearchCallback)
   };
 
   youTubeSearchCallback = (err, results) => {
