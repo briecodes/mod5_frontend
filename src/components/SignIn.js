@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { setCurrentLocation, setUserId } from '../reducers/index';
+import { HURL } from '../actions/index';
 
 class SignIn extends React.Component {
   state = {
@@ -19,7 +20,7 @@ class SignIn extends React.Component {
   logIn = (e) => {
     e.preventDefault();
     if (this.state.username && this.state.password){
-      fetch('http://localhost:3000/sessions', {
+      fetch(HURL() + '/sessions', {
         method: 'POST',
         body: JSON.stringify({username: this.state.username, password: this.state.password}),
         headers: {

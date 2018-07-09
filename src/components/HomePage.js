@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setActiveEvent, setCurrentLocation } from '../reducers/index';
+import { HURL } from '../actions/index';
 
 class HomePage extends React.Component {
 
@@ -17,7 +18,7 @@ class HomePage extends React.Component {
   
   getMyEvents = () => {
     const localUserId = parseInt(localStorage.getItem('user_id'), 10);
-    fetch('http://localhost:3000/api/v1/events', {
+    fetch(HURL('/api/v1/events'), {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { setUserId } from '../reducers/index';
+import { HURL } from '../actions/index';
 
 class EditProfile extends React.Component {
   state = {
@@ -22,7 +23,7 @@ class EditProfile extends React.Component {
   };
 
   getUser = () => {
-    fetch('http://localhost:3000/api/v1/users/' + parseInt(localStorage.getItem('user_id'), 10), {
+    fetch(HURL('/api/v1/users/') + parseInt(localStorage.getItem('user_id'), 10), {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
@@ -44,7 +45,7 @@ class EditProfile extends React.Component {
 
   save = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3000/api/v1/users/' + parseInt(localStorage.getItem('user_id'), 10), {
+    fetch(HURL('/api/v1/users/') + parseInt(localStorage.getItem('user_id'), 10), {
       method: 'PATCH',
       body: JSON.stringify({username: this.state.username, name: this.state.name, password: this.state.password}),
       headers: {

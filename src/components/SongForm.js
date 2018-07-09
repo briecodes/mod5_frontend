@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import { addPerformerToList, selectVideoInForm } from '../reducers/index';
+import { HURL } from '../actions/index';
 // import YouTubeSearch from '../components/YouTubeSearch';
 
 // YOUTUBE SEARCH API
@@ -69,7 +70,7 @@ class SongForm extends React.Component {
     e.preventDefault();
     e.persist();
     if (this.validateData()){
-      fetch('http://localhost:3000/api/v1/song_entries', {
+      fetch(HURL('/api/v1/song_entries'), {
         method: 'POST',
         body: JSON.stringify({...this.state, video_id: this.props.video_id, video_url: this.props.video_url}),
         headers: {

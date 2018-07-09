@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setActiveEvent, setCurrentLocation } from '../reducers/index';
+import { HURL } from '../actions/index';
 
 class EventSearch extends React.Component {
   state = {
@@ -23,7 +24,7 @@ class EventSearch extends React.Component {
   };
 
   fetchEvents = (searchTerm) => {
-    fetch('http://localhost:3000/api/v1/events', {
+    fetch(HURL('/api/v1/events'), {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')

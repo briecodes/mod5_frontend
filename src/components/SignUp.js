@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { setUserId, setCurrentLocation, setToken } from '../reducers/index';
+import { HURL } from '../actions/index';
 
 class SignUp extends React.Component {
 
@@ -22,7 +23,7 @@ class SignUp extends React.Component {
     e.persist();
     if (this.state.password === this.state.password_retype){
       console.log('new user accepted');
-      fetch('http://localhost:3000/api/v1/users', {
+      fetch(HURL('/api/v1/users'), {
         method: 'POST',
         body: JSON.stringify({username: this.state.username, name: this.state.name, password: this.state.password}),
         headers: {'Content-Type': 'application/json'}

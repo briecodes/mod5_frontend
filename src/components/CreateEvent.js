@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { setActiveEvent, setCurrentLocation } from '../reducers/index';
+import { HURL } from '../actions/index';
 
 class CreateEvent extends React.Component {
 
@@ -16,7 +17,7 @@ class CreateEvent extends React.Component {
     e.preventDefault();
     e.persist();
     if (this.state.password === this.state.password_retype){
-      fetch('http://localhost:3000/api/v1/events', {
+      fetch(HURL('/api/v1/events'), {
         method: 'POST',
         body: JSON.stringify({user_id: localStorage.getItem('user_id'), title: this.state.title, location: this.state.location, description: this.state.description, key_code: this.state.key_code, active: true}),
         headers: {

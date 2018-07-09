@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import SongForm from '../components/SongForm';
 import { setActiveEvent, setPerformerList } from '../reducers/index';
-import { parseUrl } from '../actions/index';
+import { parseUrl, HURL } from '../actions/index';
 
 class Event extends React.Component {
 
@@ -51,7 +51,7 @@ class Event extends React.Component {
   };
 
   getEventDetails = () => {
-    fetch('http://localhost:3000/api/v1/events/' + this.eventId, {
+    fetch(HURL('/api/v1/events/') + this.eventId, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
@@ -65,7 +65,7 @@ class Event extends React.Component {
   };
 
   getEventPerformerList = () => {
-    fetch('http://localhost:3000/api/v1/song_entries/', {
+    fetch(HURL('/api/v1/song_entries/'), {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
@@ -86,7 +86,7 @@ class Event extends React.Component {
 
   compareList = () => {
     // console.log('comparing...');
-    fetch('http://localhost:3000/api/v1/song_entries/', {
+    fetch(HURL('/api/v1/song_entries/'), {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
@@ -109,7 +109,7 @@ class Event extends React.Component {
 
 
   getUserEvents = () => {
-    fetch('http://localhost:3000/api/v1/user_events', {
+    fetch(HURL('/api/v1/user_events'), {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
@@ -123,7 +123,7 @@ class Event extends React.Component {
   };
 
   createUserEvent = () => {
-    fetch('http://localhost:3000/api/v1/user_events', {
+    fetch(HURL('/api/v1/user_events'), {
         method: 'POST',
         body: JSON.stringify({user_id: this.localUserId, event_id: this.props.activeEvent.id}),
         headers: {
@@ -138,7 +138,7 @@ class Event extends React.Component {
   };
 
   deleteUserEvent = (id) => {
-    fetch('http://localhost:3000/api/v1/user_events/' + id, {
+    fetch(HURL('/api/v1/user_events/') + id, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ class Event extends React.Component {
   };
 
   markAsPerformed = (id) => {
-    fetch('http://localhost:3000/api/v1/song_entries/' + id, {
+    fetch(HURL('/api/v1/song_entries/') + id, {
       method: 'PATCH',
       body: JSON.stringify({played: true}),
       headers: {
@@ -176,7 +176,7 @@ class Event extends React.Component {
   };
 
   deletePerformer = (id) => {
-    fetch('http://localhost:3000/api/v1/song_entries/' + id, {
+    fetch(HURL('/api/v1/song_entries/') + id, {
       method: 'PATCH',
       body: JSON.stringify({played: true}),
       headers: {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { setActiveEvent, setCurrentLocation, resetStore } from '../reducers/index';
-import { parseUrl } from '../actions/index';
+import { parseUrl, HURL } from '../actions/index';
 
 class EditEvent extends React.Component {
   state = {
@@ -49,7 +49,7 @@ class EditEvent extends React.Component {
   };
 
   getEventData = () => {
-    fetch('http://localhost:3000/api/v1/events/' + this.eventId, {
+    fetch(HURL('/api/v1/events/') + this.eventId, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
@@ -70,7 +70,7 @@ class EditEvent extends React.Component {
   submitEvent = (e) => {
     e.preventDefault();
     e.persist();
-    fetch('http://localhost:3000/api/v1/events/' + this.eventId, {
+    fetch(HURL('/api/v1/events/') + this.eventId, {
       method: 'PATCH',
       body: JSON.stringify(this.state.eventData),
       headers: {
@@ -116,7 +116,7 @@ class EditEvent extends React.Component {
   };
 
   deleteSongEntries = () => {
-    const entryURL = 'http://localhost:3000/api/v1/song_entries';
+    const entryURL = HURL('/api/v1/song_entries');
     fetch(entryURL, {
       headers: {
         'Content-Type': 'application/json',
@@ -136,7 +136,7 @@ class EditEvent extends React.Component {
   };
 
   deleteUserEvents = () => {
-    const userEventsURL = 'http://localhost:3000/api/v1/user_events';
+    const userEventsURL = HURL('/api/v1/user_events');
     fetch(userEventsURL, {
       headers: {
         'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ class EditEvent extends React.Component {
   };
 
   deleteTheEvent = () => {
-    fetch('http://localhost:3000/api/v1/events/'+ this.eventId, {
+    fetch(HURL('/api/v1/events/')+ this.eventId, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
