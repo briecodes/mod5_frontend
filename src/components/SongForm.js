@@ -7,12 +7,12 @@ import { HURL } from '../actions/index';
 // import YouTubeSearch from '../components/YouTubeSearch';
 
 // YOUTUBE SEARCH API
-// import API_KEY from '../api';
+import API_KEY from '../api';
 import YouTubeSearchResults from '../components/YouTubeSearchResults';
-// const search = require('youtube-search');
+const search = require('youtube-search');
 const opts = {
   maxResults: 10,
-  key: process.env.API_KEY2,
+  key: API_KEY,
   type: 'video',
   videoEmbeddable: true
 };
@@ -52,7 +52,7 @@ class SongForm extends React.Component {
   };
 
   searchYouTube = () => {
-    // search('karaoke ' + this.state.song_title + this.state.song_artist, opts, this.youTubeSearchCallback)
+    search('karaoke ' + this.state.song_title + this.state.song_artist, opts, this.youTubeSearchCallback)
   };
 
   youTubeSearchCallback = (err, results) => {
@@ -98,7 +98,6 @@ class SongForm extends React.Component {
   };
 
   render() {
-    console.log(process.env.API_KEY2);
     return (
       <form onSubmit={this.submitEntry} className='boxed'>
         <input type='text' className='songInput' name='song_artist' placeholder='Song Artist' value={this.state.song_artist} onChange={this.inputControl} />

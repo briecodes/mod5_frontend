@@ -16,7 +16,7 @@
     font-size: .75em;
     color: #263a5f;
     background: #f4f2f2;
-    background-image: url('drip2.svg');
+    background-image: url('images/drip2.svg');
     background-repeat: repeat-x;
     background-size: 20%;
   }
@@ -136,7 +136,7 @@
   #entry-logo {
     width: 150px;
     height: 30px;
-    background-image: url('octothoke_logo.svg');
+    background-image: url('images/octothoke_logo.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -149,7 +149,7 @@
     width: 150px;
     height: 30px;
     margin-right: 25px;
-    background-image: url('octothoke_logo.svg');
+    background-image: url('images/octothoke_logo.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -517,7 +517,7 @@
     width: 100%;
     min-height: 100%;
     position: relative;
-    background-image: url('bg-cru.jpg');
+    background-image: url('images/bg-cru.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -546,7 +546,7 @@
   #prez {
     width: 100px;
     height: 100px;
-    background-image: url('prez.png');
+    background-image: url('images/prez.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -555,8 +555,20 @@
     bottom: 5%;
   }
 
+  #fast {
+    width: 100px;
+    height: 100px;
+    background-image: url('images/fast.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    left: 5%;
+    bottom: 5%;
+  }
+
   #welcome {
-    background-image: url('bg2.jpg');
+    background-image: url('images/bg2.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -613,7 +625,7 @@
     font-size: .9em;
     color: #263a5f;
     background: #f4f2f2;
-    background-image: url('drip2.svg');
+    background-image: url('images/drip2.svg');
     background-repeat: repeat-x;
     background-size: 35%;
   }
@@ -733,7 +745,7 @@
   #entry-logo {
     width: 150px;
     height: 30px;
-    background-image: url('octothoke_logo.svg');
+    background-image: url('images/octothoke_logo.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -749,7 +761,7 @@
     margin-bottom: 2%;
     margin-top: -3.5%;
     background-color: rgba(255, 255, 255, .5);
-    background-image: url('octothoke_logo.svg');
+    background-image: url('images/octothoke_logo.svg');
     background-size: 40%;
     background-repeat: no-repeat;
     background-position: center;
@@ -1121,7 +1133,7 @@
     width: 100%;
     min-height: 100%;
     position: relative;
-    background-image: url('bg-cru.jpg');
+    background-image: url('images/bg-cru.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -1148,7 +1160,7 @@
   #prez {
     width: 100px;
     height: 100px;
-    background-image: url('prez.png');
+    background-image: url('images/prez.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -1157,8 +1169,20 @@
     bottom: 5%;
   }
 
+  #fast {
+    width: 100px;
+    height: 100px;
+    background-image: url('images/fast.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    left: 5%;
+    bottom: 5%;
+  }
+
   #welcome {
-    background-image: url('bg2.jpg');
+    background-image: url('images/bg2.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
