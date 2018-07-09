@@ -24,7 +24,14 @@ class Event extends React.Component {
     this.calculateHeight();
     this.getEventDetails();
     this.getEventPerformerList();
+    const fetchInterval = () => window.setInterval(this.compareList(), 1000);
   };
+
+
+  componentWillUnmount() {
+    console.log('unmounting...');
+    clearInterval(this.fetchInterval);
+  }
 
   calculateHeight = () => {
     this.setState({
@@ -74,6 +81,33 @@ class Event extends React.Component {
       this.props.dispatch(setPerformerList(list));
     });
   };
+
+
+  compareList = () => {
+    console.log('comparing...');
+    fetch('http://localhost:3000/api/v1/song_entries/', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      }
+    }).then(response => response.json() )
+    .then(performerList => {
+      const list = []
+      performerList.forEach(entry => {
+        if (entry.event_id === this.eventId && entry.played === false && entry.passed === false){
+          list.push(entry);
+        };
+      });
+      if (list.length !== this.props.performerList.length){
+        console.log('difference detected!');
+        this.getEventPerformerList();
+      }else {
+        console.log('no difference detected.');
+      }
+    });
+  };
+
+
 
   getUserEvents = () => {
     fetch('http://localhost:3000/api/v1/user_events', {
