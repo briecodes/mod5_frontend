@@ -7,12 +7,12 @@ import { HURL } from '../actions/index';
 // import YouTubeSearch from '../components/YouTubeSearch';
 
 // YOUTUBE SEARCH API
-import API_KEY from '../api';
+// import API_KEY from '../api';
 import YouTubeSearchResults from '../components/YouTubeSearchResults';
 const search = require('youtube-search');
 const opts = {
   maxResults: 10,
-  key: API_KEY,
+  key: API_KEY2,
   type: 'video',
   videoEmbeddable: true
 };
