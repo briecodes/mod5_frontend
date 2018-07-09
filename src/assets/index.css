@@ -76,7 +76,7 @@ input {
   border: 1px;
   border-color: #d2e6f4;
   border-style: solid;
-  padding: 5px;
+  padding: 2%;
 }
 
 textarea {
@@ -177,7 +177,7 @@ ul {
   text-decoration: none;
 }
 
-#searchUl {
+.search-bar {
   margin-top: 5px;
   position: relative;
   float: right;
@@ -185,19 +185,39 @@ ul {
   width: 20%;
 }
 
-#searchUl input {
-  width: 100%;
+.search-bar input {
+  padding: 4%;
+  width: 92%;
   margin: 0;
   display: block;
 }
 
+#searchUl {
+  width: 100%;
+}
+
+#searchUl li {
+  display: block;
+  padding: 3%;
+  width: 94%;
+  border-bottom: 1px;
+  border-bottom-style: solid;
+  border-color: #d2e6f4;
+}
+
+#searchUl li:hover {
+  color: #263a5f;
+  background: #d2e6f4;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 #partySearchResults {
+  width: 100%;
+  clear: both;
+  position: absolute;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  width: 19.25%;
-  position: fixed;
-  background: #fff;
-  overflow: hidden;
   border-left: 1px;
   border-left-style: solid;
   border-bottom: 1px;
@@ -205,12 +225,9 @@ ul {
   border-right: 1px;
   border-right-style: solid;
   border-color: #d2e6f4;
-};
-
-.searchLi {
-  display: block;
-  max-width: 75%;
-  background: fuchsia;
+  background: #fff;
+  overflow: hidden;
+  padding: 0px;
 }
 
 .searchLink {
@@ -222,12 +239,6 @@ ul {
   border-bottom-style: solid;
   border-color: #d2e6f4;
   background: transparent;
-}
-
-.searchLink:hover {
-  color: #263a5f;
-  background: #d2e6f4;
-  text-decoration: none;
 }
 
 #footer {

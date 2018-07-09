@@ -51,15 +51,23 @@ class EventSearch extends React.Component {
     this.props.dispatch(setCurrentLocation('/events/'+event.id));
   };
 
+  linkHandler = (path, event) => {
+    window.history.pushState({}, "new state", path);
+    this.exploreEvent(event);
+  };
+
   render() {
     return (
-      <ul id='searchUl'>
+      <div className='float-right search-bar'>
         <input type='text' name='searchTerm' placeholder='Search Events' value={this.state.searchTerm} onChange={this.inputControl} />
         {this.state.searchTerm !== '' ? <React.Fragment>
-        <div id='partySearchResults'>
-          {this.state.foundEvents.map(event => <li className='searchLi' key={event.id}><Link to={'/events/'+event.id} className='searchLink' onClick={() => this.exploreEvent(event)}>{event.title}</Link><div className='spacer'></div></li>)}
-        </div></React.Fragment> : null }
-      </ul>
+          <ul id='searchUl'>
+            <div id='partySearchResults'>
+              {this.state.foundEvents.map(event => <React.Fragment><li key={event.id} onClick={() => this.linkHandler(`/events/${event.id}`, event)}>{event.title}</li></React.Fragment>)}
+            </div>
+          </ul>
+        </React.Fragment> : null }
+      </div>
     );
   };
 };
