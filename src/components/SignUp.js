@@ -70,7 +70,7 @@ class SignUp extends React.Component {
           <input type='text' name='name' placeholder='Name' value={this.state.name} onChange={this.inputControl} />
           <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.inputControl} />
           <input type='password' name='password_retype' placeholder='Password Confirmation' value={this.state.password_retype} onChange={this.checkPassword} />
-          <input type='submit'/>
+          <input type='submit' className='submit'/>
         </form>
         <Link exact='true' to='/' onClick={() => this.props.dispatch(setCurrentLocation('/'))} >Already have an account? Sign in ></Link>
       </div>

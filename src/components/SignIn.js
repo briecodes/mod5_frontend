@@ -49,7 +49,7 @@ class SignIn extends React.Component {
         <h1 className='light'>{this.props.userId} Sign In Below:</h1>
           <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={this.inputControl} />
           <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.inputControl} />
-          <input type='submit'/>
+          <input type='submit' className='submit'/>
         </form>
         <Link exact='true' to='/sign-up' onClick={() => this.props.dispatch(setCurrentLocation('/sign-up'))} >Don't have an account? Sign up ></Link>
       </div>
