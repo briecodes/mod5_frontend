@@ -98,6 +98,7 @@ class SongForm extends React.Component {
   };
 
   render() {
+    console.log(process.env.API_KEY2);
     return (
       <form onSubmit={this.submitEntry} className='boxed'>
         <input type='text' className='songInput' name='song_artist' placeholder='Song Artist' value={this.state.song_artist} onChange={this.inputControl} />
