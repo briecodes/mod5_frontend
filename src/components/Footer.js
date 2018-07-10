@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setCurrentLocation } from '../reducers/index';
+import { setCurrentLocation } from '../actions/index';
 
 class Footer extends React.Component {
   render() {

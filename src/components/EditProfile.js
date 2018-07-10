@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setUserId } from '../reducers/index';
-import { HURL, loggedInUserId, localToken } from '../actions/index';
+import { HURL, loggedInUserId, localToken, setUserId } from '../actions/index';
 
 class EditProfile extends React.Component {
   state = {

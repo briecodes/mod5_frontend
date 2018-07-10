@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setActiveEvent, setCurrentLocation } from '../reducers/index';
-import { HURL, loggedInUserId, inputControl, localToken } from '../actions/index';
+import { HURL, loggedInUserId, inputControl, localToken, setActiveEvent, setCurrentLocation } from '../actions/index';
 
 class CreateEvent extends React.Component {
 

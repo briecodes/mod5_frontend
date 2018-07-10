@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setActiveEvent, setCurrentLocation } from '../reducers/index';
-import { HURL, loggedInUserId, localToken } from '../actions/index';
+
+import { HURL, loggedInUserId, localToken, setActiveEvent, setCurrentLocation } from '../actions/index';
 
 class HomePage extends React.Component {
 

@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setActiveEvent, setCurrentLocation, resetStore } from '../reducers/index';
-import { HURL, pathEventId } from '../actions/index';
+import { HURL, pathEventId, setActiveEvent, setCurrentLocation, resetStore } from '../actions/index';
 
 class EditEvent extends React.Component {
   state = {

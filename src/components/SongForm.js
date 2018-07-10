@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { addPerformerToList, selectVideoInForm } from '../reducers/index';
-import { HURL } from '../actions/index';
+import { HURL, addPerformerToList, selectVideoInForm  } from '../actions/index';
 // import YouTubeSearch from '../components/YouTubeSearch';
 
 // YOUTUBE SEARCH API

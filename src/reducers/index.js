@@ -1,75 +1,40 @@
-export function setUserId(user_id) {
-  return {
-    type: 'SET_USER_ID',
-    payload: {user_id}
-  };
-};
+const initialState = {
+  user_id: parseInt(localStorage.getItem('user_id'), 10) || null,
+  activeEvent: {},
+  performerList: [],
+  currentLocation: window.location.pathname,
+  video_url: undefined,
+  video_id: undefined,
+  token: null
+}
 
-export function setToken(token) {
-  return {
-    type: 'SET_TOKEN',
-    payload: {token}
-  };
-};
-
-export function logOutUser() {
-  return {
-    type: 'LOGOUT',
-    payload: {user_id: null}
-  };
-};
-
-export function setActiveEvent(event) {
-  return {
-    type: 'ACTIVE_EVENT',
-    payload: {event}
-  };
-};
-
-export function setCurrentLocation(loc) {
-  return {
-    type: 'SET_LOCATION',
-    payload: {currentLocation: loc}
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'SET_USER_ID':
+      return {...state, user_id: action.payload.user_id};
+    case 'SET_TOKEN':
+      return {...state, token: action.payload.token};
+    case 'LOGOUT':
+      return {...state, user_id: action.payload.user_id};
+    case 'ACTIVE_EVENT':
+      return {...state, activeEvent: action.payload.event};
+    case 'SET_LOCATION':
+      return {...state, currentLocation: action.payload.currentLocation};
+    case 'LOAD_PERFORMERS':
+      return {...state, performerList: action.payload.performerList};
+    case 'ADD_PERFORMER_TO_LIST':
+      return {...state, performerList: [...state.performerList, action.payload.performer]};
+    case 'VIDEO_FORM_SELECTION':
+      return {...state, video_id: action.payload.video_id, video_url: action.payload.video_url};
+    case 'RESET_STORE':
+      return {...state, performerList: initialState.performerList, video_url: initialState.video_url, video_id: initialState.video_id, activeEvent: initialState.activeEvent};
+    case 'RESET_APP':
+      return { initialState };
+    case 'RESET_ACTIVE_EVENT':
+      return {...state, activeEvent: null};
+    default:
+      return state;
   }
 };
 
-export function setPerformerList(entry) {
-  return {
-    type: 'LOAD_PERFORMERS',
-    payload: {performerList: entry}
-  }
-};
-
-export function addPerformerToList(performer) {
-  return {
-    type: 'ADD_PERFORMER_TO_LIST',
-    payload: {performer}
-  }
-};
-
-export function selectVideoInForm(video_id, video_url) {
-  return {
-    type: 'VIDEO_FORM_SELECTION',
-    payload: {video_id, video_url}
-  };
-};
-
-export function resetStore() {
-  return {
-    type: 'RESET_STORE'
-  };
-};
-
-export function resetApp() {
-  return {
-    type: 'RESET_APP',
-    payload: {}
-  };
-};
-
-export function resetActiveEvent() {
-  return {
-    type: 'RESET_ACTIVE_EVENT',
-    payload: {}
-  };
-};
+export default reducer;

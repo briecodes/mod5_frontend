@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setUserId, setCurrentLocation, setToken } from '../reducers/index';
-import { HURL, inputControl } from '../actions/index';
+import { HURL, inputControl, setUserId, setCurrentLocation, setToken } from '../actions/index';
 
 class SignUp extends React.Component {
 

@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { setCurrentLocation, setUserId } from '../reducers/index';
-import { HURL, inputControl } from '../actions/index';
+import { HURL, inputControl, setCurrentLocation, setUserId } from '../actions/index';
 
 class SignIn extends React.Component {
   state = {
