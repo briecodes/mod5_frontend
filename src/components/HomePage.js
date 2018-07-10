@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setActiveEvent, setCurrentLocation } from '../reducers/index';
-import { HURL } from '../actions/index';
+import { HURL, loggedInUserId } from '../actions/index';
 
 class HomePage extends React.Component {
 
@@ -17,7 +17,6 @@ class HomePage extends React.Component {
   }
   
   getMyEvents = () => {
-    const localUserId = parseInt(localStorage.getItem('user_id'), 10);
     fetch(HURL('/api/v1/events'), {
       headers: {
         'Content-Type': 'application/json',
@@ -25,7 +24,7 @@ class HomePage extends React.Component {
       }
     }).then( response => response.json() ).then(array => {
       array.forEach(event => {
-        if (event.user_id === localUserId){
+        if (event.user_id === loggedInUserId() ){
           if (event.active){
             this.setState({
               myCurrentEvents: [...this.state.myCurrentEvents, event]
@@ -37,7 +36,7 @@ class HomePage extends React.Component {
           };
         };
         event.user_events.forEach(usrEvt => {
-          if (usrEvt.user_id === localUserId){
+          if (usrEvt.user_id === loggedInUserId() ){
             this.setState({
               visitedEvents: [...this.state.visitedEvents, event]
             });

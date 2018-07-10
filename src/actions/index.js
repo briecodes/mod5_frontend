@@ -15,3 +15,7 @@ export function inputControl(e) {
     [e.target.name]: e.target.value
   });
 };
+
+export function loggedInUserId() {
+  return parseInt(localStorage.getItem('user_id'), 10);
+}
