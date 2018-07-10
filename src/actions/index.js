@@ -20,6 +20,10 @@ export function loggedInUserId() {
   return parseInt(localStorage.getItem('user_id'), 10);
 };
 
+export function pathEventId() {
+  return parseInt(parseUrl(window.location.pathname), 10);
+};
+
 export function localToken() {
   return localStorage.getItem('token');
 };

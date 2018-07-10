@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import SongForm from '../components/SongForm';
 import PerformerList from '../components/PerformerList';
 import { setActiveEvent, setPerformerList } from '../reducers/index';
-import { parseUrl, HURL, loggedInUserId, localToken } from '../actions/index';
+import { HURL, loggedInUserId, localToken, pathEventId } from '../actions/index';
 
 class Event extends React.Component {
 
@@ -13,8 +13,6 @@ class Event extends React.Component {
     attending_id: null,
     height: ''
   };
-
-  eventId = parseInt(parseUrl(window.location.pathname), 10);
 
   componentDidMount() {
     window.addEventListener("resize", function(){
@@ -49,7 +47,7 @@ class Event extends React.Component {
   };
 
   getEventDetails = () => {
-    fetch(HURL('/api/v1/events/') + this.eventId, {
+    fetch(HURL('/api/v1/events/') + pathEventId(), {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localToken()
@@ -71,7 +69,7 @@ class Event extends React.Component {
     .then(performerList => {
       const list = []
       performerList.forEach(entry => {
-        if (entry.event_id === this.eventId && entry.played === false && entry.passed === false){
+        if (entry.event_id === pathEventId() && entry.played === false && entry.passed === false){
           list.push(entry);
         };
       });
@@ -91,7 +89,7 @@ class Event extends React.Component {
     .then(performerList => {
       const list = []
       performerList.forEach(entry => {
-        if (entry.event_id === this.eventId && entry.played === false && entry.passed === false){
+        if (entry.event_id === pathEventId() && entry.played === false && entry.passed === false){
           list.push(entry);
         };
       });
