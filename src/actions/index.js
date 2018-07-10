@@ -18,4 +18,4 @@ export function inputControl(e) {
 
 export function loggedInUserId() {
   return parseInt(localStorage.getItem('user_id'), 10);
-}
+};
