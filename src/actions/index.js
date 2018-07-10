@@ -19,3 +19,7 @@ export function inputControl(e) {
 export function loggedInUserId() {
   return parseInt(localStorage.getItem('user_id'), 10);
 };
+
+export function localToken() {
+  return localStorage.getItem('token');
+};

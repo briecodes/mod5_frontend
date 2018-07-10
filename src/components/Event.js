@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import SongForm from '../components/SongForm';
 import { setActiveEvent, setPerformerList } from '../reducers/index';
-import { parseUrl, HURL, loggedInUserId } from '../actions/index';
+import { parseUrl, HURL, loggedInUserId, localToken } from '../actions/index';
 
 class Event extends React.Component {
 
@@ -53,7 +53,7 @@ class Event extends React.Component {
     fetch(HURL('/api/v1/events/') + this.eventId, {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': localToken()
       }
     }).then(response => response.json() )
     .then(eve => {
@@ -67,7 +67,7 @@ class Event extends React.Component {
     fetch(HURL('/api/v1/song_entries/'), {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': localToken()
       }
     }).then(response => response.json() )
     .then(performerList => {
@@ -88,7 +88,7 @@ class Event extends React.Component {
     fetch(HURL('/api/v1/song_entries/'), {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': localToken()
       }
     }).then(response => response.json() )
     .then(performerList => {
@@ -111,7 +111,7 @@ class Event extends React.Component {
     fetch(HURL('/api/v1/user_events'), {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': localToken()
       }
     }).then( response => response.json() )
     .then(array => {
@@ -127,7 +127,7 @@ class Event extends React.Component {
         body: JSON.stringify({user_id: loggedInUserId(), event_id: this.props.activeEvent.id}),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('token')
+          'Authorization': localToken()
         }
       })
       .then( res => res.json() )
@@ -141,7 +141,7 @@ class Event extends React.Component {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('token')
+          'Authorization': localToken()
         }
     })
     .then( res => res.json() )
@@ -164,7 +164,7 @@ class Event extends React.Component {
       body: JSON.stringify({played: true}),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': localToken()
       }
     })
       .then( res => res.json() )
@@ -180,7 +180,7 @@ class Event extends React.Component {
       body: JSON.stringify({played: true}),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': localToken()
       }
     }).then (res => res.json() )
     .then (response => {
