@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { setActiveEvent, setCurrentLocation } from '../reducers/index';
-import { HURL, loggedInUserId, inputControl } from '../actions/index';
+import { HURL, loggedInUserId, inputControl, localToken } from '../actions/index';
 
 class CreateEvent extends React.Component {
 
@@ -22,7 +22,7 @@ class CreateEvent extends React.Component {
         body: JSON.stringify({user_id: loggedInUserId(), title: this.state.title, location: this.state.location, description: this.state.description, key_code: this.state.key_code, active: true}),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('token')
+          'Authorization': localToken()
         }
       })
       .then( res => res.json() )

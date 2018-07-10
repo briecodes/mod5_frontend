@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setActiveEvent, setCurrentLocation } from '../reducers/index';
-import { HURL, loggedInUserId } from '../actions/index';
+import { HURL, loggedInUserId, localToken } from '../actions/index';
 
 class HomePage extends React.Component {
 
@@ -20,7 +20,7 @@ class HomePage extends React.Component {
     fetch(HURL('/api/v1/events'), {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': localToken()
       }
     }).then( response => response.json() ).then(array => {
       array.forEach(event => {

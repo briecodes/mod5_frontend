@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { setUserId } from '../reducers/index';
-import { HURL, loggedInUserId } from '../actions/index';
+import { HURL, loggedInUserId, localToken } from '../actions/index';
 
 class EditProfile extends React.Component {
   state = {
@@ -26,7 +26,7 @@ class EditProfile extends React.Component {
     fetch(HURL('/api/v1/users/') + loggedInUserId(), {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': localToken()
       }
     })
     .then( res => res.json() )
@@ -50,7 +50,7 @@ class EditProfile extends React.Component {
       body: JSON.stringify({username: this.state.username, name: this.state.name, password: this.state.password}),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': localToken()
       }
     })
     .then( res => res.json() )
