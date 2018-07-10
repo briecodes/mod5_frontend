@@ -41,13 +41,6 @@ export function setUserId(user_id) {
   };
 };
 
-export function setToken(token) {
-  return {
-    type: 'SET_TOKEN',
-    payload: {token}
-  };
-};
-
 export function logOutUser() {
   return {
     type: 'LOGOUT',

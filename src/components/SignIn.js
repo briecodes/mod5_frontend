@@ -28,7 +28,7 @@ class SignIn extends React.Component {
           localStorage.setItem('token', response.token);
           this.props.dispatch(setUserId(response.user.id));
           window.history.pushState({}, "new state", "/");
-          this.props.dispatch(setCurrentLocation('/'))
+          this.props.dispatch(setCurrentLocation('/'));
         }
       });
     }else{

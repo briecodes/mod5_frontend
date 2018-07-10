@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { HURL, inputControl, setUserId, setCurrentLocation, setToken } from '../actions/index';
+import { HURL, inputControl, setUserId, setCurrentLocation } from '../actions/index';
 
 class SignUp extends React.Component {
 
@@ -32,12 +32,12 @@ class SignUp extends React.Component {
         if (response.errors || response.error){
           alert(response.errors[0]);
         }else{
-          this.props.dispatch(setUserId(response.user.id));
-          this.props.dispatch(setToken(response.token));
-          localStorage.setItem('token', response.token);
           localStorage.setItem('user_id', response.user.id);
-          e.target.reset();
+          localStorage.setItem('token', response.token);
+          this.props.dispatch(setUserId(response.user.id));
+          window.history.pushState({}, "new state", "/");
           this.props.dispatch(setCurrentLocation('/'));
+          e.target.reset();
         }
       });
     }else {
