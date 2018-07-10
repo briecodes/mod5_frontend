@@ -9,3 +9,9 @@ export function baseURL() {
 export function HURL(route = '') {
   return 'https://mod5karaoke.herokuapp.com' + route;
 };
+
+export function inputControl(e) {
+  this.setState({
+    [e.target.name]: e.target.value
+  });
+};

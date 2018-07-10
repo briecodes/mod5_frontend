@@ -3,19 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { setCurrentLocation, setUserId } from '../reducers/index';
-import { HURL } from '../actions/index';
+import { HURL, inputControl } from '../actions/index';
 
 class SignIn extends React.Component {
   state = {
     username: '',
     password: ''
   }
-
-  inputControl = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
 
   logIn = (e) => {
     e.preventDefault();
@@ -48,8 +42,8 @@ class SignIn extends React.Component {
       <div className='formContainer'>
         <form onSubmit={this.logIn}>
         <h1 className='light'>{this.props.userId} Sign In Below:</h1>
-          <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={this.inputControl} />
-          <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.inputControl} />
+          <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={inputControl.bind(this)} />
+          <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={inputControl.bind(this)} />
           <input type='submit' className='submit'/>
         </form>
         <Link exact='true' to='/sign-up' onClick={() => this.props.dispatch(setCurrentLocation('/sign-up'))} >Don't have an account? Sign up ></Link>
