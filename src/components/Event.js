@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import SongForm from '../components/SongForm';
 import { setActiveEvent, setPerformerList } from '../reducers/index';
-import { parseUrl, HURL } from '../actions/index';
+import { parseUrl, HURL, loggedInUserId } from '../actions/index';
 
 class Event extends React.Component {
 
@@ -14,7 +14,6 @@ class Event extends React.Component {
   };
 
   eventId = parseInt(parseUrl(window.location.pathname), 10);
-  localUserId = parseInt(localStorage.getItem('user_id'), 10);
 
   componentDidMount() {
     window.addEventListener("resize", function(){
@@ -42,7 +41,7 @@ class Event extends React.Component {
   eventAttendanceCheck = (arr) => {
     // console.log('attendance arr', arr);
     let theResult = arr.find(userEvent => {
-      return userEvent.user_id === this.localUserId;
+      return userEvent.user_id === loggedInUserId();
     });
     theResult = theResult ? true : false;
     this.setState({
@@ -125,7 +124,7 @@ class Event extends React.Component {
   createUserEvent = () => {
     fetch(HURL('/api/v1/user_events'), {
         method: 'POST',
-        body: JSON.stringify({user_id: this.localUserId, event_id: this.props.activeEvent.id}),
+        body: JSON.stringify({user_id: loggedInUserId(), event_id: this.props.activeEvent.id}),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': localStorage.getItem('token')
@@ -154,7 +153,7 @@ class Event extends React.Component {
     if (e.target.name === 'join'){
       this.createUserEvent();
     }else{
-      const uev = this.props.activeEvent.user_events.find(userevent => userevent.user_id === this.localUserId);
+      const uev = this.props.activeEvent.user_events.find(userevent => userevent.user_id === loggedInUserId());
       this.deleteUserEvent(uev.id);
     }
   };
@@ -196,7 +195,7 @@ class Event extends React.Component {
   render() {
     return (
       <React.Fragment>
-        { this.localUserId === this.props.activeEvent.user_id ? <React.Fragment>
+        { loggedInUserId() === this.props.activeEvent.user_id ? <React.Fragment>
           <div className='divider spacer'></div>
           {this.props.performerList.length > 0 ? <iframe id='mainPlayer' height={this.state.height} title='Admin Player' type='text/html'
                   src={`http://www.youtube.com/embed/${this.props.performerList[0].video_id}`} frameBorder='0'></iframe> : null}
@@ -210,7 +209,7 @@ class Event extends React.Component {
           </div>
         </React.Fragment> : null}
 
-          {this.props.activeEvent.title && this.localUserId !== this.props.activeEvent.user_id ? <React.Fragment>
+          {this.props.activeEvent.title && loggedInUserId() !== this.props.activeEvent.user_id ? <React.Fragment>
               <div className='col-half float-left'>
                 <span className='home-text light'>{this.props.activeEvent.title}</span>
               </div>
@@ -232,7 +231,7 @@ class Event extends React.Component {
                 {this.props.performerList.map((perf, index) => {
                   return (
                     <li key={perf.id} className='user-performer'>
-                      { perf.user.id === this.localUserId ? <span className='heavy red'>{perf.user.name}</span> : <span className='heavy'>{perf.user.name}</span>} up {index > 0 ? ('in ' + index * 3.5 + ' mins') : 'now' } {perf.user.id === this.localUserId ? <input type='button' value='Cancel' className='cancel' onClick={() => this.deletePerformer(perf.id)} /> : null}<br />
+                      { perf.user.id === loggedInUserId() ? <span className='heavy red'>{perf.user.name}</span> : <span className='heavy'>{perf.user.name}</span>} up {index > 0 ? ('in ' + index * 3.5 + ' mins') : 'now' } {perf.user.id === loggedInUserId() ? <input type='button' value='Cancel' className='cancel' onClick={() => this.deletePerformer(perf.id)} /> : null}<br />
                       performing <em>{perf.song_title}</em> by {perf.song_artist}
                     </li>
                   )
@@ -246,7 +245,7 @@ class Event extends React.Component {
             </React.Fragment> : null}
             <div className='divider'></div>
             <center>
-              {this.state.attending ? <input type='submit' name='leave' value='Leave Event' className='submit leave-event light' onClick={this.attendButton} /> : this.props.activeEvent.user_id !== this.localUserId ? <input type='submit' name='join' value='Join Event' className='submit join-event light' onClick={this.attendButton} /> : null}
+              {this.state.attending ? <input type='submit' name='leave' value='Leave Event' className='submit leave-event light' onClick={this.attendButton} /> : this.props.activeEvent.user_id !== loggedInUserId() ? <input type='submit' name='join' value='Join Event' className='submit join-event light' onClick={this.attendButton} /> : null}
             </center>
       </React.Fragment>
     );
