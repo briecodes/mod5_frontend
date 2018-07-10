@@ -5,10 +5,6 @@ import UserEntry from '../components/UserEntry';
 import Content from './Content';
 
 class App extends Component {
-  componentDidMount() {
-      // document.getElementsByTagName('body')[0].style.backgroundImage='url(/assets/bg.jpg)';
-  };
-  
   render() {
     return (
       <React.Fragment>
