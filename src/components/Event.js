@@ -246,10 +246,8 @@ class Event extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    activeUser: state.activeUser,
     activeEvent: state.activeEvent,
-    performerList: state.performerList,
-    currentLocation: state.currentLocation
+    performerList: state.performerList
   };
 };
 

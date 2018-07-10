@@ -23,24 +23,3 @@ export function loggedInUserId() {
 export function localToken() {
   return localStorage.getItem('token');
 };
-
-export function fetchSomething(path) {
-  console.log('fetching...');
-  fetch(HURL(path), {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': localToken()
-    }
-  }).then( response => response.json() )
-  .then( response => {
-    if (response.error || response.errors){
-      console.log('Error!', response);
-      return response;
-    }else{
-      console.log('returning', response);
-      if(response){
-        return response;
-      }
-    }
-  })
-};
