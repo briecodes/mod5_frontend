@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { setActiveEvent, setCurrentLocation, resetStore } from '../reducers/index';
-import { parseUrl, HURL } from '../actions/index';
+import { HURL, pathEventId } from '../actions/index';
 
 class EditEvent extends React.Component {
   state = {
@@ -18,8 +18,6 @@ class EditEvent extends React.Component {
     success: false,
     deleted: false
   };
-
-  eventId = parseInt(parseUrl(window.location.pathname), 10);
 
   componentDidMount() {
     this.getEventData();
@@ -49,7 +47,7 @@ class EditEvent extends React.Component {
   };
 
   getEventData = () => {
-    fetch(HURL('/api/v1/events/') + this.eventId, {
+    fetch(HURL('/api/v1/events/') + pathEventId(), {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
@@ -70,7 +68,7 @@ class EditEvent extends React.Component {
   submitEvent = (e) => {
     e.preventDefault();
     e.persist();
-    fetch(HURL('/api/v1/events/') + this.eventId, {
+    fetch(HURL('/api/v1/events/') + pathEventId(), {
       method: 'PATCH',
       body: JSON.stringify(this.state.eventData),
       headers: {
@@ -127,7 +125,7 @@ class EditEvent extends React.Component {
     .then(array => {
       // console.log('delete songEntries');
       array.forEach(se => {
-        if (se.event_id === this.eventId){
+        if (se.event_id === pathEventId()){
           this.deleteHelper(entryURL, se.id);
         };
       });
@@ -147,7 +145,7 @@ class EditEvent extends React.Component {
     .then(array => {
       // console.log('delete userEvents');
       array.forEach(uev => {
-        if (uev.event_id === this.eventId){
+        if (uev.event_id === pathEventId()){
           this.deleteHelper(userEventsURL, uev.id);
         };
       });
@@ -156,7 +154,7 @@ class EditEvent extends React.Component {
   };
 
   deleteTheEvent = () => {
-    fetch(HURL('/api/v1/events/')+ this.eventId, {
+    fetch(HURL('/api/v1/events/')+ pathEventId(), {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -216,7 +214,7 @@ class EditEvent extends React.Component {
         {this.state.eventData.title ? <React.Fragment><form onSubmit={this.submitEvent}>
           <center>
             <span className='home-text light'>Editing {this.props.activeEvent.title}</span>
-            {this.state.success ? <h3>Event updated! <Link to={'/events/' + this.eventId} onClick={() => this.props.dispatch(setCurrentLocation('/events/' + this.eventId))}>View ></Link></h3> : null }
+            {this.state.success ? <h3>Event updated! <Link to={'/events/' + pathEventId()} onClick={() => this.props.dispatch(setCurrentLocation('/events/' + pathEventId()))}>View ></Link></h3> : null }
           </center>
           <label htmlFor='title'>Title</label>
           <input type='text' id='title' name='title' className='form-input' placeholder='Title' value={this.state.eventData.title} onChange={this.inputControl} />
