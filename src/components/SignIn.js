@@ -7,7 +7,8 @@ import { HURL, inputControl, setCurrentLocation, setUserId } from '../actions/in
 class SignIn extends React.Component {
   state = {
     username: '',
-    password: ''
+    password: '',
+    errors: ''
   }
 
   logIn = (e) => {
@@ -20,9 +21,11 @@ class SignIn extends React.Component {
           'Content-Type': 'application/json'
         }
       }).then( res => res.json() )
-      .then( response => {
+      .then( response => {  
         if (response.errors || response.error){
-          console.log('errors!', response);
+          this.setState({
+            errors: response.errors
+          });
         }else{
           localStorage.setItem('user_id', response.user.id);
           localStorage.setItem('token', response.token);
@@ -32,7 +35,9 @@ class SignIn extends React.Component {
         }
       });
     }else{
-      alert('Username/Password needed.');
+      this.setState({
+        errors: 'Missing username or password.'
+      });
     }
   };
 
@@ -41,6 +46,7 @@ class SignIn extends React.Component {
       <div className='formContainer'>
         <form onSubmit={this.logIn}>
         <h1 className='light'>{this.props.userId} Sign In Below:</h1>
+          <span className='error-message'>{this.state.errors}</span>
           <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={inputControl.bind(this)} />
           <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={inputControl.bind(this)} />
           <input type='submit' className='submit'/>

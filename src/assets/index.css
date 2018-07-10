@@ -121,6 +121,10 @@
     padding: 0;
   }
 
+  .error-message {
+    color: red;
+  }
+
   #App {
     margin: 0;
     padding: 0;

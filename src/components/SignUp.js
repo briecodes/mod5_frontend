@@ -10,18 +10,23 @@ class SignUp extends React.Component {
     username: '',
     name: '',
     password: '',
-    password_retype: ''
+    password_retype: '',
+    errors: [],
+    verified: false
   }
 
   componentDidMount() {
     this.props.dispatch(setCurrentLocation(window.location.pathname));
   };
 
+  verifyData = () => {
+
+  };
+
   createUser = (e) => {
     e.preventDefault();
     e.persist();
     if (this.state.password === this.state.password_retype){
-      console.log('new user accepted');
       fetch(HURL('/api/v1/users'), {
         method: 'POST',
         body: JSON.stringify({username: this.state.username, name: this.state.name, password: this.state.password}),
@@ -30,7 +35,9 @@ class SignUp extends React.Component {
       .then( res => res.json() )
       .then( response => {
         if (response.errors || response.error){
-          alert(response.errors[0]);
+          this.setState({
+            errors: response.errors
+          });
         }else{
           localStorage.setItem('user_id', response.user.id);
           localStorage.setItem('token', response.token);
@@ -41,7 +48,9 @@ class SignUp extends React.Component {
         }
       });
     }else {
-      console.log('error: password does not match');
+      this.setState({
+        errors: 'Password does not match.'
+      });
     };
   };
 
@@ -51,7 +60,9 @@ class SignUp extends React.Component {
     });
     if (e.target.value === this.state.password){
     }else{
-      console.log(`Warning! Password does not match.`);
+      this.setState({
+        errors: 'Password does not match.'
+      });
     };
   };
 
@@ -60,6 +71,7 @@ class SignUp extends React.Component {
       <div className='formContainer'>
         <form onSubmit={this.createUser}>
           <h1 className='light'>Sign Up Below:</h1>
+          <span className='error-message'>{this.state.errors}</span>
           <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={inputControl.bind(this)} />
           <input type='text' name='name' placeholder='Name' value={this.state.name} onChange={inputControl.bind(this)} />
           <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={inputControl.bind(this)} />
