@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { setUserId, setCurrentLocation, setToken } from '../reducers/index';
-import { HURL } from '../actions/index';
+import { HURL, inputControl } from '../actions/index';
 
 class SignUp extends React.Component {
 
@@ -46,12 +46,6 @@ class SignUp extends React.Component {
     };
   };
 
-  inputControl = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
   checkPassword = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -67,9 +61,9 @@ class SignUp extends React.Component {
       <div className='formContainer'>
         <form onSubmit={this.createUser}>
           <h1 className='light'>Sign Up Below:</h1>
-          <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={this.inputControl} />
-          <input type='text' name='name' placeholder='Name' value={this.state.name} onChange={this.inputControl} />
-          <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.inputControl} />
+          <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={inputControl.bind(this)} />
+          <input type='text' name='name' placeholder='Name' value={this.state.name} onChange={inputControl.bind(this)} />
+          <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={inputControl.bind(this)} />
           <input type='password' name='password_retype' placeholder='Password Confirmation' value={this.state.password_retype} onChange={this.checkPassword} />
           <input type='submit' className='submit'/>
         </form>
