@@ -55,7 +55,6 @@ class EditProfile extends React.Component {
     })
     .then( res => res.json() )
     .then( response => {
-      // console.log('response:', response);
       if (response.errors || response.error){
         console.log(response.errors);
         console.log(response.error);
