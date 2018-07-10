@@ -28,7 +28,6 @@ class Event extends React.Component {
 
 
   componentWillUnmount() {
-    // console.log('unmounting...');
     clearInterval(this.fetchInterval);
   }
 
@@ -39,7 +38,6 @@ class Event extends React.Component {
   };
 
   eventAttendanceCheck = (arr) => {
-    // console.log('attendance arr', arr);
     let theResult = arr.find(userEvent => {
       return userEvent.user_id === loggedInUserId();
     });
@@ -57,7 +55,6 @@ class Event extends React.Component {
       }
     }).then(response => response.json() )
     .then(eve => {
-      // console.log('geteventdetails active', eve);
       this.props.dispatch(setActiveEvent(eve));
       this.eventAttendanceCheck(eve.user_events);
     });
@@ -84,7 +81,6 @@ class Event extends React.Component {
   i = 0;
 
   compareList = () => {
-    // console.log('comparing...');
     fetch(HURL('/api/v1/song_entries/'), {
       headers: {
         'Content-Type': 'application/json',
@@ -99,7 +95,6 @@ class Event extends React.Component {
         };
       });
       if (list.length !== this.props.performerList.length){
-        // console.log('difference detected!');
         this.getEventPerformerList();
       }
     });
@@ -132,7 +127,6 @@ class Event extends React.Component {
       })
       .then( res => res.json() )
       .then( response => {
-        // console.log('response:', response );
       }).then(() => this.getEventDetails() );
   };
 
@@ -145,7 +139,6 @@ class Event extends React.Component {
         }
     })
     .then( res => res.json() )
-    // .then( response => console.log('response:', response ))
     .then( () => this.getEventDetails() );
   };
 
@@ -169,7 +162,6 @@ class Event extends React.Component {
     })
       .then( res => res.json() )
       .then( response => {
-        // console.log('success:', response);
         this.getEventPerformerList();
       });
   };
