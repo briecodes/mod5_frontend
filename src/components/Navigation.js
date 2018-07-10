@@ -43,8 +43,7 @@ class Navigation extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    activeUser: state.activeUser,
-    currentLocation: state.currentLocation
+    activeUser: state.activeUser
   };
 };
 
