@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import SongForm from '../components/SongForm';
 import PerformerList from '../components/PerformerList';
 import { setActiveEvent, setPerformerList } from '../reducers/index';
-import { HURL, loggedInUserId, localToken, pathEventId } from '../actions/index';
+import { HURL, loggedInUserId, localToken, pathEventId, getPeformers } from '../actions/index';
 
 class Event extends React.Component {
 
@@ -98,8 +98,6 @@ class Event extends React.Component {
       }
     });
   };
-
-
 
   getUserEvents = () => {
     fetch(HURL('/api/v1/user_events'), {
