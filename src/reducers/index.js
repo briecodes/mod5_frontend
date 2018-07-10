@@ -5,7 +5,8 @@ const initialState = {
   currentLocation: window.location.pathname,
   video_url: undefined,
   video_id: undefined,
-  token: null
+  token: null,
+  attending: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -27,11 +28,15 @@ const reducer = (state = initialState, action) => {
     case 'VIDEO_FORM_SELECTION':
       return {...state, video_id: action.payload.video_id, video_url: action.payload.video_url};
     case 'RESET_STORE':
-      return {...state, performerList: initialState.performerList, video_url: initialState.video_url, video_id: initialState.video_id, activeEvent: initialState.activeEvent};
+      return {...state, performerList: initialState.performerList, video_url: initialState.video_url, video_id: initialState.video_id, activeEvent: initialState.activeEvent, attending: false};
     case 'RESET_APP':
       return { initialState };
     case 'RESET_ACTIVE_EVENT':
       return {...state, activeEvent: null};
+    case 'SET_ATTENDING':
+      return {...state, attending: action.payload.attending};
+    case 'RESET_ATTENDING':
+      return {...state, attending: action.payload.attending};
     default:
       return state;
   }

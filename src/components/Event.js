@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 
 import SongForm from '../components/SongForm';
 import PerformerList from '../components/PerformerList';
-import { HURL, loggedInUserId, localToken, pathEventId, setActiveEvent, setPerformerList } from '../actions/index';
+import { HURL, loggedInUserId, localToken, pathEventId, setActiveEvent, setPerformerList, setAttending } from '../actions/index';
 
 class Event extends React.Component {
 
   state = {
-    attending: false,
-    attending_id: null,
     height: ''
   };
 
@@ -24,7 +22,6 @@ class Event extends React.Component {
     this.fetchInterval = window.setInterval( () => this.compareList(), 2000);
   };
 
-
   componentWillUnmount() {
     clearInterval(this.fetchInterval);
   }
@@ -32,16 +29,6 @@ class Event extends React.Component {
   calculateHeight = () => {
     this.setState({
       height: (window.innerWidth * .7) * 9/16
-    });
-  };
-
-  eventAttendanceCheck = (arr) => {
-    let theResult = arr.find(userEvent => {
-      return userEvent.user_id === loggedInUserId();
-    });
-    theResult = theResult ? true : false;
-    this.setState({
-      attending: theResult
     });
   };
 
@@ -56,6 +43,14 @@ class Event extends React.Component {
       this.props.dispatch(setActiveEvent(eve));
       this.eventAttendanceCheck(eve.user_events);
     });
+  };
+
+  eventAttendanceCheck = () => {
+    let theResult = this.props.activeEvent.user_events.find(userEvent => {
+      return userEvent.user_id === loggedInUserId();
+    });
+    theResult = theResult ? true : false;
+    this.props.dispatch(setAttending(theResult));
   };
 
   getEventPerformerList = () => {
@@ -75,8 +70,6 @@ class Event extends React.Component {
       this.props.dispatch(setPerformerList(list));
     });
   };
-
-  i = 0;
 
   compareList = () => {
     fetch(HURL('/api/v1/song_entries/'), {
@@ -212,7 +205,7 @@ class Event extends React.Component {
               <div className='divider spacer'></div>
             </React.Fragment> : null}
 
-          {this.state.attending ? <React.Fragment>
+          {this.props.attending ? <React.Fragment>
             <div className='col-half float-left' style={{maxHeight: '400px', overflowY: 'auto'}}>
               <h3>Songlist:</h3>
               <PerformerList />
@@ -224,7 +217,7 @@ class Event extends React.Component {
             </React.Fragment> : null}
             <div className='divider'></div>
             <center>
-              {this.state.attending ? <input type='submit' name='leave' value='Leave Event' className='submit leave-event light' onClick={this.attendButton} /> : this.props.activeEvent.user_id !== loggedInUserId() ? <input type='submit' name='join' value='Join Event' className='submit join-event light' onClick={this.attendButton} /> : null}
+              {this.props.attending ? <input type='submit' name='leave' value='Leave Event' className='submit leave-event light' onClick={this.attendButton} /> : this.props.activeEvent.user_id !== loggedInUserId() ? <input type='submit' name='join' value='Join Event' className='submit join-event light' onClick={this.attendButton} /> : null}
             </center>
       </React.Fragment>
     );
@@ -234,7 +227,8 @@ class Event extends React.Component {
 const mapStateToProps = (state) => {
   return {
     activeEvent: state.activeEvent,
-    performerList: state.performerList
+    performerList: state.performerList,
+    attending: state.attending
   };
 };
 

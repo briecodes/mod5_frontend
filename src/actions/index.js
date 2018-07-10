@@ -1,5 +1,4 @@
 // GENERAL FUNCTIONS
-
 export function parseUrl(url) {
   return url.split('/').pop();
 };
@@ -33,8 +32,6 @@ export function localToken() {
 
 
 
-
-
 // FUNCTIONS FOR STORE
 
 export function setUserId(user_id) {
@@ -62,6 +59,20 @@ export function setActiveEvent(event) {
   return {
     type: 'ACTIVE_EVENT',
     payload: {event}
+  };
+};
+
+export function setAttending(attending) {
+  return {
+    type: 'SET_ATTENDING',
+    payload: {attending}
+  };
+};
+
+export function resetAttending() {
+  return {
+    type: 'RESET_ATTENDING',
+    payload: {attending: false}
   };
 };
 

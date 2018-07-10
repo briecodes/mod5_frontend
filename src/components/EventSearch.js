@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { HURL, setActiveEvent, setCurrentLocation } from '../actions/index';
 
@@ -47,8 +48,9 @@ class EventSearch extends React.Component {
 
   exploreEvent = (event) => {
     this.clearState();
+    window.history.pushState({}, "new state", '/events/' + event.id);
     this.props.dispatch(setActiveEvent(event));
-    this.props.dispatch(setCurrentLocation('/events/'+event.id));
+    this.props.dispatch(setCurrentLocation('/events/' + event.id));
   };
 
   linkHandler = (path, event) => {
@@ -63,7 +65,8 @@ class EventSearch extends React.Component {
         {this.state.searchTerm !== '' ? <React.Fragment>
           <ul id='searchUl'>
             <div id='partySearchResults'>
-              {this.state.foundEvents.map(event => <li key={event.id} onClick={() => this.linkHandler(`/events/${event.id}`, event)}>{event.title}</li>)}
+              {/* {this.state.foundEvents.map(event => <li key={event.id} onClick={() => this.linkHandler(`/events/${event.id}`, event)}>{event.title}</li>)} */}
+              {this.state.foundEvents.map(event => <li key={event.id}> <Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)}>{event.title}</Link></li>)}
             </div>
           </ul>
         </React.Fragment> : null }
