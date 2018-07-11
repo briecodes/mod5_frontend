@@ -15,7 +15,8 @@ class EditEvent extends React.Component {
     },
     confirmDelete: false,
     success: false,
-    deleted: false
+    deleted: false,
+    errors: []
   };
 
   componentDidMount() {
@@ -41,7 +42,8 @@ class EditEvent extends React.Component {
         active: this.props.activeEvent.active
       },
       confirmDelete: false,
-      success: false
+      success: false,
+      errors: []
     });
   };
 
@@ -55,7 +57,10 @@ class EditEvent extends React.Component {
     .then ( res => res.json() )
     .then( response => {
       if (response.error || response.errors){
-        console.log('Warning! Error!', response);
+        this.setState({
+          errors: response.errors,
+          success: false
+        });
       }else{
         this.setState({
           eventData: response
@@ -77,12 +82,16 @@ class EditEvent extends React.Component {
       })
       .then( res => res.json() )
       .then( response => {
-        if (response.errors || response.error){
-          console.log('error!', response);
+        if (response.errors){
+          this.setState({
+            errors: response.errors,
+            success: false
+          });
         }else{
           this.props.dispatch(setActiveEvent(response));
           this.setState({
-            success: true
+            success: true,
+            errors: []
           });
         };
       });
@@ -122,7 +131,6 @@ class EditEvent extends React.Component {
     })
     .then( response => response.json() )
     .then(array => {
-      // console.log('delete songEntries');
       array.forEach(se => {
         if (se.event_id === pathEventId()){
           this.deleteHelper(entryURL, se.id);
@@ -142,7 +150,6 @@ class EditEvent extends React.Component {
     })
     .then( response => response.json())
     .then(array => {
-      // console.log('delete userEvents');
       array.forEach(uev => {
         if (uev.event_id === pathEventId()){
           this.deleteHelper(userEventsURL, uev.id);
@@ -162,14 +169,16 @@ class EditEvent extends React.Component {
     })
     .then(response => response.json() )
     .then( response => {
-      if(response.errors || response.error){
-        console.log('error!', response);
+      if(response.errors){
+        this.setState({
+          errors: response.errors,
+          success: false
+        });
       }else{
         return response
       };
     })
     .then( response => {
-      // console.log('last delete');
       this.setState({
         deleted: true
       });
@@ -204,15 +213,17 @@ class EditEvent extends React.Component {
   };
 
   render() {
+    const renderErrors = this.state.errors.map(error => error + '. ')
     return (
       <div id='form-container'>
         {this.state.deleted ? <React.Fragment>
           <h1>Event Deleted!</h1>
           <h3><Link to='/' onClick={() => this.props.dispatch(setCurrentLocation('/'))} >Go home ></Link></h3>
         </React.Fragment> : null }
-        {this.state.eventData.title ? <React.Fragment><form onSubmit={this.submitEvent}>
+        {this.props.activeEvent.title ? <React.Fragment><form onSubmit={this.submitEvent}>
           <center>
             <span className='home-text light'>Editing {this.props.activeEvent.title}</span>
+            <span className='error-message'>{renderErrors}</span>
             {this.state.success ? <h3>Event updated! <Link to={'/events/' + pathEventId()} onClick={() => this.props.dispatch(setCurrentLocation('/events/' + pathEventId()))}>View ></Link></h3> : null }
           </center>
           <label htmlFor='title'>Title</label>
