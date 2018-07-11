@@ -33,6 +33,7 @@ class Event extends React.Component {
   };
 
   eventAttendanceCheck = () => {
+    console.log('attendance check');
     let theResult = this.props.activeEvent.user_events.find(userEvent => {
       return userEvent.user_id === loggedInUserId();
     });
@@ -141,24 +142,6 @@ class Event extends React.Component {
         this.getEventPerformerList();
       });
   };
-
-  deletePerformer = (id) => {
-    fetch(HURL('/api/v1/song_entries/') + id, {
-      method: 'PATCH',
-      body: JSON.stringify({played: true}),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': localToken()
-      }
-    }).then (res => res.json() )
-    .then (response => {
-      if (response.error || response.errors){
-        console.log('error!', response);
-      }else{
-        this.getEventPerformerList();
-      }
-    })
-  }
 
   render() {
     return (

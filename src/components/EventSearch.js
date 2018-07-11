@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { HURL, setActiveEvent, setCurrentLocation } from '../actions/index';
+import { HURL, setActiveEvent, setCurrentLocation, setAttending, loggedInUserId } from '../actions/index';
 
 class EventSearch extends React.Component {
   state = {
@@ -51,6 +51,15 @@ class EventSearch extends React.Component {
     window.history.pushState({}, "new state", '/events/' + event.id);
     this.props.dispatch(setActiveEvent(event));
     this.props.dispatch(setCurrentLocation('/events/' + event.id));
+    this.eventAttendanceCheck(event);
+  };
+
+  eventAttendanceCheck = (event) => {
+    let theResult = event.user_events.find(userEvent => {
+      return userEvent.user_id === loggedInUserId();
+    });
+    theResult = theResult ? true : false;
+    this.props.dispatch(setAttending(theResult));
   };
 
   linkHandler = (path, event) => {
@@ -66,7 +75,7 @@ class EventSearch extends React.Component {
           <ul id='searchUl'>
             <div id='partySearchResults'>
               {/* {this.state.foundEvents.map(event => <li key={event.id} onClick={() => this.linkHandler(`/events/${event.id}`, event)}>{event.title}</li>)} */}
-              {this.state.foundEvents.map(event => <li key={event.id}> <Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)}>{event.title}</Link></li>)}
+              {this.state.foundEvents.map(event => <li key={event.id}  onClick={() => this.exploreEvent(event)}>{event.title}</li>)}
             </div>
           </ul>
         </React.Fragment> : null }
@@ -77,7 +86,8 @@ class EventSearch extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    activeUser: state.activeUser
+    activeUser: state.activeUser,
+    activeEvent: state.activeEvent
   };
 };
 
