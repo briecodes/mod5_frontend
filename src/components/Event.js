@@ -9,16 +9,7 @@ import { HURL, loggedInUserId, localToken, pathEventId, setActiveEvent, setPerfo
 
 class Event extends React.Component {
 
-  state = {
-    height: ''
-  };
-
   componentDidMount() {
-    window.addEventListener("resize", function(){
-      this.calculateHeight();
-    }.bind(this), true);
-
-    this.calculateHeight();
     this.getEventDetails();
     this.getEventPerformerList();
     this.fetchInterval = window.setInterval( () => this.compareList(), 2000);
@@ -27,12 +18,6 @@ class Event extends React.Component {
   componentWillUnmount() {
     clearInterval(this.fetchInterval);
   }
-
-  calculateHeight = () => {
-    this.setState({
-      height: (window.innerWidth * .7) * 9/16
-    });
-  };
 
   getEventDetails = () => {
     fetch(HURL('/api/v1/events/') + pathEventId(), {
@@ -179,20 +164,15 @@ class Event extends React.Component {
     return (
       <React.Fragment>
         { loggedInUserId() === this.props.activeEvent.user_id ? <EventAdminConsole/> : null }
+        
         {this.props.activeEvent.title && loggedInUserId() !== this.props.activeEvent.user_id ? <EventData/> : null}
 
-          {this.props.attending ? <React.Fragment>
-            <EventGuestPerformersList/>
-            <div className='col-half float-right mobile-col'>
-              <h3>Submit a song:</h3>
-              <SongForm/>
-            </div>
-          </React.Fragment> : null}
-          
-            <div className='divider'></div>
-            <center>
-              {this.props.attending ? <input type='submit' name='leave' value='Leave Event' className='submit leave-event light' onClick={this.attendButton} /> : this.props.activeEvent.user_id !== loggedInUserId() ? <input type='submit' name='join' value='Join Event' className='submit join-event light' onClick={this.attendButton} /> : null}
-            </center>
+        {this.props.attending ? <React.Fragment> <EventGuestPerformersList/> <SongForm/> </React.Fragment> : null}
+
+        <div className='divider'></div>
+        <center>
+          {this.props.attending ? <input type='submit' name='leave' value='Leave Event' className='submit leave-event light' onClick={this.attendButton} /> : this.props.activeEvent.user_id !== loggedInUserId() ? <input type='submit' name='join' value='Join Event' className='submit join-event light' onClick={this.attendButton} /> : null}
+        </center>
       </React.Fragment>
     );
   };

@@ -98,16 +98,19 @@ class SongForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.submitEntry} className='boxed'>
-        <input type='text' className='songInput' name='song_artist' placeholder='Song Artist' value={this.state.song_artist} onChange={this.inputControl} />
-        <input type='text' className='songInput' name='song_title' placeholder='Song Title' value={this.state.song_title} onChange={this.inputControl} />
-        <div className='divider'></div>
-        {this.state.video_results.length > 0 ? <YouTubeSearchResults results={this.state.video_results} /> : null}
-        <div className='divider'></div>
-        <center>
-          {this.props.video_id ? <input type='submit' className='submit'/> : null }
-        </center>
-      </form>
+      <div className='col-half float-right mobile-col'>
+        <h3>Submit a song:</h3>
+        <form onSubmit={this.submitEntry} className='boxed'>
+          <input type='text' className='songInput' name='song_artist' placeholder='Song Artist' value={this.state.song_artist} onChange={this.inputControl} />
+          <input type='text' className='songInput' name='song_title' placeholder='Song Title' value={this.state.song_title} onChange={this.inputControl} />
+          <div className='divider'></div>
+          {this.state.video_results.length > 0 ? <YouTubeSearchResults results={this.state.video_results} /> : null}
+          <div className='divider'></div>
+          <center>
+            {this.props.video_id ? <input type='submit' className='submit'/> : null }
+          </center>
+        </form>
+      </div>
     );
   };
 };
