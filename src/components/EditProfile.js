@@ -8,7 +8,8 @@ class EditProfile extends React.Component {
     name: '',
     username: '',
     password: '',
-    success: false
+    success: false,
+    errors: []
   };
 
   componentDidMount(){
@@ -55,12 +56,15 @@ class EditProfile extends React.Component {
     .then( res => res.json() )
     .then( response => {
       if (response.errors || response.error){
-        console.log(response.errors);
-        console.log(response.error);
+        this.setState({
+          errors: response.errors,
+          success: false
+        });
       }else{
         this.props.dispatch(setUserId(response.id));
         localStorage.setItem('user_id', response.id);
         this.setState({
+          errors: [],
           success: true
         });
       }
@@ -68,11 +72,13 @@ class EditProfile extends React.Component {
   };
 
   render() {
+    const renderErrors = this.state.errors.map(error => error + '. ')
     return (
       <div id='form-container'>
         <form onSubmit={this.save}>
           <center>
             <span className='home-text light line-light'>Edit Profile:</span>
+            <span className='error-message'>{renderErrors}</span>
             {this.state.success ? <h3>Changes Saved!</h3> : null }
           </center>
           <label htmlFor='username'>Username</label>
