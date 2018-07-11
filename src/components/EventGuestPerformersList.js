@@ -1,9 +1,46 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { loggedInUserId } from '../actions/index';
+import { loggedInUserId, HURL, localToken, setPerformerList, pathEventId } from '../actions/index';
 
 class EventGuestPerformersList extends React.Component {
+
+
+  deletePerformer = (id) => {
+    fetch(HURL('/api/v1/song_entries/') + id, {
+      method: 'PATCH',
+      body: JSON.stringify({played: true}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localToken()
+      }
+    }).then (res => res.json() )
+    .then (response => {
+      if (response.error || response.errors){
+        console.log('error!', response);
+      }else{
+        this.getEventPerformerList();
+      }
+    })
+  }
+
+  getEventPerformerList = () => {
+    fetch(HURL('/api/v1/song_entries/'), {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localToken()
+      }
+    }).then(response => response.json() )
+    .then(performerList => {
+      const list = []
+      performerList.forEach(entry => {
+        if (entry.event_id === pathEventId() && entry.played === false && entry.passed === false){
+          list.push(entry);
+        };
+      });
+      this.props.dispatch(setPerformerList(list));
+    });
+  };
 
   render() {
     return (
