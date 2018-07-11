@@ -33,7 +33,6 @@ class Event extends React.Component {
   };
 
   eventAttendanceCheck = () => {
-    console.log('attendance check');
     let theResult = this.props.activeEvent.user_events.find(userEvent => {
       return userEvent.user_id === loggedInUserId();
     });
