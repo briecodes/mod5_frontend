@@ -123,6 +123,8 @@
 
   .error-message {
     color: red;
+    display: block;
+    margin-bottom: 10%;
   }
 
   #App {
@@ -736,6 +738,10 @@
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  .error-message {
+    color: red;
   }
 
   #App {
