@@ -27,6 +27,8 @@ const reducer = (state = initialState, action) => {
       return {...state, performerList: [...state.performerList, action.payload.performer]};
     case 'VIDEO_FORM_SELECTION':
       return {...state, video_id: action.payload.video_id, video_url: action.payload.video_url};
+    case 'RESET_VIDEO_IN_FORM':
+      return {...state, video_id: undefined, video_url: undefined}
     case 'RESET_STORE':
       return {...state, performerList: initialState.performerList, video_url: initialState.video_url, video_id: initialState.video_id, activeEvent: initialState.activeEvent, attending: false};
     case 'RESET_APP':

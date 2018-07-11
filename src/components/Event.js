@@ -5,7 +5,7 @@ import SongForm from '../components/SongForm';
 import EventAdminConsole from '../components/EventAdminConsole';
 import EventGuestPerformersList from './EventGuestPerformersList';
 import EventData from '../components/EventData';
-import { HURL, loggedInUserId, localToken, pathEventId, setActiveEvent, setPerformerList, setAttending, inputControl } from '../actions/index';
+import { HURL, loggedInUserId, localToken, pathEventId, setActiveEvent, setPerformerList, setAttending, inputControl, resetVideoInForm } from '../actions/index';
 
 class Event extends React.Component {
 
@@ -142,7 +142,7 @@ class Event extends React.Component {
     if (e.target.name === 'join'){
       this.createUserEvent();
     }else{
-
+      this.props.dispatch(resetVideoInForm());
       const uev = this.props.activeEvent.user_events.find(userevent => userevent.user_id === loggedInUserId());
       this.deleteUserEvent(uev.id);
     }

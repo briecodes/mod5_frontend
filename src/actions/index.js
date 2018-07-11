@@ -101,6 +101,12 @@ export function selectVideoInForm(video_id, video_url) {
   };
 };
 
+export function resetVideoInForm() {
+  return {
+    type: 'RESET_VIDEO_IN_FORM',
+  }
+};
+
 export function resetStore() {
   return {
     type: 'RESET_STORE'
