@@ -250,7 +250,7 @@ class EditEvent extends React.Component {
           <center>
             {this.state.eventData.public ? <React.Fragment><input type='checkbox' name='public' onClick={this.check2} defaultChecked /> Make Public</React.Fragment> : <React.Fragment><input type='checkbox' name='public' onClick={this.check2} /> Make Public</React.Fragment> }
             &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
-            {this.state.eventData.active ? <React.Fragment><input type='checkbox' name='active' onChange={this.check} defaultChecked /> Active</React.Fragment> : <React.Fragment><input type='checkbox' name='active' onChange={this.check} /> Active</React.Fragment>}<br />
+            {this.state.eventData.active ? <React.Fragment><input type='checkbox' name='active' onChange={this.check} defaultChecked /> Close Event</React.Fragment> : <React.Fragment><input type='checkbox' name='active' onChange={this.check} /> Close Event</React.Fragment>}<br />
           </center>
           <center>
             <p>
