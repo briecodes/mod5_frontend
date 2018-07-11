@@ -9,38 +9,45 @@ class CreateEvent extends React.Component {
     title: '',
     location: '',
     description: '',
-    key_code: ''
+    key_code: '',
+    errors: []
   }
 
-  createEvent = (e) => {
+  validateData = (e) => {
     e.preventDefault();
+    if (!this.state.title || !this.state.location || !this.state.description){
+      this.setState({
+        errors: ['Form incomplete!']
+      });
+    }else{
+      this.createEvent(e);
+    };
+  };
+
+  createEvent = (e) => {
     e.persist();
-    if (this.state.password === this.state.password_retype){
-      fetch(HURL('/api/v1/events'), {
-        method: 'POST',
-        body: JSON.stringify({user_id: loggedInUserId(), title: this.state.title, location: this.state.location, description: this.state.description, key_code: this.state.key_code, active: true}),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': localToken()
-        }
-      })
-      .then( res => res.json() )
-      .then( response => {
-        if (response.errors){
-          alert(response.errors[0]);
-        }else{
-          this.stateReset();
-          e.target.reset();
-          this.exploreEvent(response);
-          return response;
-        }
-      }).then(response => {
+    fetch(HURL('/api/v1/events'), {
+      method: 'POST',
+      body: JSON.stringify({user_id: loggedInUserId(), title: this.state.title, location: this.state.location, description: this.state.description, key_code: this.state.key_code, active: true}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localToken()
+      }
+    })
+    .then( res => res.json() )
+    .then( response => {
+      if (response.errors || response.error){
+        this.setState({
+          errors: response.errors
+        });
+      }else{
+        this.stateReset();
+        e.target.reset();
+        this.exploreEvent(response);
         window.history.pushState({}, "new state", '/events/' + response.id);
         this.props.dispatch(setCurrentLocation('/events/' + response.id))
-      });
-    }else {
-      console.log('Error! Something is amiss...');
-    };
+      }
+    });
   };
 
   exploreEvent = (event) => {
@@ -57,12 +64,14 @@ class CreateEvent extends React.Component {
   }
 
   render() {
+    const renderErrors = this.state.errors.map(error => error + '. ')
     return (
       <div id='form-container'>
         <center>
           <span className='home-text light line-light'>Create Event:</span>
+          <span className='error-message'>{renderErrors}</span>
         </center>
-        <form onSubmit={this.createEvent}>
+        <form onSubmit={this.validateData}>
           <label htmlFor='title'>Title</label>
           <input type='text' id='title' name='title' className='form-input' placeholder='Title' value={this.state.title} onChange={inputControl.bind(this)} /><br />
           <label htmlFor='location'>Location</label>
