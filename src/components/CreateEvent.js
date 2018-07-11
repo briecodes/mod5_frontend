@@ -10,6 +10,7 @@ class CreateEvent extends React.Component {
     location: '',
     description: '',
     key_code: '',
+    public: true,
     errors: []
   }
 
@@ -28,7 +29,7 @@ class CreateEvent extends React.Component {
     e.persist();
     fetch(HURL('/api/v1/events'), {
       method: 'POST',
-      body: JSON.stringify({user_id: loggedInUserId(), title: this.state.title, location: this.state.location, description: this.state.description, key_code: this.state.key_code, active: true}),
+      body: JSON.stringify({user_id: loggedInUserId(), title: this.state.title, location: this.state.location, description: this.state.description, key_code: this.state.key_code, active: true, public: this.state.public}),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localToken()
@@ -63,7 +64,14 @@ class CreateEvent extends React.Component {
     });
   }
 
+  check = () => {
+    this.setState({
+        public: !this.state.public
+    });
+  };
+
   render() {
+    console.log('state: public:', this.state.public)
     const renderErrors = this.state.errors.map(error => error + '. ')
     return (
       <div id='form-container'>
@@ -81,6 +89,7 @@ class CreateEvent extends React.Component {
           <label htmlFor='key-code'>Key Code</label>
           <input type='text' id='key-code' name='key_code' className='form-input' placeholder='key_code' value={this.state.key_code} onChange={inputControl.bind(this)} /><br />
           <center>
+            <input type='checkbox' name='public' onChange={this.check} defaultChecked /> Make Public
             <p>
               <input type='submit' className='submit'/>
             </p>

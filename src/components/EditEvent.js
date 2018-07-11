@@ -39,7 +39,8 @@ class EditEvent extends React.Component {
         location: this.props.activeEvent.location,
         description: this.props.activeEvent.description,
         key_code: this.props.activeEvent.key_code,
-        active: this.props.activeEvent.active
+        active: this.props.activeEvent.active,
+        public: this.props.activeEvent.public
       },
       confirmDelete: false,
       success: false,
@@ -203,11 +204,22 @@ class EditEvent extends React.Component {
     e.preventDefault();
   };
 
-  check = () => {
+  check = (e) => {
+    console.log('name:', e.target.name);
     this.setState({
       eventData: {
         ...this.state.eventData,
         active: !this.state.eventData.active
+      }
+    });
+  };
+
+  check2 = (e) => {
+    console.log('name:', e.target.name);
+    this.setState({
+      eventData: {
+        ...this.state.eventData,
+        public: !this.state.eventData.public
       }
     });
   };
@@ -237,6 +249,8 @@ class EditEvent extends React.Component {
           <input type='text' id='key-code' name='key_code' className='form-input' placeholder='Key Code' value={this.state.eventData.key_code} onChange={this.inputControl} /><br />
           <label htmlFor=''></label>
           <center>
+            {this.state.eventData.public ? <React.Fragment><input type='checkbox' name='public' onClick={this.check2} defaultChecked /> Make Public</React.Fragment> : <React.Fragment><input type='checkbox' name='public' onClick={this.check2} /> Make Public</React.Fragment> }
+            &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
             {this.state.eventData.active ? <React.Fragment><input type='checkbox' name='active' onChange={this.check} defaultChecked /> Active</React.Fragment> : <React.Fragment><input type='checkbox' name='active' onChange={this.check} /> Active</React.Fragment>}<br />
           </center>
           <center>
