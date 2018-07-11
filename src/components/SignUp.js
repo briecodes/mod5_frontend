@@ -49,7 +49,7 @@ class SignUp extends React.Component {
       });
     }else {
       this.setState({
-        errors: 'Password does not match.'
+        errors: ['Password does not match.']
       });
     };
   };
@@ -59,19 +59,19 @@ class SignUp extends React.Component {
       [e.target.name]: e.target.value
     });
     if (e.target.value === this.state.password){
+      this.setState({ errors: [] });
     }else{
-      this.setState({
-        errors: 'Password does not match.'
-      });
+      this.setState({ errors: ['Password does not match.'] });
     };
   };
 
   render() {
+    const renderErrors = this.state.errors.map(error => error + '. ')
     return (
       <div className='formContainer'>
         <form onSubmit={this.createUser}>
           <h1 className='light'>Sign Up Below:</h1>
-          <span className='error-message'>{this.state.errors}</span>
+          <span className='error-message'>{renderErrors}</span>
           <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={inputControl.bind(this)} />
           <input type='text' name='name' placeholder='Name' value={this.state.name} onChange={inputControl.bind(this)} />
           <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={inputControl.bind(this)} />
