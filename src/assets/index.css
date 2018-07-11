@@ -124,7 +124,6 @@
   .error-message {
     color: red;
     display: block;
-    margin-bottom: 10%;
   }
 
   #App {
@@ -742,6 +741,7 @@
 
   .error-message {
     color: red;
+    display: block;
   }
 
   #App {

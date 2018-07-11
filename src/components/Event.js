@@ -176,7 +176,8 @@ class Event extends React.Component {
         <center>
           {this.props.attending ? <input type='submit' name='leave' value='Leave Event' className='submit leave-event light' onClick={this.attendButton} /> : this.props.activeEvent.user_id !== loggedInUserId() ? <React.Fragment>
             This event is private. Please enter key code to join:<br />
-            <span className='error-message'>{this.state.error}</span><br />
+            <span className='error-message'>{this.state.error}</span>
+            <div className='divider spacer'></div>
             <form name='join' onSubmit={this.validateKeyCode}>
               <input type='text' name='keyCode' placeholder='Key Code' value={this.state.keyCode} onChange={inputControl.bind(this)} className='input' /><br/>
               <input type='submit' name='join' value='Join Event' className='submit join-event light' />
