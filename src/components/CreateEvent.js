@@ -71,7 +71,6 @@ class CreateEvent extends React.Component {
   };
 
   render() {
-    console.log('state: public:', this.state.public)
     const renderErrors = this.state.errors.map(error => error + '. ')
     return (
       <div id='form-container'>
