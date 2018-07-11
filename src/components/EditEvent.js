@@ -11,7 +11,8 @@ class EditEvent extends React.Component {
       location: this.props.activeEvent.location,
       description: this.props.activeEvent.description,
       key_code: this.props.activeEvent.key_code,
-      active: this.props.activeEvent.active
+      active: this.props.activeEvent.active,
+      public: this.props.activeEvent.public
     },
     confirmDelete: false,
     success: false,
@@ -205,7 +206,6 @@ class EditEvent extends React.Component {
   };
 
   check = (e) => {
-    console.log('name:', e.target.name);
     this.setState({
       eventData: {
         ...this.state.eventData,
@@ -215,7 +215,6 @@ class EditEvent extends React.Component {
   };
 
   check2 = (e) => {
-    console.log('name:', e.target.name);
     this.setState({
       eventData: {
         ...this.state.eventData,

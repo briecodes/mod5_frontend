@@ -5,9 +5,14 @@ import SongForm from '../components/SongForm';
 import EventAdminConsole from '../components/EventAdminConsole';
 import EventGuestPerformersList from './EventGuestPerformersList';
 import EventData from '../components/EventData';
-import { HURL, loggedInUserId, localToken, pathEventId, setActiveEvent, setPerformerList, setAttending } from '../actions/index';
+import { HURL, loggedInUserId, localToken, pathEventId, setActiveEvent, setPerformerList, setAttending, inputControl } from '../actions/index';
 
 class Event extends React.Component {
+
+  state = {
+    keyCode: '',
+    error: ''
+  }
 
   componentDidMount() {
     this.getEventDetails();
@@ -118,6 +123,21 @@ class Event extends React.Component {
     .then( () => this.getEventDetails() );
   };
 
+  validateKeyCode = (e) => {
+
+    if(this.state.keyCode === ''){
+      this.setState({
+        error: 'Key Code missing.'
+      });
+    }else if (this.state.keyCode !== this.props.activeEvent.key_code){
+      this.setState({
+        error: 'Key Code is incorrect.'
+      });
+    }else if (this.state.keyCode === this.props.activeEvent.key_code){
+      this.attendButton(e);
+    };
+  };
+
   attendButton = (e) => {
     if (e.target.name === 'join'){
       this.createUserEvent();
@@ -143,6 +163,7 @@ class Event extends React.Component {
   };
 
   render() {
+    console.log('state key', this.state.keyCode);
     return (
       <React.Fragment>
         { loggedInUserId() === this.props.activeEvent.user_id ? <EventAdminConsole/> : null }
@@ -153,7 +174,12 @@ class Event extends React.Component {
 
         <div className='divider'></div>
         <center>
-          {this.props.attending ? <input type='submit' name='leave' value='Leave Event' className='submit leave-event light' onClick={this.attendButton} /> : this.props.activeEvent.user_id !== loggedInUserId() ? <input type='submit' name='join' value='Join Event' className='submit join-event light' onClick={this.attendButton} /> : null}
+          {this.props.attending ? <input type='submit' name='leave' value='Leave Event' className='submit leave-event light' onClick={this.attendButton} /> : this.props.activeEvent.user_id !== loggedInUserId() ? <React.Fragment>
+            This event is private. Please enter key code to join:<br />
+            <span className='error-message'>{this.state.error}</span><br />
+            <input type='text' name='keyCode' placeholder='Key Code' value={this.state.keyCode} onChange={inputControl.bind(this)} className='input' /><br/>
+            <input type='submit' name='join' value='Join Event' className='submit join-event light' onClick={this.validateKeyCode} />
+            </React.Fragment> : null}
         </center>
       </React.Fragment>
     );

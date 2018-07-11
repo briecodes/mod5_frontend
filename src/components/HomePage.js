@@ -66,13 +66,13 @@ class HomePage extends React.Component {
         <div className='col-third float-left'>
           <ul>
             <span className='home-text light line-light'>Hosting Events:</span>
-            {this.state.myCurrentEvents.map(event => <li key={event.id} >{event.title} | <Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} >view</Link> | <Link to={'/edit-event/' + event.id} onClick={() => this.editEvent(event)} >edit</Link></li>)}
+            {this.state.myCurrentEvents.map(event => <li key={event.id} >{event.title} {event.public ? '(public)' : '(private)' }<br /><Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} >view</Link> | <Link to={'/edit-event/' + event.id} onClick={() => this.editEvent(event)} >edit</Link></li>)}
           </ul>
         </div>
         <div className='col-third float-left'>
           <ul>
             <span className='home-text light line-light'>Closed Events:</span>
-            {this.state.myPastEvents.map(event => <li key={event.id} >{event.title} | <Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} >view</Link> | <Link to={'/edit-event/' + event.id} onClick={() => this.editEvent(event)} >edit</Link></li>)}
+            {this.state.myPastEvents.map(event => <li key={event.id} >{event.title} {event.public ? '(public)' : '(private)' }<br /><Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} >view</Link> | <Link to={'/edit-event/' + event.id} onClick={() => this.editEvent(event)} >edit</Link></li>)}
           </ul>
         </div>
         <div className='col-third float-left'>
