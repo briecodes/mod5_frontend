@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import SongForm from '../components/SongForm';
-import PerformerList from '../components/PerformerList';
 import { HURL, loggedInUserId, localToken, pathEventId, setActiveEvent, setPerformerList, setAttending } from '../actions/index';
 
 class Event extends React.Component {
@@ -178,16 +177,22 @@ class Event extends React.Component {
       <React.Fragment>
         { loggedInUserId() === this.props.activeEvent.user_id ? <React.Fragment>
           <div className='divider spacer'></div>
-          {this.props.performerList.length > 0 ? <iframe id='mainPlayer' height={this.state.height} title='Admin Player' type='text/html'
-                  src={`http://www.youtube.com/embed/${this.props.performerList[0].video_id}`} frameBorder='0'></iframe> : null}
-          <div className='admin-list' style={{height: this.state.height}}>
-            {this.props.performerList.map(perf => <div key={perf.id} className='admin-performer current'><span className='admin-performer-name heavy'>{perf.user.name} <button className='admin-next-button' onClick={() => this.markAsPerformed(perf.id)} >></button></span> {perf.song_title} by {perf.song_artist}</div>)[0]}
-            {this.props.performerList.slice(1).map(perf => <div key={perf.id} className='admin-performer'><span className='admin-performer-name medium'>{perf.user.name}</span> Performing <em>{perf.song_title}</em> by {perf.song_artist}</div>)}
-          </div>
-          <div id='mainPlayerDetails'>
-            <h3 className='medium float-left'>{this.props.activeEvent.title} {this.props.activeEvent.key_code ? <span className='light'> / Code: {this.props.activeEvent.key_code}</span> : null}</h3>
-            <h3 className='light float-right'>Est. wait time: {this.props.performerList.length * 3.5}mins</h3>
-          </div>
+          {this.props.performerList.length > 0 ? <React.Fragment>
+            {this.props.performerList.length > 0 ? <iframe id='mainPlayer' height={this.state.height} title='Admin Player' type='text/html'
+                    src={`http://www.youtube.com/embed/${this.props.performerList[0].video_id}`} frameBorder='0'></iframe> : null}
+            <div className='admin-list' style={{height: this.state.height}}>
+              {this.props.performerList.map(perf => <div key={perf.id} className='admin-performer current'><span className='admin-performer-name heavy'>{perf.user.name} <button className='admin-next-button' onClick={() => this.markAsPerformed(perf.id)} >></button></span> {perf.song_title} by {perf.song_artist}</div>)[0]}
+              {this.props.performerList.slice(1).map(perf => <div key={perf.id} className='admin-performer'><span className='admin-performer-name medium'>{perf.user.name}</span> Performing <em>{perf.song_title}</em> by {perf.song_artist}</div>)}
+            </div>
+            <div id='mainPlayerDetails'>
+              <h3 className='medium float-left'>{this.props.activeEvent.title} {this.props.activeEvent.key_code ? <span className='light'> / Code: {this.props.activeEvent.key_code}</span> : null}</h3>
+              <h3 className='light float-right'>Est. wait time: {this.props.performerList.length * 3.5}mins</h3>
+            </div>
+          </React.Fragment> : <React.Fragment>
+              <img src='/assets/party.jpg' className='placeholder-image' alt='Waiting for song entries...' />
+              <h3 className='medium float-left'>{this.props.activeEvent.title} {this.props.activeEvent.key_code ? <span className='light'> / Code: {this.props.activeEvent.key_code}</span> : null}</h3>
+              <h3 className='light float-right'>Est. wait time: {this.props.performerList.length * 3.5}mins</h3>
+            </React.Fragment> }
         </React.Fragment> : null}
 
           {this.props.activeEvent.title && loggedInUserId() !== this.props.activeEvent.user_id ? <React.Fragment>
@@ -208,7 +213,19 @@ class Event extends React.Component {
           {this.props.attending ? <React.Fragment>
             <div className='col-half float-left' style={{maxHeight: '400px', overflowY: 'auto'}}>
               <h3>Songlist:</h3>
-              <PerformerList />
+              {this.props.performerList.length > 0 ? <React.Fragment>
+                <ul>
+                  {this.props.performerList.map((perf, index) => {
+                    return (
+                      <li key={perf.id} className='user-performer'>
+                        { perf.user.id === loggedInUserId() ? <span className='heavy red'>{perf.user.name}</span> : <span className='heavy'>{perf.user.name}</span>} up {index > 0 ? ('in ' + index * 3.5 + ' mins') : 'now' } {perf.user.id === loggedInUserId() ? <input type='button' value='Cancel' className='cancel' onClick={() => this.deletePerformer(perf.id)} /> : null}<br />
+                        performing <em>{perf.song_title}</em> by {perf.song_artist}
+                      </li>
+                    )
+                    })
+                  }
+                </ul>
+              </React.Fragment> : <p>Be the first to sign up!</p> }
             </div>
             <div className='col-half float-right mobile-col'>
               <h3>Submit a song:</h3>

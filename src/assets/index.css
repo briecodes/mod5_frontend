@@ -337,6 +337,10 @@
 
   /* EVENT PAGE */
 
+  .placeholder-image {
+    width: 100%;
+  }
+
   .admin-list {
     font-size: .8em;
     float: right;
