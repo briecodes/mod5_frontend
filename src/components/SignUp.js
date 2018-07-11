@@ -71,7 +71,11 @@ class SignUp extends React.Component {
       <div className='formContainer'>
         <form onSubmit={this.createUser}>
           <h1 className='light'>Sign Up Below:</h1>
-          <span className='error-message'>{renderErrors}</span>
+          {this.state.errors ? <React.Fragment>
+            <span className='error-message'>{renderErrors}</span>
+            <div className='divider spacer'></div>
+            <div className='divider spacer'></div>
+          </React.Fragment> : null }
           <input type='text' name='username' placeholder='Username' value={this.state.username} onChange={inputControl.bind(this)} />
           <input type='text' name='name' placeholder='Name' value={this.state.name} onChange={inputControl.bind(this)} />
           <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={inputControl.bind(this)} />
