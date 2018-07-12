@@ -639,16 +639,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
+/* ======================================== MOBILE VERSION BEGINS ======================================== */
 
 
 
@@ -1259,6 +1250,26 @@
 
   #player, #mainPlayer {
     min-height: 200px;
+  }
+
+
+
+
+
+   /* ALL EVENTS */
+
+   .allevents-event {
+    display: block;
+    padding: 2.5%;
+    width: 95%;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, .3);
+  }
+
+  .allevents-event:hover {
+    /* background: #fff; */
+    background: rgba(255, 255, 255, .3);
   }
 
 }
