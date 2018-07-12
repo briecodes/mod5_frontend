@@ -265,7 +265,7 @@ class EditEvent extends React.Component {
               {this.state.confirmDelete ? <React.Fragment>
                   <input type='submit' className='submit' name='cancel-delete-event' value='cancel' onClick={this.deleteEvent} />
                   &nbsp;&nbsp;&nbsp; 
-                  <input type='submit' className='submit delete-btn' name='confirm-delete-event' value='confirm delete' onClick={this.deleteEvent} />
+                  <input type='submit' className='delete-btn' name='confirm-delete-event' value='confirm delete' onClick={this.deleteEvent} />
                 </React.Fragment> : <input type='submit' className='delete-btn' name='delete-event' value='delete event' onClick={this.deleteEvent} /> }
             </p>
           </center>
