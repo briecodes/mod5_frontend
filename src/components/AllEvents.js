@@ -42,7 +42,6 @@ class AllEvents extends React.Component {
   };
 
   render() {
-    console.log('state', this.state);
     return (
       <React.Fragment>
         <div className='col-half'>
@@ -50,9 +49,12 @@ class AllEvents extends React.Component {
         </div>
         {this.state.events.map(event => <React.Fragment key={event.id}>
             <div key={event.id} className='allevents-event light'>
-                <span className='medium explore-event-title'>{event.title}</span>, hosted by {event.user.id === loggedInUserId() ? 'me!' : event.user.name }<br />
-                <em>{event.description}</em><br />
-                <Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} > view > </Link>
+                <span className='medium explore-event-title'>{event.title}</span> {event.users.map(user => user.id).includes(loggedInUserId()) ? '(attending)' : null }<br/>
+                <em className='explore-event-desc'>{event.description}</em>
+                <div className='divider spacer'></div>
+                <div className='divider line-light'></div>
+                <div className='divider spacer '></div>
+                Hosted by {event.user.id === loggedInUserId() ? 'me!' : event.user.name } | <Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} > view > </Link>
             </div>
             </React.Fragment>)}
       </React.Fragment>
