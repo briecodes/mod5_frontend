@@ -488,7 +488,7 @@
   /* ALL EVENTS */
 
   .allevents-event {
-    display: inline-block;
+    display: block;
     padding: 2.5%;
     width: 28.33%;
     border-radius: 8px;

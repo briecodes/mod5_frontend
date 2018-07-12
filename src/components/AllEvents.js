@@ -7,7 +7,8 @@ import { HURL, localToken, setActiveEvent, setCurrentLocation, loggedInUserId } 
 class AllEvents extends React.Component {
 
   state = {
-    events: []
+    events: [],
+    count: 0
   };
 
   componentDidMount() {
@@ -41,13 +42,21 @@ class AllEvents extends React.Component {
     this.props.dispatch(setCurrentLocation('/events/'+event.id));
   };
 
+  count = () => {
+    this.setState({
+      count: this.state.count + 1
+    });
+    console.log('count', this.state.count);
+    return this.state.count;
+  };
+
   render() {
     return (
       <React.Fragment>
         <div className='col-half'>
           <span className='home-text light line-light'>Explore Events:</span>
         </div>
-        {this.state.events.map(event => <React.Fragment key={event.id}>
+        {this.state.events.map((event, index) => <React.Fragment key={event.id}>
             <div key={event.id} className='allevents-event light'>
                 <span className='medium explore-event-title'>{event.title}</span> {event.users.map(user => user.id).includes(loggedInUserId()) ? '(attending)' : null }<br/>
                 <em className='explore-event-desc'>{event.description}</em>
@@ -56,6 +65,7 @@ class AllEvents extends React.Component {
                 <div className='divider spacer '></div>
                 Hosted by {event.user.id === loggedInUserId() ? 'me!' : event.user.name } | <Link to={'/events/' + event.id} onClick={() => this.exploreEvent(event)} > view > </Link>
             </div>
+            {(index + 1) % 3 === 0 ? <div className='divider line'></div> : null }
             </React.Fragment>)}
       </React.Fragment>
     );
