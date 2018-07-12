@@ -329,10 +329,6 @@
     color: #fff;
   }
 
-  .video-result img, .video-result iframe {
-    /* height: 199px; */
-  }
-
 
 
 
@@ -499,17 +495,6 @@
     /* background: #fff; */
     background: rgba(255, 255, 255, .3);
   }
-
-  .explore-event-title {
-    /* font-size: 1.25em; */
-  }
-
-  .explore-event-desc {
-    /* display: block;
-    padding: 0;
-    margin: 0; */
-  }
-
 
 
 
@@ -998,11 +983,6 @@
     background: #85b7d0;
     color: #fff;
   }
-
-  .video-result img, .video-result iframe {
-    /* height: 199px; */
-  }
-
 
 
 
