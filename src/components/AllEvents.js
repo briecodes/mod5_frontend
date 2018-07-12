@@ -16,7 +16,7 @@ class AllEvents extends React.Component {
   };
 
   fetchEvents = () => {
-    fetch(HURL('api/v1/events'), {
+    fetch(HURL('/api/v1/events'), {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': localToken()
