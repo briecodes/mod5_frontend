@@ -13,10 +13,6 @@ Karaoke app allowing users to sign up, host/join karaoke events, and submit song
 [Redux JS](https://redux.js.org/)
 
 
-## Install
-Run npm install to install packages and dependencies.
-
-
 
 ## API Reference
 • [YouTube Search API](https://developers.google.com/youtube/v3/docs/search/list)<br />
